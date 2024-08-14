@@ -1,0 +1,42 @@
+@import "../../responsive.scss";
+
+.otp-terms {
+  margin-top: 25px;
+}
+.otp-terms-condition {
+  font-size: 14px;
+  font-family: Inter;
+  color: #687787;
+  font-weight: 500;
+}
+.resend-link {
+  color: #6941c6;
+  text-decoration: underline;
+  padding-left: 5px;
+}
+.main-container {
+  margin-top: 32px;
+}
+.otp-main {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+}
+.otp-input-box {
+  border: 1px solid #c6c6c6;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 16px;
+  height: 48px;
+  width: 48px;
+  outline: none;
+  &:focus {
+    border-color: #6941c6;
+  }
+}
+@include sm {
+  .otp-input-box {
+    width: 42px;
+    height: 42px;
+  }
+}

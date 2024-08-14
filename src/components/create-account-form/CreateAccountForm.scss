@@ -1,0 +1,66 @@
+@import "../../themes/generated/variables.base.scss";
+
+.create-account-form {
+  .policy-info {
+    margin: 10px 0;
+    color: rgba($base-text-color, alpha($base-text-color) * 0.7);
+    font-size: 14px;
+    font-style: normal;
+
+    a {
+      color: rgba($base-text-color, alpha($base-text-color) * 0.7);
+    }
+  }
+
+  .login-link {
+    color: $base-accent;
+    font-size: 16px;
+    text-align: center;
+  }
+}
+.backbtn {
+  display: flex;
+  gap: 12px;
+}
+.step-text {
+  color: #687787;
+  // margin-bottom: 10px;
+  font-size: 16px;
+  font-family: "Pompiere", sans-serif;
+  font-weight: 400;
+}
+.or-text {
+  margin-top: 20px;
+  // margin-bottom: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #687787;
+  font-family: Inter;
+  font-weight: 500;
+}
+.login-with-google {
+  margin-top: 20px;
+  display: inline-block;
+  width: 100%;
+}
+
+.google-button {
+  position: relative;
+  padding-left: 24px;
+  font-size: 14px;
+  font-family: Inter;
+  color: #344450;
+}
+
+.google-button::before {
+  content: "";
+  background-image: url("../../assets/images/google.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 32%;
+  top: 51%;
+  transform: translate(-32%, -51%);
+}

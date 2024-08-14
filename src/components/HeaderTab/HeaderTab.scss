@@ -1,0 +1,51 @@
+@import "../../responsive.scss";
+.HeaderTab {
+  margin-top: 24px;
+  margin-left: 16px;
+  margin-right: 16px;
+  font-family: inter;
+
+  .Active-Header {
+    width: 100%;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  .dx-tab {
+    .dx-tab-text-span {
+      font-weight: 600;
+    }
+
+    background-color: transparent !important;
+    position: relative;
+    display: inline-flex;
+    align-items: stretch;
+    justify-content: flex-end;
+    flex-basis: 0;
+    min-width: max-content;
+    cursor: pointer;
+    padding: 12px 8px;
+
+    :first-child {
+      padding-left: 0px;
+    }
+  }
+  .dx-tabs {
+    border-bottom: 1px solid #d9dde1;
+    background-color: transparent;
+  }
+
+  .dx-tabs-wrapper {
+    gap: 32px;
+    @include sm {
+      gap: 14px;
+    }
+  }
+  .dx-tab.dx-tab-selected {
+    color: #6941c6;
+    border-bottom: #6941c6;
+  }
+  .dx-tabs-styling-mode-primary.dx-tab-indicator-position-bottom
+    .dx-tab-selected::after {
+    background-color: #6941c6;
+  }
+}

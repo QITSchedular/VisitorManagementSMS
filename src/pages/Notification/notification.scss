@@ -1,0 +1,53 @@
+.notification {
+  .header-container {
+    font-size: 20px;
+    // border-bottom: 1px solid #D9DDE1;
+    padding-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+  .notifydropdown-body {
+    :hover {
+      background-color: #fcfaff;
+      border-radius: 4px;
+    }
+    .notification {
+      display: flex;
+      align-items: center;
+      // gap: 10px;
+      // justify-content: space-between;
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid #d9dde1;
+      cursor: pointer;
+
+      .notify-title {
+        margin-left: 10px;
+        margin-bottom: 0.5rem;
+        color: #525252;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+      .notify-time {
+        margin-left: 10px;
+        color: #8d8d8d;
+        font-family: Inter;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+      .notify-unread {
+        background-color: #6941c6;
+        height: 7px;
+        width: 7px;
+        border-radius: 50%;
+      }
+    }
+  }
+}

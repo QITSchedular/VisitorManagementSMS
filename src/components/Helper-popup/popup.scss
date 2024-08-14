@@ -1,0 +1,54 @@
+@import "../../responsive.scss";
+.release-popup-main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.verify-pro-datagrid {
+  margin-top: 24px;
+  .dx-toolbar-after {
+    width: 100%;
+    padding-inline-start: 0px;
+
+    .dx-datagrid-search-panel {
+      width: 100% !important;
+      margin: 0px 0px 0px 0px !important;
+      background-color: white;
+      border: 1px solid #c2c2c2;
+      border-radius: 4px;
+      height: 44px;
+    }
+  }
+  .dx-datagrid-header-panel {
+    padding: 0px 0px !important;
+    margin-bottom: 16px;
+  }
+}
+@include sm {
+  .verify-pro-datagrid {
+    .dx-toolbar-after {
+      width: 100%;
+      padding-inline-start: 0px;
+
+      .dx-datagrid-search-panel {
+        width: 275px !important;
+        margin: 0px 0px 0px 0px !important;
+        background-color: white;
+        border: 1px solid #c2c2c2;
+        border-radius: 4px;
+        height: 44px;
+      }
+    }
+    .dx-datagrid-header-panel {
+      padding: 0px 0px !important;
+      margin-bottom: 16px;
+    }
+  }
+}
+.popup-btn-section {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 16px;
+}

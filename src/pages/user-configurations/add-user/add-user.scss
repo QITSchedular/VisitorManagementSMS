@@ -1,0 +1,32 @@
+@import "../../../responsive.scss";
+
+.add-user-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  .form-input {
+    margin-top: 24px;
+    flex: 1;
+
+    .dx-texteditor-input-container {
+      width: 100%;
+      height: 56px;
+    }
+  }
+  @include sm {
+    gap: 0;
+    .form-input {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+.dx-loadindicator-segment-inner {
+  border-color: #7f56d9 #7f56d9 transparent;
+}
+
+.dx-button.dx-state-disabled.dx-button-mode-contained {
+  background-color: rgba(255, 255, 255, 0);
+}

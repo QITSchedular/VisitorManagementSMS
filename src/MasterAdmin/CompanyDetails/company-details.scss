@@ -1,0 +1,138 @@
+@import "../../responsive.scss";
+
+.cmpProfile {
+  .content-block {
+    border-radius: 8px;
+  }
+  .upper-section {
+    margin-left: 16px;
+    margin-right: 16px;
+    // padding-bottom: 24px;
+    // border-bottom: 1px solid #d9dde1;
+    .cmpHeader {
+      margin-top: 8px;
+      display: flex;
+      gap: 16px;
+    }
+    .about-profile {
+      margin-top: 8px;
+      height: 104px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .portal-name {
+        font-size: 14px;
+      }
+      .name-address {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        .bname {
+          font-size: 20px;
+          font-weight: 600;
+          color: #344450;
+
+          // @include sm {
+          //   font-size: 16px;
+          // }
+        }
+        :nth-child(2) {
+          font-size: 20px;
+
+          color: #344450;
+        }
+        .cityTxt {
+          font-size: 16px;
+          font-weight: 400;
+          color: #344450;
+          // @include sm {
+          //   font-size: 14px;
+          // }
+        }
+      }
+      .forget-pass {
+        color: #6941c6;
+        font-weight: 500;
+        .dx-button-content {
+          justify-content: start;
+          padding-inline-start: 0px;
+        }
+      }
+      .forget-pass:hover {
+        // .dx-button-mode-text.dx-state-hover {
+        background-color: transparent;
+        // }
+      }
+      .dx-button-mode-text.dx-state-active {
+        background-color: transparent;
+      }
+      .dx-button-mode-text.dx-state-hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .edit-profile-section {
+    // margin-left: 16px;
+    // margin-right: 16px;
+    // // height: 132px;
+    // margin-top: 24px;
+    .profile-section-header {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 24px;
+      .dx-button {
+        background-color: transparent !important;
+        .dx-icon {
+          font-size: 24px !important;
+        }
+      }
+    }
+    .profile-section-editor {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding-bottom: 16px;
+      @include md {
+        flex-wrap: wrap;
+      }
+      @include sm {
+        flex-wrap: wrap;
+      }
+
+      .uplaod_btn {
+        cursor: pointer;
+        width: 304px;
+        height: 56px;
+        border: 1px dashed #9d9b9b;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        word-spacing: 2px;
+        font-size: 14px;
+        border-radius: 4px;
+        margin-top: 6px;
+      }
+    }
+  }
+
+  .dx-texteditor.dx-editor-outlined.dx-state-readonly {
+    box-shadow: none;
+  }
+
+  .dx-texteditor.dx-editor-outlined {
+    border: 0px solid black;
+  }
+
+  .dx-texteditor.dx-editor-outlined.dx-state-disabled .dx-texteditor-input,
+  .dx-texteditor.dx-editor-outlined.dx-state-readonly .dx-texteditor-input {
+    color: rgba(0, 0, 0, 1);
+  }
+
+  .header-text {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}

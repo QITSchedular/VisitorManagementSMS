@@ -1,0 +1,100 @@
+.CheckStatus {
+  padding: 8px 16px;
+  width: 100%;
+  background-color: white;
+  font-family: inter;
+  .backbtn {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .inner-container {
+    height: 119px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 40px;
+
+    .upper {
+      height: 30px;
+      :first-child {
+        font-size: 20px;
+        font-weight: 500;
+        color: #344450;
+      }
+      :nth-child(2) {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+
+// Status page 
+.StatusPage{
+  width: 100%;
+  padding: 8px 16px;
+  font-family: inter;
+  
+  .dynamic-content{
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+  
+  }
+    .approved{
+      height: 240px;
+      width: 240px;
+      img{
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .pending{
+      margin-bottom: 6px;
+      height: 240px;
+      width: 240px;
+      img{
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .rejected{
+      height: 240px;
+      width: 240px;
+      img{
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    .success,.Pending ,.Reject{
+      display: flex;
+      flex-direction: column;
+
+      :first-child{
+        font-size: 20px;
+        color: #344450;
+        font-weight: 600  ;
+        display: flex;
+        justify-content: center;
+      }
+      :nth-child(2){
+        font-size: 16px;
+        width: 100%;
+        color: #525252;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+      }
+    }
+  
+    .button{
+      width: 100%;
+    }
+}

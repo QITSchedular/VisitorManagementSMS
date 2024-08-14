@@ -1,0 +1,313 @@
+// @import "../../../responsive.scss";
+// /* styles for visitor-card.scss */
+.visitor-initial {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: #ccc;
+  font-size: 1.5em;
+  color: #fff;
+  text-transform: uppercase;
+  margin-right: 10px;
+}
+
+// .visitor-card {
+//   flex: 1 1 calc(33.333% - 24px);
+//   box-sizing: border-box;
+//   background-color: #fff;
+//   border-radius: 8px;
+//   padding: 16px;
+//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+//   display: flex;
+//   flex-direction: column;
+//   overflow: hidden;
+//   transition: all 0.3s ease;
+//   max-width: calc(33.333% - 24px);
+
+//   .visitor-header-main,
+//   .visitor-meet-main {
+//     display: flex;
+//     // align-items: center;
+//   }
+
+//   .visitor-info-main,
+//   .visitor-footer {
+//     display: block;
+//   }
+
+//   &.expanded {
+//     .visitor-info-main,
+//     .visitor-footer {
+//       display: block;
+//     }
+//   }
+
+//   .visitor-header-main {
+//     display: flex;
+//     border-bottom: 1px solid #d9dde1;
+//     img {
+//       width: 57px;
+//       height: 65px;
+//       border-radius: 4px;
+//     }
+//     .visitor-deatils {
+//       display: flex;
+//       flex-direction: column;
+//       margin-left: 16px;
+//       margin-bottom: 16px;
+//       .visitor-company {
+//         font-size: 12px;
+//         color: #344450;
+//         font-family: Inter;
+//       }
+//       .visitor-name {
+//         font-size: 16px;
+//         font-family: Inter;
+//         font-weight: 500;
+//         color: #344450;
+//         margin-top: 4px;
+//       }
+//       .visitor-address {
+//         font-size: 12px;
+//         color: #687787;
+//         font-family: Inter;
+//         margin-top: 8px;
+//         font-style: italic;
+//       }
+//     }
+//     .visitor-icon {
+//       margin-left: auto;
+//       font-size: 20px;
+//       color: #687787;
+//       cursor: pointer;
+//     }
+//   }
+//   .visitor-meet-main {
+//     display: flex;
+//     .visitor-meet {
+//       display: flex;
+//       flex-direction: column;
+//       margin-top: 16px;
+//       .visitor-meeting {
+//         font-size: 14px;
+//         color: #344450;
+//         font-family: Inter;
+//       }
+//       .meeting-with {
+//         margin-right: 4px;
+//       }
+//       .visitor-time {
+//         color: #687787;
+//         font-size: 14px;
+//         font-family: Roboto;
+//         margin-top: 8px;
+//       }
+//     }
+//     .visitor-meet-icon {
+//       margin-left: auto;
+//       font-size: 20px;
+//       color: #687787;
+//       cursor: pointer;
+//       margin-top: 20px;
+//       // &:hover {
+//       //   // padding: 5px;
+//       //   background-color: #687787;
+//       // }
+//     }
+//   }
+//   .visitor-info-main {
+//     margin-top: 16px;
+//     .visitor-info {
+//       padding: 12px;
+//       background-color: #fcfaff;
+//       border-radius: 4px;
+//       font-size: 14px;
+//       color: #687787;
+//       font-family: Inter;
+//     }
+//   }
+//   .visitor-footer {
+//     display: flex;
+//     gap: 16px;
+//     margin-top: 16px;
+
+//     // Make buttons flexible
+//     .dx-button {
+//       flex: 1;
+//     }
+//   }
+// }
+
+// @include md {
+//   .visitor-card {
+//     flex: 1 1 calc(50% - 24px);
+//     max-width: calc(50% - 24px);
+//   }
+// }
+
+// @include sm {
+//   .visitor-card {
+//     flex: 1 1 100%;
+//     max-width: 100%;
+//   }
+// }
+
+@import "../../../responsive.scss";
+
+.visitor-card {
+  flex: 1 1 calc(33.333% - 24px);
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  max-width: calc(33.333% - 24px);
+
+  .visitor-header-main,
+  .visitor-meet-main {
+    display: flex;
+    // align-items: center;
+  }
+
+  .visitor-info-main,
+  .visitor-footer {
+    display: block;
+  }
+
+  &.expanded {
+    .visitor-info-main,
+    .visitor-footer {
+      display: block;
+    }
+  }
+
+  .visitor-header-main {
+    display: flex;
+    border-bottom: 1px solid #d9dde1;
+    img {
+      width: 57px;
+      height: 65px;
+      border-radius: 4px;
+    }
+    .visitor-deatils {
+      display: flex;
+      flex-direction: column;
+      margin-left: 16px;
+      margin-bottom: 16px;
+      .visitor-company {
+        font-size: 12px;
+        color: #344450;
+        font-family: Inter;
+      }
+      .visitor-name {
+        font-size: 16px;
+        font-family: Inter;
+        font-weight: 500;
+        color: #344450;
+        margin-top: 4px;
+      }
+      .visitor-address {
+        font-size: 12px;
+        color: #687787;
+        font-family: Inter;
+        margin-top: 8px;
+        font-style: italic;
+      }
+    }
+    .visitor-icon {
+      margin-left: auto;
+      font-size: 20px;
+      color: #687787;
+      cursor: pointer;
+    }
+  }
+  .visitor-meet-main {
+    display: flex;
+    .visitor-meet {
+      display: flex;
+      flex-direction: column;
+      margin-top: 16px;
+      .visitor-meeting {
+        font-size: 14px;
+        color: #344450;
+        font-family: Inter;
+      }
+      .meeting-with {
+        margin-right: 4px;
+      }
+      .visitor-time {
+        color: #687787;
+        font-size: 14px;
+        font-family: Roboto;
+        margin-top: 8px;
+      }
+    }
+    .visitor-meet-icon {
+      margin-left: auto;
+      font-size: 20px;
+      color: #687787;
+      cursor: pointer;
+      margin-top: 20px;
+      // &:hover {
+      //   // padding: 5px;
+      //   background-color: #687787;
+      // }
+    }
+  }
+  .visitor-info-main {
+    margin-top: 16px;
+    .visitor-info {
+      padding: 12px;
+      background-color: #fcfaff;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #687787;
+      font-family: Inter;
+    }
+  }
+  .visitor-footer {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+
+    // Make buttons flexible
+    .dx-button {
+      flex: 1;
+    }
+  }
+}
+
+.visitor-initial {
+  width: 56px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: #ccc;
+  font-size: 1.5em;
+  color: #fff;
+  text-transform: uppercase;
+  margin-right: 10px;
+}
+
+@include md {
+  .visitor-card {
+    flex: 1 1 calc(50% - 24px);
+    max-width: calc(50% - 24px);
+  }
+}
+
+@include sm {
+  .visitor-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}

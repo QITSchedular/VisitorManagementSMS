@@ -1,0 +1,63 @@
+.Step1 {
+  padding: 8px 16px;
+  width: 100%;
+  background-color: white;
+  .backbtn {
+    height: 44px;
+    width: 44px;
+    display: flex;
+    align-items: center;
+    color: #344450;
+    margin-bottom: 12px;
+    font-size: 18px;
+  }
+
+  .header-step {
+    height: 62px;
+    margin-bottom: 24px;
+
+    .step-number {
+      font-family: pompiere;
+      font-size: 16px;
+      color: #687787;
+      margin-bottom: 8px;
+    }
+
+    .welcome-text {
+      font-family: inter;
+      font-size: 16px;
+      :first-child {
+        font-size: 20px;
+        font-weight: 500;
+        color: #344450;
+      }
+    }
+  }
+  .input-text {
+    .step-textbox {
+      margin-bottom: 24px;
+    }
+    .last-textbox {
+      margin-bottom: 32px;
+    }
+  }
+  .btn-section {
+    margin-bottom: 24px;
+  }
+  .already-text {
+    height: 40px;
+    font-family: inter;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    gap: 5px;
+    color: #687787;
+    :nth-child(2) {
+      color: #6941c6;
+      font-family: inter;
+      font-weight: 600;
+    }
+  }
+}

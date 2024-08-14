@@ -1,0 +1,73 @@
+.outer-container {
+  height: 100vh;
+  width: 100%;
+  background-image: url("../../assets/images/welcome.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .lower-part {
+    top: 50%;
+    height: 50%;
+    background-color: white;
+    position: relative;
+    border-radius: 20px 20px 0 0;
+    border: none;
+
+    .welcome-note {
+      padding: 40px 16px;
+
+      .title {
+        font-size: 32px;
+        font-family: pompiere;
+        margin-bottom: 16px;
+      }
+      .subtitle {
+        display: flex;
+        font-family: inter;
+        flex-direction: column;
+        font-size: 20px;
+        font-weight: 500;
+        color: #344450;
+      }
+    }
+
+    .button-section {
+      height: 168px;
+      margin: 10px 16px;
+      .checkInBtn {
+        width: 100%;
+        height: 44px;
+        margin-bottom: 20px;
+        font-size: 14px;
+      }
+      .CheckOutBtn {
+        width: 100%;
+        height: 44px;
+        background-color: white;
+        color: black;
+        box-shadow: none;
+        border: 0.3px solid #b3bac3;
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
+
+      .welcome-footer {
+        height: 40px;
+        font-family: inter;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        gap: 5px;
+        color: #687787;
+        :nth-child(2) {
+          color: #6941c6;
+          font-family: inter;
+          font-weight: 600;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

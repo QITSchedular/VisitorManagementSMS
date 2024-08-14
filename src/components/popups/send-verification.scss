@@ -1,0 +1,83 @@
+@import "../../responsive.scss";
+
+.verification-popup-main {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  .popup-subtext {
+    margin-top: 8px;
+  }
+  .popup-close-btn {
+    position: absolute;
+    top: 20%;
+    right: 0;
+    transform: translateY(-40%);
+    .dx-button-has-icon {
+      background-color: transparent;
+    }
+  }
+}
+.verification-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 50px;
+}
+
+.continueBtn {
+  margin: 24px 0px;
+}
+
+// .dx-overlay-content {
+//   display: flex;
+//   justify-content: center;
+// }
+
+@include sm {
+  .dx-overlay-content .dx-popup-content {
+    width: 290px;
+    height: 250px;
+  }
+}
+.popup-input {
+  margin-top: 32px;
+}
+.full-width-button {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.popup-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+// .responsive-popup {
+//   .dx-popup-wrapper > .dx-overlay-content {
+//     width: 25%;
+//     max-width: 480px;
+//     @include sm {
+//       width: 95%;
+//     }
+//   }
+// }
+.dx-popup-wrapper > .dx-overlay-content {
+  width: 25%;
+  max-width: 480px;
+  @include sm {
+    width: 95%;
+  }
+}
+
+.statusGifHeader {
+  font-size: 18px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.statusGif {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,12 @@
+.qr-code {
+  height: 183px;
+  background-color: #fcfaff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .qr-image {
+    width: auto;
+    height: 125px;
+  }
+}

@@ -1,0 +1,447 @@
+@import "../../responsive.scss";
+
+.addBtn {
+  background-color: #7f56d9;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 20px;
+  cursor: pointer;
+}
+
+.required {
+  span:nth-child(1)::after {
+    color: red !important; /* Change color of the asterisk */
+    content: " *"; /* Add asterisk after the first character */
+  }
+
+  span.dx-clear-button-area:first-of-type::after {
+    color: rgb(255, 255, 255) !important; /* Change color of the asterisk */
+    content: ""; /* Add asterisk after the first character */
+  }
+  span.dx-icon-clear:first-of-type::after {
+    color: rgb(255, 255, 255) !important; /* Change color of the asterisk */
+    content: ""; /* Add asterisk after the first character */
+  }
+}
+
+.navigation-header {
+  display: flex;
+  align-items: center;
+}
+.title-section {
+  flex: 1;
+}
+.navigation-header-main {
+  display: flex;
+  align-items: center;
+}
+
+.dx-context-menu {
+  // box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.title-section-btn {
+  .dx-button-mode-outlined {
+    font-size: 14px;
+    font-size: Inter;
+    color: #344450;
+    font-weight: 400;
+  }
+  .dx-button-text {
+    font-weight: 400;
+    white-space: nowrap;
+  }
+  .button-with-margin {
+    margin-left: 16px;
+  }
+}
+.data-grid {
+  .dx-toolbar-items-container {
+    margin-bottom: 16px;
+  }
+  .left-textbox {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+.personal-detail-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  .form-input {
+    margin-top: 24px;
+    flex: 1 1 468px;
+    max-width: 468px;
+
+    .dx-texteditor-input-container {
+      width: 100%;
+      height: 56px;
+    }
+  }
+
+  .form-input.full-width {
+    flex: 1 1 100%;
+    max-width: calc(2 * 468px + 24px);
+    // max-width: 100%;
+  }
+
+  @include sm {
+    gap: 0;
+    .form-input {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+
+    .form-input.full-width {
+      max-width: 100%;
+    }
+  }
+
+  @include md {
+    // gap: 0px !important;
+    .form-input {
+      flex: 1 1 calc(50% - 24px);
+      max-width: calc(50% - 24px);
+    }
+
+    .form-input.full-width {
+      max-width: 100%;
+    }
+  }
+
+  @include lg {
+    gap: 24px !important;
+
+    // .form-input {
+    //   flex: 1 1 calc(33.33% - 24px);
+    //   max-width: calc(33.33% - 24px);
+    // }
+
+    // .form-input.full-width {
+    //   max-width: calc(2 * 468px + 24px);
+    // }
+  }
+}
+.popup-textbox {
+  .dx-button-has-icon {
+    background-color: transparent;
+  }
+  .dx-button-has-icon .dx-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+@include sm {
+  .navigation-header-main {
+    display: block;
+  }
+}
+@include sm {
+  .data-grid .dx-toolbar-items-container {
+    margin-bottom: 70px;
+  }
+  .data-grid .dx-toolbar .dx-toolbar-after {
+    margin-top: 50px;
+  }
+}
+@include md {
+  .data-grid .dx-toolbar-items-container {
+    margin-bottom: 70px;
+  }
+  .data-grid .dx-toolbar .dx-toolbar-after {
+    margin-top: 50px;
+  }
+}
+@include sm {
+  .data-grid .left-textbox {
+    margin-left: 0 !important;
+  }
+}
+.data-grid {
+  @include sm {
+    .dx-toolbar-after {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .dx-toolbar .dx-toolbar-after {
+      padding: 0 !important;
+    }
+    .dx-toolbar {
+      height: 180px;
+      max-width: 100%;
+      // height: 250px;
+      // max-width: 100%;
+    }
+    .dx-toolbar-after {
+      .dx-item-content.dx-toolbar-item-content {
+        padding-top: 10px;
+        // width: 250px !important;
+      }
+    }
+  }
+}
+@include sm {
+  .data-grid {
+    .dx-datagrid-search-panel {
+      width: 310px !important;
+      margin: 0 !important;
+    }
+    .dx-toolbar-after .dx-toolbar-item {
+      padding: 0 !important;
+    }
+  }
+}
+.header-state {
+  // margin-left: 10px;
+  background-color: rgba(18, 77, 34, 0.08);
+  border-radius: 16px;
+  padding: 4px 8px 4px 8px;
+
+  .status-circle {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: -13px;
+    margin-bottom: 2px;
+  }
+
+  span {
+    &[data-type="Approved"] {
+      .status-circle {
+        background-color: #124d22;
+      }
+
+      color: #124d22;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 21px;
+      margin-left: 18px;
+    }
+    &[data-type="Check in"] {
+      .status-circle {
+        background-color: #06548b;
+      }
+
+      color: #06548b;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 21px;
+      margin-left: 18px;
+    }
+    &[data-type="Rejected"] {
+      .status-circle {
+        background-color: #ad1820;
+      }
+
+      color: #ad1820;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 21px;
+      margin-left: 18px;
+    }
+    &[data-type="Check Out"] {
+      .status-circle {
+        background-color: #ad1820;
+      }
+
+      color: #ad1820;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 21px;
+      margin-left: 18px;
+    }
+    &[data-type="Pending"] {
+      .status-circle {
+        background-color: #934908;
+      }
+
+      color: #934908;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 21px;
+      margin-left: 18px;
+    }
+  }
+}
+.header-status {
+  margin-left: 10px;
+  background-color: rgba(18, 77, 34, 0.08);
+  border-radius: 16px;
+  padding: 4px 8px 4px 8px;
+
+  .status-circle {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: -13px;
+    margin-bottom: 2px;
+  }
+
+  span {
+    &[data-type="Check in"] {
+      .status-circle {
+        background-color: #06548b;
+      }
+
+      color: #06548b;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 21px;
+      margin-left: 18px;
+    }
+
+    &[data-type="Check Out"] {
+      .status-circle {
+        background-color: #ad1820;
+      }
+
+      color: #ad1820;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 21px;
+      margin-left: 18px;
+    }
+  }
+}
+.data-grid {
+  td {
+    .col-main {
+      &[data-type="Approved"] {
+        background-color: rgba(18, 77, 34, 0.06);
+      }
+      &[data-type="Changed"] {
+        background-color: rgba(18, 77, 34, 0.06);
+      }
+      &[data-type="Check in"] {
+        background-color: rgba(6, 84, 139, 0.06);
+      }
+      &[data-type="Pending"] {
+        background-color: rgba(233, 115, 12, 0.06);
+      }
+      &[data-type="Check Out"] {
+        background-color: rgba(173, 24, 32, 0.06);
+      }
+      &[data-type="Rejected"] {
+        background-color: rgba(173, 24, 32, 0.06);
+      }
+      // background-color: rgba(18, 77, 34, 0.08);
+      border-radius: 16px;
+      padding: 6px 8px 6px 8px;
+    }
+
+    // position: relative;
+
+    .status-circle {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: -13px;
+      margin-bottom: 2px;
+    }
+
+    span {
+      &[data-type="Approved"] {
+        .status-circle {
+          background-color: #124d22;
+        }
+
+        color: #124d22;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 21px;
+        margin-left: 18px;
+      }
+      &[data-type="Changed"] {
+        .status-circle {
+          background-color: #124d22;
+        }
+
+        color: #124d22;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 21px;
+        margin-left: 18px;
+      }
+      &[data-type="Pending"] {
+        .status-circle {
+          background-color: #934908;
+        }
+
+        color: #934908;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 21px;
+        margin-left: 18px;
+      }
+      &[data-type="Rejected"] {
+        .status-circle {
+          background-color: #ad1820;
+        }
+
+        color: #ad1820;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 21px;
+        margin-left: 18px;
+      }
+      &[data-type="Check in"] {
+        .status-circle {
+          background-color: #0d4d8b;
+        }
+
+        color: #0d4d8b;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 21px;
+        margin-left: 18px;
+      }
+      &[data-type="Check Out"] {
+        .status-circle {
+          background-color: #ad1820;
+        }
+
+        color: #ad1820;
+        font-family: Inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 21px;
+        margin-left: 18px;
+      }
+    }
+  }
+}
+.actionDetails {
+  .dx-button-mode-outlined {
+    border: none !important;
+  }
+}

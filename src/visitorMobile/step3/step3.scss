@@ -1,0 +1,163 @@
+.step3 {
+  padding: 8px 16px;
+  width: 100%;
+  background-color: white;
+
+  .backbtn {
+    height: 44px;
+    width: 44px;
+    display: flex;
+    align-items: center;
+    color: #344450;
+    margin-bottom: 12px;
+    font-size: 18px;
+  }
+
+  .header-step {
+    height: 87px;
+    margin-bottom: 40px;
+
+    .step-number {
+      font-family: pompiere;
+      font-size: 16px;
+      color: #687787;
+      margin-bottom: 8px;
+    }
+
+    .welcome-text {
+      font-family: inter;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      color: #687787;
+
+      :first-child {
+        font-size: 20px;
+        font-weight: 500;
+        color: #344450;
+        margin-bottom: 6px;
+      }
+    }
+  }
+
+  .picture {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &.fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .imgcapture {
+      height: 100%;
+      width: 100%;
+      margin-bottom: 40px;
+      justify-content: center;
+      img {
+        border-radius: 8px;
+      }
+    }
+
+    .captureBtn {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .clickBtn {
+      background-color: white;
+      color: #344450;
+      box-shadow: none;
+      border: 1px solid rgba(78, 93, 107, 0.24);
+    }
+  }
+}
+.imgcapture {
+  display: flex;
+  justify-content: center;
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: auto;
+}
+
+.photo-button {
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  bottom: 2rem; /* 2rem space from the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  bottom: 15%;
+  right: 15%;
+  border-radius: 100%;
+  background-color: white;
+  opacity: 0;
+}
+
+.ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 100%;
+  border: 0.2em solid white;
+  opacity: 0.8;
+}
+
+.photo-button .circle,
+.photo-button .ring {
+  transition: all 0.25s;
+}
+
+.photo-button:hover .circle {
+  opacity: 1;
+}
+
+.photo-button:active .ring {
+  opacity: 1;
+}
+
+.photo-button:active .circle {
+  opacity: 0.5;
+}
+
+.no-camera {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: red;
+}

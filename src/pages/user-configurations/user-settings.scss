@@ -1,0 +1,28 @@
+@import "../../responsive.scss";
+.content-block {
+  .tab-panel {
+    .dx-tabpanel-tabs {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+
+      @include sm {
+        overflow-x: scroll;
+      }
+
+      .dx-item {
+        display: inline-block;
+        padding: 10px;
+      }
+    }
+
+    .dx-tabpanel-content {
+      padding: 16px;
+
+      @include sm {
+        padding: 8px;
+      }
+    }
+  }
+}

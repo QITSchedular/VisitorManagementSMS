@@ -1,0 +1,168 @@
+@import "../../themes/generated/variables.base.scss";
+@import "../../responsive.scss";
+
+.login-form {
+  .link {
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    color: none;
+    a {
+      text-decoration: none;
+      color: none;
+    }
+  }
+
+  .form-text {
+    margin: 10px 0;
+    color: rgba($base-text-color, alpha($base-text-color) * 0.7);
+  }
+}
+
+.login-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+
+  .login-container-right {
+    height: 100vh;
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    overflow: hidden;
+    // align-items: center;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .login-container-left {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+    padding: 0px 8rem;
+    background-color: #fff;
+
+    .login-form {
+      width: 650px;
+      // margin-top: 250px;
+    }
+
+    .header-image {
+      margin-bottom: 40px;
+    }
+    .header-main-title {
+      font-size: 20px;
+      font-weight: 500;
+      color: #344450;
+      font-family: Inter;
+    }
+    .header-sub-title {
+      padding-top: 15px;
+      padding-bottom: 12px;
+      font-size: 14px;
+      color: #40566d;
+      font-family: Inter;
+      .create-account {
+        color: #6941c6;
+        font-size: 14px;
+        font-family: Inter;
+        font-weight: 500;
+        margin-left: 2px;
+        cursor: pointer;
+      }
+    }
+    .forget-pwd {
+      margin-top: 20px;
+      // color: #6941c6;
+      font-size: 14px;
+      font-family: Inter;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .login-container-right-body {
+      .inputField {
+        // margin-bottom: 8px;
+        padding-top: 24px;
+      }
+    }
+  }
+}
+.login-container-right-footer {
+  margin-top: 24px;
+}
+.terms-condition {
+  margin-top: 15px;
+  font-size: 14px;
+  font-family: Inter;
+  color: #687787;
+
+  .terms-service {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+// media queries
+@include sm {
+  .login-container {
+    .login-container-right {
+      height: 100vh;
+      display: flex;
+      width: 0;
+      justify-content: center;
+      overflow: hidden;
+      // align-items: center;
+      img {
+        display: none;
+      }
+    }
+    .login-container-left {
+      width: 100%;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      font-family: "Inter", sans-serif;
+      padding: 0px 2rem;
+      background-color: #fff;
+
+      .login-form {
+        width: 100%;
+        // margin-top: 250px;
+      }
+    }
+  }
+}
+@include md {
+  .login-container {
+    .login-container-right {
+      height: 100vh;
+      display: flex;
+      width: 0;
+      justify-content: center;
+      overflow: hidden;
+      // align-items: center;
+      img {
+        display: none;
+      }
+    }
+    .login-container-left {
+      width: 100%;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      font-family: "Inter", sans-serif;
+      padding: 0px 10rem;
+      background-color: #fff;
+
+      .login-form {
+        width: 100%;
+        // margin-top: 250px;
+      }
+    }
+  }
+}

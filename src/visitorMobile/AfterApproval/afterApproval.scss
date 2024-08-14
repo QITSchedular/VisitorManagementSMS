@@ -1,0 +1,30 @@
+.AfterApproval{
+    font-family: inter;
+    padding: 8px 16px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .center-conatier{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 40px;
+        .text{
+            font-size: 20px;
+            font-weight: 500;
+        }
+        .gif{
+            height: 240px;
+            width: 240px;
+            img{
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+
+}

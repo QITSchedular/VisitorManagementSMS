@@ -1,0 +1,52 @@
+.typ-header-text {
+  color: #142129;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px;
+}
+.typ-sub-text {
+  color: #344450;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+.popup-header-text {
+  color: #344450;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 27px;
+}
+.form-text {
+  color: #142129;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+.popup-sub-text {
+  color: #687787;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+@media only screen and (max-width: 600px) {
+  .typ-header-text {
+    font-size: 20px !important;
+    margin-bottom: 16px;
+  }
+
+  .typ-sub-text {
+    font-size: 14px !important;
+    margin-bottom: 16px;
+  }
+}

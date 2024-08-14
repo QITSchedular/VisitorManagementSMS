@@ -1,0 +1,46 @@
+.Checkout {
+  padding: 8px 16px;
+  width: 100%;
+  background-color: white;
+  .backbtn {
+    height: 44px;
+    width: 44px;
+    display: flex;
+    align-items: center;
+    color: #344450;
+    margin-bottom: 12px;
+    font-size: 18px;
+  }
+  .welcome-text {
+    font-family: inter;
+    font-size: 16px;
+    margin-bottom: 24px;
+    :first-child {
+      font-size: 20px;
+      font-weight: 500;
+      color: #344450;
+    }
+  }
+  .step-textbox {
+    margin-bottom: 32px;
+  }
+  .already-text {
+    height: 40px;
+    font-family: inter;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    gap: 5px;
+    color: #687787;
+    :nth-child(2) {
+      color: #6941c6;
+      font-family: inter;
+      font-weight: 600;
+    }
+  }
+  .btn-section {
+    margin-bottom: 24px;
+  }
+}

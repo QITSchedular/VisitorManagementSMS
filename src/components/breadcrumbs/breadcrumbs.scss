@@ -1,0 +1,31 @@
+.breadcrumbs {
+  display: flex;
+  margin: 0px 0px 0px 0px;
+}
+
+.breadcrumb-item-text {
+  white-space: nowrap;
+  text-decoration: none !important;
+  color: #0a6ed1;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 21px;
+}
+
+.breadcrumb-slash {
+  margin: 0 5px;
+  color: #262626;
+}
+.breadcrumb-item.last-child {
+  .breadcrumb-item-text {
+    color: #262626;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px;
+    text-decoration: none !important;
+  }
+}

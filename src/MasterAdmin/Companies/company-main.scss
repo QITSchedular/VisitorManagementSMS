@@ -1,0 +1,73 @@
+span {
+  &[data-type="Active"] {
+    .status-circle {
+      background-color: #0d4d8b;
+    }
+
+    color: #0d4d8b;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px;
+    margin-left: 18px;
+  }
+  &[data-type="Inactive"] {
+    .status-circle {
+      background-color: #910000;
+    }
+
+    color: #910000;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px;
+    margin-left: 18px;
+  }
+  &[data-type="Received"] {
+    .status-circle {
+      background-color: #0c6230;
+    }
+
+    color: #0c6230;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px;
+    margin-left: 18px;
+  }
+  &[data-type="Due"] {
+    .status-circle {
+      background-color: #934908;
+    }
+
+    color: #934908;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px;
+    margin-left: 18px;
+  }
+}
+
+.data-grid {
+  td {
+    .col-main {
+      &[data-type="Active"] {
+        background-color: rgba(17, 100, 180, 0.09);
+      }
+      &[data-type="Inactive"] {
+        background-color: rgba(187, 00, 00, 0.09);
+      }
+      &[data-type="Received"] {
+        background-color: rgba(16, 126, 62, 0.09);
+      }
+      &[data-type="Due"] {
+        background-color: rgba(233, 115, 12, 0.09);
+      }
+    }
+  }
+}
