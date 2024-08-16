@@ -458,6 +458,16 @@ const VisitorDetail = () => {
                 </div>
               </div>
               <div className="visitor-personal-data">
+                <div className="visitor-header">Email</div>
+                <div className="visitor-sub-header">
+                  {visitorDetailbrief.vEmail === ""
+                    ? "--"
+                    : visitorDetailbrief.vEmail}
+                </div>
+              </div>
+            </div>
+            <div className="visitor-personal-detail">
+              <div className="visitor-personal-data">
                 <div className="visitor-header">Mobile Number</div>
                 <div className="visitor-sub-header">
                   {visitorDetailbrief.vPhone1 === ""
@@ -465,8 +475,6 @@ const VisitorDetail = () => {
                     : visitorDetailbrief.vPhone1}
                 </div>
               </div>
-            </div>
-            <div className="visitor-personal-detail">
               <div className="visitor-personal-data">
                 <div className="visitor-header">Company</div>
                 <div className="visitor-sub-header">
@@ -475,6 +483,8 @@ const VisitorDetail = () => {
                     : visitorDetailbrief.vCmpname}
                 </div>
               </div>
+            </div>
+            <div className="visitor-personal-detail">
               <div className="visitor-personal-data">
                 <div className="visitor-header">Location</div>
                 <div className="visitor-sub-header">
@@ -635,14 +645,6 @@ const VisitorDetail = () => {
             </div>
             <div className="visitor-personal-detail">
               <div className="visitor-personal-data">
-                <div className="visitor-header">Purpose of Visit</div>
-                <div className="visitor-sub-header">
-                  {visitorDetailbrief.purposeofvisit === ""
-                    ? "--"
-                    : visitorDetailbrief.purposeofvisit}
-                </div>
-              </div>
-              <div className="visitor-personal-data">
                 <div className="visitor-header">Time Slot</div>
                 <div className="visitor-sub-header">
                   {visitorDetailbrief.timeslot === "" ? (
@@ -652,8 +654,6 @@ const VisitorDetail = () => {
                   )}
                 </div>
               </div>
-            </div>
-            <div className="visitor-personal-detail">
               <div className="visitor-personal-data">
                 <div className="visitor-header">Carrying hardware</div>
                 <div className="visitor-sub-header">
@@ -662,12 +662,14 @@ const VisitorDetail = () => {
                     : visitorDetailbrief.anyhardware}
                 </div>
               </div>
+            </div>
+            <div className="visitor-personal-detail">
               <div className="visitor-personal-data">
-                <div className="visitor-header">Email</div>
+                <div className="visitor-header">Purpose of Visit</div>
                 <div className="visitor-sub-header">
-                  {visitorDetailbrief.vEmail === ""
+                  {visitorDetailbrief.purposeofvisit === ""
                     ? "--"
-                    : visitorDetailbrief.vEmail}
+                    : visitorDetailbrief.purposeofvisit}
                 </div>
               </div>
             </div>
