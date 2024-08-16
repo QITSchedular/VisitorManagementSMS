@@ -45,11 +45,22 @@ export const registerUserApi = async (payload) => {
   }
 };
 
-export const requestOtp = async (email, role) => {
-  const payload = {
-    e_mail: email,
-    role: role,
-  };
+export const requestOtp = async (email, role,mobile) => {
+  var payload = {
+      e_mail: email,
+      role: role
+    }
+    if(role.toUpperCase() != "COMPANY"){
+      payload = {
+      e_mail: email,
+      role: role,
+      mobile:mobile
+    }
+  }
+  // const payload = {
+  //   e_mail: email,
+  //   role: role,
+  // };
   const responseBody = {
     responseData: null,
     hasError: false,

@@ -46,12 +46,12 @@ const AddUser = ({ setLoading, setActiveTabIndex }) => {
     loadDeptData();
   }, []);
 
-  const GenerateOTP = async (officialMail, type) => {
+  const GenerateOTP = async (officialMail, type, phone) => {
     // setIsOtpPopupVisible(true);
 
     setLoading(true);
     setrefFocused(true);
-    const getOtpFromID = await requestOtp(officialMail, type);
+    const getOtpFromID = await requestOtp(officialMail, type, phone);
 
     if (getOtpFromID.hasError === true) {
       setLoading(false);
@@ -72,7 +72,7 @@ const AddUser = ({ setLoading, setActiveTabIndex }) => {
     if (isMatch === false) {
       return toastDisplayer("error", "Please enter a valid email address.");
     }
-    GenerateOTP(formData?.e_mail, "user");
+    GenerateOTP(formData?.e_mail, "user",formData?.phone);
   };
 
   const mobileOption = {
