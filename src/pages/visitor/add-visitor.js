@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Breadcrumbs from "../../components/breadcrumbs/BreadCrumbs";
 import {
   FormText,
@@ -163,8 +163,6 @@ const AddVisitor = () => {
       return toastDisplayer("success", "OTP send successfully");
     }
   };
-
-  useEffect(() => {}, [formData]);
 
   const OtpBtnHandler = () => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -383,64 +381,57 @@ const AddVisitor = () => {
               </TextBox>
             </div>
             <div className="form-input popup-textbox">
-              {/* {isLoading && (
-                <LoadPanel visible={true} shadingColor="rgba(0,0,0,0.4)" />
-              )} */}
-              {stagedChanges && stagedChanges.OtpVerification ? (
-                <>
-                  <TextBox
-                    label="Email Address"
-                    placeholder="Enter email address"
-                    labelMode="static"
-                    stylingMode="outlined"
-                    onValueChanged={(e) => handleInputChange("e_mail", e)}
-                    readOnly={isOTPVerified}
-                    value={formData?.e_mail}
-                    style={{ cursor: "pointer" }}
-                    valueChangeEvent="keyup"
-                    className="required"
-                  >
-                    <TextBoxButton
-                      name="popupSearch"
-                      location="after"
-                      options={mobileOption}
-                    />
-                    <Validator>
-                      <RequiredRule message="Email address is required." />
-                      <EmailRule message="Email is invalid" />
-                    </Validator>
-                  </TextBox>
-                </>
-              ) : (
-                <>
-                  <TextBox
-                    label="Email Address"
-                    placeholder="Enter email address"
-                    labelMode="static"
-                    stylingMode="outlined"
-                    onValueChanged={(e) => handleInputChange("e_mail", e)}
-                    readOnly={isOTPVerified}
-                    value={formData?.e_mail}
-                    style={{ cursor: "pointer" }}
-                    valueChangeEvent="keyup"
-                    className="required"
-                  >
-                    {/* <TextBoxButton
+              {/* {stagedChanges && stagedChanges.OtpVerification ? (
+                <TextBox
+                  label="Email Address"
+                  placeholder="Enter email address"
+                  labelMode="static"
+                  stylingMode="outlined"
+                  onValueChanged={(e) => handleInputChange("e_mail", e)}
+                  readOnly={isOTPVerified}
+                  value={formData?.e_mail}
+                  style={{ cursor: "pointer" }}
+                  valueChangeEvent="keyup"
+                  className="required"
+                >
+                  <TextBoxButton
+                    name="popupSearch"
+                    location="after"
+                    options={mobileOption}
+                  />
+                  <Validator>
+                    <RequiredRule message="Email address is required." />
+                    <EmailRule message="Email is invalid" />
+                  </Validator>
+                </TextBox>
+              ) : ( */}
+              <TextBox
+                label="Email Address"
+                placeholder="Enter email address"
+                labelMode="static"
+                stylingMode="outlined"
+                onValueChanged={(e) => handleInputChange("e_mail", e)}
+                readOnly={isOTPVerified}
+                value={formData?.e_mail}
+                style={{ cursor: "pointer" }}
+                valueChangeEvent="keyup"
+                className="required"
+              >
+                {/* <TextBoxButton
                   name="popupSearch"
                   location="after"
                   options={mobileOption}
                 /> */}
-                    <Validator>
-                      <RequiredRule message="Email address is required." />
-                      <EmailRule message="Email is invalid" />
-                    </Validator>
-                  </TextBox>
-                </>
-              )}
+                <Validator>
+                  <RequiredRule message="Email address is required." />
+                  <EmailRule message="Email is invalid" />
+                </Validator>
+              </TextBox>
+              {/* )} */}
             </div>
           </div>
           <div className="personal-detail-form">
-            <div className="form-input">
+            <div className="form-input popup-textbox">
               <TextBox
                 label="Mobile"
                 placeholder="Input"
@@ -449,8 +440,22 @@ const AddVisitor = () => {
                 onValueChanged={(e) => handleInputChange("phone1", e)}
                 value={formData?.phone1}
                 className="required"
-                // maxLength={10}
+                valueChangeEvent="keyup"
               >
+                {stagedChanges && stagedChanges.OtpVerification && (
+                  <TextBoxButton
+                    name="popupSearch"
+                    location="after"
+                    options={mobileOption}
+                  />
+                )}
+                {/* <TextBoxButton
+                  name="popupSearch"
+                  location="after"
+                  options={mobileOption}
+                  visible={false}
+                  // visible={stagedChanges && stagedChanges.OtpVerification} // Control visibility
+                /> */}
                 <Validator>
                   <RequiredRule message="Mobile is required" />
                   <PatternRule
@@ -460,6 +465,57 @@ const AddVisitor = () => {
                 </Validator>
               </TextBox>
             </div>
+
+            {/* <div className="form-input  popup-textbox">
+              {stagedChanges && stagedChanges.OtpVerification ? (
+                <>
+                  <TextBox
+                    label="Mobile"
+                    placeholder="Input"
+                    labelMode="static"
+                    stylingMode="outlined"
+                    onValueChanged={(e) => handleInputChange("phone1", e)}
+                    value={formData?.phone1}
+                    className="required"
+                    // maxLength={10}
+                  >
+                    <TextBoxButton
+                      name="popupSearch"
+                      location="after"
+                      options={mobileOption}
+                    />
+                    <Validator>
+                      <RequiredRule message="Mobile is required" />
+                      <PatternRule
+                        message="Invalid mobile number"
+                        pattern="^\d{10}$"
+                      />
+                    </Validator>
+                  </TextBox>
+                </>
+              ) : (
+                <>
+                  <TextBox
+                    label="Mobile"
+                    placeholder="Input"
+                    labelMode="static"
+                    stylingMode="outlined"
+                    onValueChanged={(e) => handleInputChange("phone1", e)}
+                    value={formData?.phone1}
+                    className="required"
+                    // maxLength={10}
+                  >
+                    <Validator>
+                      <RequiredRule message="Mobile is required" />
+                      <PatternRule
+                        message="Invalid mobile number"
+                        pattern="^\d{10}$"
+                      />
+                    </Validator>
+                  </TextBox>
+                </>
+              )}
+            </div> */}
             <div className="form-input">
               <TextBox
                 placeholder="In which company visitor work"
