@@ -38,6 +38,7 @@ const VistorsDetails = () => {
     setVerifyData({
       company_id: company_id,
       visitor_id: visitorId,
+      visitor_name:"",
       reason: "",
       status: "R",
       sender_email: user.e_mail,
@@ -69,7 +70,9 @@ const VistorsDetails = () => {
     const getData = await getVisitorDetailsApi(cmp_id, visitorId);
     setAllVisitor(getData.responseData.Data);
     const myallVisitor = getData.responseData.Data;
-
+    setVerifyData((prevData)=>({
+      ...prevData,
+      "visitor_name":myallVisitor.vName}))
     setSingleVisitor(myallVisitor);
     setLoading(false);
   };

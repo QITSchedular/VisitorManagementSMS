@@ -98,8 +98,9 @@ export const Step1 = () => {
   // Handle OTP
   const hanldeGetOtp = () => {
     const email = registerVisitor.e_mail;
+    const mobile = registerVisitor.phone1;
     const role = "visitor";
-    const handleOtp = requestOtp(email, role);
+    const handleOtp = requestOtp(email, role,mobile);
 
     if (handleOtp === true) {
     }
