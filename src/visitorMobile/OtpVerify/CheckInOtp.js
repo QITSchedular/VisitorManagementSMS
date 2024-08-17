@@ -18,6 +18,7 @@ export const CheckInOtp = () => {
   const [registerVisitor, setRegisterVisitor] = useRegisterVisitor();
 
   const email = registerVisitor.e_mail;
+  const mobile = registerVisitor.phone1;
 
   const handleChange = (index, e) => {
     const value = e.target.value;
@@ -66,7 +67,7 @@ export const CheckInOtp = () => {
 
   const handleRetryClick = async () => {
     const userType = "visitor";
-    const otpRequest = await requestOtp(email, userType);
+    const otpRequest = await requestOtp(email, userType, mobile);
     if (otpRequest.hasError === true) {
       return toastDisplayer("error", `${otpRequest.error}`);
     }
