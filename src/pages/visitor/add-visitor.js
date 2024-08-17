@@ -149,10 +149,10 @@ const AddVisitor = () => {
     }
   };
 
-  const GenerateOTP = async (officialMail, type,mobile) => {
+  const GenerateOTP = async (officialMail, type, mobile) => {
     setLoading(true);
     setrefFocused(true);
-    const getOtpFromID = await requestOtp(officialMail, type,mobile);
+    const getOtpFromID = await requestOtp(officialMail, type, mobile);
     if (getOtpFromID.hasError === true) {
       setLoading(false);
       return toastDisplayer("error", getOtpFromID.errorMessage);
@@ -170,7 +170,15 @@ const AddVisitor = () => {
     if (isMatch === false) {
       return toastDisplayer("error", "Please enter a valid email address.");
     }
-    GenerateOTP(formData?.e_mail, "visitor",formData?.phone1);
+    const mobileRegex = /^\d{10}$/;
+    const isMobileMatch = mobileRegex.test(formData?.phone1);
+    if (!isMobileMatch) {
+      return toastDisplayer(
+        "error",
+        "Please enter a valid 10-digit mobile number."
+      );
+    }
+    GenerateOTP(formData?.e_mail, "visitor", formData?.phone1);
   };
 
   const fetchDeptData = async () => {
