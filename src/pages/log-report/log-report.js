@@ -471,6 +471,7 @@ const LogReportMain = () => {
 
             <Item location="after">
               <Button
+                disabled={!logs.length}
                 stylingMode="outlined"
                 height={45}
                 width={45}
