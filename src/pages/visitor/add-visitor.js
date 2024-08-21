@@ -82,7 +82,8 @@ const AddVisitor = () => {
   const handleClosePopup = () => {
     setIsPopupVisible(false);
   };
-  const handleOpenPopup = () => {
+  const handleOpenPopup = (e) => {
+    e.preventDefault();
     if (!validateFields()) {
       return toastDisplayer("error", "Please complete all required fields.");
     }
@@ -449,6 +450,7 @@ const AddVisitor = () => {
                 value={formData?.phone1}
                 className="required"
                 valueChangeEvent="keyup"
+                readOnly={isOTPVerified}
               >
                 {stagedChanges && stagedChanges.OtpVerification && (
                   <TextBoxButton

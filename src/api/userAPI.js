@@ -66,7 +66,6 @@ export const SaveUserData = async (reqPayload) => {
   };
   //return null;
   try {
-
     const response = await axios.post(`${API_URL}VMS/User/Save`, reqPayload);
     responseBody.responseData = response.data;
     saveNotification(
@@ -355,7 +354,7 @@ export const UpdateUserData = async (reqPayload) => {
       "Profile",
       reqPayload.sender_email,
       reqPayload.sender_role,
-      `${reqPayload.bname} profile has been updated`,
+      `${reqPayload.username} profile has been updated`,
       reqPayload.company_id
     );
     return responseBody;
