@@ -324,6 +324,7 @@ const ReportMain = () => {
                 className="left-textbox"
                 placeholder="Check In"
                 items={allCheckinVisitor}
+                style={{ marginLeft: "10px", marginRight: "10px" }}
                 value={filterState}
                 onValueChanged={(e) => handleFilterState(e.value)}
               />
@@ -338,6 +339,7 @@ const ReportMain = () => {
                 items={allVisitorsState}
                 value={filterStatus}
                 // className="left-textbox"
+                style={{ marginRight: "10px" }}
                 // placeholder="Pending Visitors"
                 onValueChanged={(e) => handleFilterChange(e.value)}
               />

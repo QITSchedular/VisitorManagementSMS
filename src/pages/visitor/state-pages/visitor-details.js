@@ -222,7 +222,7 @@ const VisitorDetail = () => {
 
     setIsPopupVisible(false);
 
-    toastDisplayer("success", "Visitor checked Out Successfully");
+    toastDisplayer("success", "Visitor checked-out Successfully");
     return navigate("/Visitors");
   };
 
@@ -247,7 +247,7 @@ const VisitorDetail = () => {
       return toastDisplayer("error", `${checkOutVisitor.error}`);
     }
     setIsChkNIPopupVisible(false);
-    toastDisplayer("success", "Visitor checked Out Successfully");
+    toastDisplayer("success", "Visitor checked-in Successfully");
     return navigate("/Visitors");
   };
 
@@ -353,7 +353,7 @@ const VisitorDetail = () => {
             {visitorDetailbrief.state === "Approved" &&
               visitorDetailbrief.status === "Check in" && (
                 <Button
-                  text="Checkout"
+                  text="Check-out"
                   width="auto"
                   height={44}
                   onClick={handleOpenPopup}
@@ -364,7 +364,7 @@ const VisitorDetail = () => {
               visitorDetailbrief.status !== "Check in" &&
               visitorDetailbrief.status !== "Check Out" && (
                 <Button
-                  text="CheckIn"
+                  text="Check-in"
                   width="auto"
                   height={44}
                   onClick={handleChkINOpenPopup}
@@ -373,23 +373,21 @@ const VisitorDetail = () => {
             {visitorDetailbrief.state === "Rejected" &&
               visitorDetailbrief.addedBy === "Company" && (
                 <>
-                  {!isEdit && (
-                    <Button
-                      text="Send for Verify"
-                      width="auto"
-                      height={44}
-                      onClick={handleEditOpenPopup}
-                    />
-                  )}
+                  <Button
+                    text="Send for Verify"
+                    width="auto"
+                    height={44}
+                    onClick={handleEditOpenPopup}
+                  />
 
-                  {isEdit && (
+                  {/* {isEdit && (
                     <Button
                       text="Edit"
                       width="auto"
                       height={44}
                       onClick={handleEditVisitor}
                     />
-                  )}
+                  )} */}
                 </>
               )}
           </div>
@@ -476,7 +474,7 @@ const VisitorDetail = () => {
                 </div>
               </div>
               <div className="visitor-personal-data">
-                <div className="visitor-header">Company</div>
+                <div className="visitor-header">Name of the Company</div>
                 <div className="visitor-sub-header">
                   {visitorDetailbrief.vCmpname === ""
                     ? "--"
@@ -486,134 +484,12 @@ const VisitorDetail = () => {
             </div>
             <div className="visitor-personal-detail">
               <div className="visitor-personal-data">
-                <div className="visitor-header">Location</div>
+                <div className="visitor-header">Company Address</div>
                 <div className="visitor-sub-header">
                   {visitorDetailbrief.vLocation === ""
                     ? "--"
                     : visitorDetailbrief.vLocation}
                 </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-      {visitorDetailbrief.state === "Rejected" &&
-        visitorDetailbrief.state === "Rejected" && (
-          <div className="content-block dx-card">
-            <div className="title-section">
-              <FormText text="Personal Details" />
-            </div>
-            <div className="visitor-personal-detail">
-              <div className="visitor-personal-data">
-                {/* <div className="visitor-header">Name</div>
-            <div className="visitor-sub-header">{visitorDetailbrief.vName} </div> */}
-                <TextBox
-                  label="Name"
-                  labelMode="static"
-                  stylingMode="outlined"
-                  height={"56px"}
-                  // className="required"
-                  className="last-textbox required"
-                  value={visitorDetailbrief.vName}
-                  readOnly={isEdit}
-                  onValueChanged={(e) =>
-                    handleInputChange({
-                      target: { name: "vname", value: e.value },
-                    })
-                  }
-                >
-                  <Validator>
-                    <RequiredRule message="Username is required" />
-                  </Validator>
-                </TextBox>
-              </div>
-              <div className="visitor-personal-data">
-                <TextBox
-                  label="Email Address"
-                  labelMode="static"
-                  stylingMode="outlined"
-                  height={"56px"}
-                  className="last-textbox required"
-                  readOnly={isEdit}
-                  value={visitorDetailbrief.vEmail}
-                  onValueChanged={(e) =>
-                    handleInputChange({
-                      target: { name: "e_mail", value: e.value },
-                    })
-                  }
-                >
-                  <Validator>
-                    <RequiredRule message="mobile is required" />
-                  </Validator>
-                </TextBox>
-              </div>
-            </div>
-            <div className="visitor-personal-detail">
-              <div className="visitor-personal-data">
-                <TextBox
-                  label="Mobile Number"
-                  labelMode="static"
-                  stylingMode="outlined"
-                  height={"56px"}
-                  className="last-textbox required"
-                  readOnly={isEdit}
-                  value={visitorDetailbrief.vPhone1}
-                  onValueChanged={(e) =>
-                    handleInputChange({
-                      target: { name: "phone1", value: e.value },
-                    })
-                  }
-                >
-                  <Validator>
-                    <RequiredRule message="mobile is required" />
-                    <PatternRule
-                      message="Invalid mobile number"
-                      pattern="^\d{10}$"
-                    />
-                  </Validator>
-                </TextBox>
-              </div>
-              <div className="visitor-personal-data">
-                <TextBox
-                  label="Name of the Company"
-                  labelMode="static"
-                  stylingMode="outlined"
-                  height={"56px"}
-                  className="last-textbox required"
-                  readOnly={isEdit}
-                  value={visitorDetailbrief.vCmpname}
-                  onValueChanged={(e) =>
-                    handleInputChange({
-                      target: { name: "vcmpname", value: e.value },
-                    })
-                  }
-                >
-                  <Validator>
-                    <RequiredRule message="Company is required" />
-                  </Validator>
-                </TextBox>
-              </div>
-            </div>
-            <div className="visitor-personal-detail">
-              <div className="visitor-personal-data">
-                <TextBox
-                  label="Company Address"
-                  labelMode="static"
-                  stylingMode="outlined"
-                  height={"56px"}
-                  className="last-textbox required"
-                  readOnly={isEdit}
-                  value={visitorDetailbrief.vLocation}
-                  onValueChanged={(e) =>
-                    handleInputChange({
-                      target: { name: "vlocation", value: e.value },
-                    })
-                  }
-                >
-                  <Validator>
-                    <RequiredRule message="Location is required" />
-                  </Validator>
-                </TextBox>
               </div>
             </div>
           </div>
@@ -627,7 +503,7 @@ const VisitorDetail = () => {
             </div>
             <div className="visitor-personal-detail">
               <div className="visitor-personal-data">
-                <div className="visitor-header">Person you want to meet</div>
+                <div className="visitor-header">Contact Person</div>
                 <div className="visitor-sub-header">
                   {visitorDetailbrief.cnctperson === ""
                     ? "--"
@@ -655,7 +531,7 @@ const VisitorDetail = () => {
                 </div>
               </div>
               <div className="visitor-personal-data">
-                <div className="visitor-header">Carrying hardware</div>
+                <div className="visitor-header">Hardware</div>
                 <div className="visitor-sub-header">
                   {visitorDetailbrief.anyhardware === ""
                     ? "--"
@@ -671,6 +547,127 @@ const VisitorDetail = () => {
                     ? "--"
                     : visitorDetailbrief.purposeofvisit}
                 </div>
+              </div>
+            </div>
+          </div>
+        )}
+      {visitorDetailbrief.state === "Rejected" &&
+        visitorDetailbrief.state === "Rejected" && (
+          <div className="content-block dx-card">
+            <div className="title-section">
+              <FormText text="Personal Details" />
+            </div>
+            <div className="visitor-personal-detail">
+              <div className="visitor-personal-data">
+                {/* <div className="visitor-header">Name</div>
+            <div className="visitor-sub-header">{visitorDetailbrief.vName} </div> */}
+                <TextBox
+                  label="Name"
+                  labelMode="static"
+                  stylingMode="outlined"
+                  height={"56px"}
+                  // className="required"
+                  className="last-textbox required"
+                  value={visitorDetailbrief.vName}
+                  //readOnly={isEdit}
+                  onValueChanged={(e) =>
+                    handleInputChange({
+                      target: { name: "vname", value: e.value },
+                    })
+                  }
+                >
+                  <Validator>
+                    <RequiredRule message="Username is required" />
+                  </Validator>
+                </TextBox>
+              </div>
+              <div className="visitor-personal-data">
+                <TextBox
+                  label="Email Address"
+                  labelMode="static"
+                  stylingMode="outlined"
+                  height={"56px"}
+                  className="last-textbox required"
+                  //readOnly={isEdit}
+                  value={visitorDetailbrief.vEmail}
+                  onValueChanged={(e) =>
+                    handleInputChange({
+                      target: { name: "e_mail", value: e.value },
+                    })
+                  }
+                >
+                  <Validator>
+                    <RequiredRule message="mobile is required" />
+                  </Validator>
+                </TextBox>
+              </div>
+            </div>
+            <div className="visitor-personal-detail">
+              <div className="visitor-personal-data">
+                <TextBox
+                  label="Mobile Number"
+                  labelMode="static"
+                  stylingMode="outlined"
+                  height={"56px"}
+                  className="last-textbox required"
+                  //readOnly={isEdit}
+                  value={visitorDetailbrief.vPhone1}
+                  onValueChanged={(e) =>
+                    handleInputChange({
+                      target: { name: "phone1", value: e.value },
+                    })
+                  }
+                >
+                  <Validator>
+                    <RequiredRule message="mobile is required" />
+                    <PatternRule
+                      message="Invalid mobile number"
+                      pattern="^\d{10}$"
+                    />
+                  </Validator>
+                </TextBox>
+              </div>
+              <div className="visitor-personal-data">
+                <TextBox
+                  label="Name of the Company"
+                  labelMode="static"
+                  stylingMode="outlined"
+                  height={"56px"}
+                  className="last-textbox required"
+                  //readOnly={isEdit}
+                  value={visitorDetailbrief.vCmpname}
+                  onValueChanged={(e) =>
+                    handleInputChange({
+                      target: { name: "vcmpname", value: e.value },
+                    })
+                  }
+                >
+                  <Validator>
+                    <RequiredRule message="Company is required" />
+                  </Validator>
+                </TextBox>
+              </div>
+            </div>
+            <div className="visitor-personal-detail">
+              <div className="visitor-personal-data">
+                <TextBox
+                  label="Company Address"
+                  labelMode="static"
+                  stylingMode="outlined"
+                  height={"56px"}
+                  className="last-textbox required"
+                  //readOnly={isEdit}
+                  value={visitorDetailbrief.vLocation}
+                  onValueChanged={(e) =>
+                    handleInputChange({
+                      target: { name: "vlocation", value: e.value },
+                    })
+                  }
+                >
+                  <Validator>
+                    <RequiredRule message="Location is required" />
+                  </Validator>
+                </TextBox>
               </div>
             </div>
           </div>
@@ -694,7 +691,7 @@ const VisitorDetail = () => {
                   items={companyUserData}
                   displayExpr={"username"}
                   valueExpr={"username"}
-                  readOnly={isEdit}
+                  //readOnly={isEdit}
                   searchEnabled={true}
                   onValueChanged={(e) =>
                     handleInputChange({
@@ -718,7 +715,7 @@ const VisitorDetail = () => {
                   stylingMode="outlined"
                   height={"56px"}
                   className="last-textbox required"
-                  readOnly={isEdit}
+                  //readOnly={isEdit}
                   value={editingData.department_id}
                   searchEnabled={true}
                   onValueChanged={(e) =>
@@ -742,7 +739,7 @@ const VisitorDetail = () => {
                   type="datetime"
                   label="Time Slot"
                   height={"56px"}
-                  readOnly={isEdit}
+                  //readOnly={isEdit}
                   displayFormat="dd-MM-yyyy, HH:mm:ss"
                   onValueChanged={(e) =>
                     handleInputChange({
@@ -770,7 +767,7 @@ const VisitorDetail = () => {
                   stylingMode="outlined"
                   height={"56px"}
                   className="last-textbox"
-                  readOnly={isEdit}
+                  //readOnly={isEdit}
                   value={visitorDetailbrief.anyhardware}
                   onValueChanged={(e) =>
                     handleInputChange({
@@ -788,7 +785,7 @@ const VisitorDetail = () => {
                   stylingMode="outlined"
                   height={"56px"}
                   className="last-textbox required"
-                  readOnly={isEdit}
+                  //readOnly={isEdit}
                   value={visitorDetailbrief.purposeofvisit}
                   onValueChanged={(e) =>
                     handleInputChange({
@@ -806,9 +803,9 @@ const VisitorDetail = () => {
         )}
 
       <SendVerification
-        header="Checkout Confirmation"
-        subHeader="Are you sure you want visitor to checkout? "
-        approval="Check Out"
+        header="Check-out Confirmation"
+        subHeader="Are you sure you want visitor to check-out? "
+        approval="Check-out"
         discard="Cancel"
         status={statusMessage}
         saveFunction={handleCheckOut}
@@ -817,9 +814,9 @@ const VisitorDetail = () => {
       />
 
       <SendVerification
-        header="Checkin Confirmation"
-        subHeader="Are you sure you want visitor to checkin? "
-        approval="Check In"
+        header="Check-in Confirmation"
+        subHeader="Are you sure you want visitor to Check-in? "
+        approval="Check-in"
         discard="Cancel"
         status={statusMessage}
         saveFunction={handleCheckIn}

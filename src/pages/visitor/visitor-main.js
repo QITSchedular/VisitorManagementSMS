@@ -634,9 +634,9 @@ const VisitorMain = () => {
         </DataGrid>
       </div>
       <SendVerification
-        header="Checkout Confirmation"
-        subHeader="Are you sure you want visitor to checkout? "
-        approval="Check Out"
+        header="Check-out Confirmation"
+        subHeader="Are you sure you want visitor to check-out? "
+        approval="Check-out"
         discard="Cancel"
         saveFunction={handleCheckOut}
         statusMessage={statusMessage}
@@ -644,9 +644,9 @@ const VisitorMain = () => {
         onHide={handleClosePopup}
       />
       <SendVerification
-        header="CheckIn Confirmation"
-        subHeader="Are you sure you want visitor to checkin? "
-        approval="Check In"
+        header="Check-in Confirmation"
+        subHeader="Are you sure you want visitor to check-in? "
+        approval="Check-in"
         discard="Cancel"
         saveFunction={handleCheckIn}
         isVisible={isChkInPopupVisible}
