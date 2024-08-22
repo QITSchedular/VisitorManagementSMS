@@ -1,10 +1,9 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Breadcrumbs from "../../components/breadcrumbs/BreadCrumbs";
 import {
   FormText,
   HeaderText,
 } from "../../components/typographyText/TypograghyText";
-
 import {
   Button,
   DateBox,
@@ -13,18 +12,15 @@ import {
   TextBox,
 } from "devextreme-react";
 import { Button as TextBoxButton } from "devextreme-react/text-box";
-
 import SendVerification from "../../components/popups/send-verification";
 import { PopUpIcon } from "../../assets";
 import OtpPopup from "../../components/popups/otp-popup";
-
 import Validator, {
   CustomRule,
   RequiredRule,
   EmailRule,
   PatternRule,
 } from "devextreme-react/validator";
-
 import { toastDisplayer } from "../../components/toastDisplayer/toastdisplayer";
 import { useAuth } from "../../contexts/auth";
 import { GetCmpDept } from "../../api/userAPI";
@@ -551,6 +547,7 @@ const AddVisitor = () => {
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("location", e)}
                 value={formData?.location}
+                className="required"
               >
                 <Validator>
                   <RequiredRule message="Location is required" />

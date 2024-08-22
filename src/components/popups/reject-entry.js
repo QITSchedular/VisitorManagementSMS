@@ -115,6 +115,7 @@ const RejectEntryPopup = ({
                   stylingMode="outlined"
                   onValueChanged={handleReasonInput}
                   height={56}
+                  className="required"
                 />
               </div>
             </div>

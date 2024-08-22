@@ -4567,6 +4567,7 @@
 .dx-tab.dx-state-hover {
   /* background-color: rgba(3,169,244,.08); */
   background-color: #F9F5FF;
+  color: #6941C6;;
 }
 
 .dx-tab.dx-tab-selected,

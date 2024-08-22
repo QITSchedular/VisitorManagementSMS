@@ -15,8 +15,8 @@ import { requestOtp } from "../../../api/registorApi";
 import { useAuth } from "./../../../contexts/auth";
 import { GetCmpDept, SaveUserData } from "../../../api/userAPI";
 import { toastDisplayer } from "../../../components/toastDisplayer/toastdisplayer";
-import CustomLoader from "../../../components/customerloader/CustomLoader";
 import { eyeclose, eyeopen } from "../../../assets/icon";
+import { useNavigate } from "react-router-dom";
 // import { eyeopen, eyeclose } from "../../assets/icon";
 
 const AddUser = ({ setLoading, setActiveTabIndex }) => {
@@ -29,6 +29,7 @@ const AddUser = ({ setLoading, setActiveTabIndex }) => {
   const [deptData, setDeptData] = useState([]);
   const [showpwd, setShowPwd] = useState(false);
   const [passwordMode, setPasswordMode] = useState("password");
+  const navigate = useNavigate();
 
   const loadDeptData = async () => {
     setLoading(true);
@@ -38,7 +39,12 @@ const AddUser = ({ setLoading, setActiveTabIndex }) => {
       // return toastDisplayer("error", getOtpFromID.errorMessage);
       return toastDisplayer("error", response.errorMessage);
     } else {
-      setDeptData(response.responseData?.Data);
+      const specialActionItem = {
+        transid: 0,
+        deptname: "Special Action",
+        transid: "specialAction",
+      };
+      setDeptData([...response.responseData.Data, specialActionItem]);
       setLoading(false);
     }
   };
@@ -148,6 +154,11 @@ const AddUser = ({ setLoading, setActiveTabIndex }) => {
 
   const handleInputChange = (fieldName, e) => {
     if (fieldName == "cmpdeptid") {
+      if (e.value == "specialAction") {
+        navigate("/generalsettings");
+      }
+    }
+    if (fieldName == "cmpdeptid") {
       var deptEntryData = deptData.find((item) => item.transid == e.value);
       if (deptEntryData?.deptname) {
         setFormData((prevState) => ({
@@ -160,6 +171,13 @@ const AddUser = ({ setLoading, setActiveTabIndex }) => {
       ...prevState,
       [fieldName]: e.value,
     }));
+  };
+  // Custom item template
+  const itemTemplate = (data) => {
+    if (data.transid === "specialAction") {
+      return `<span style="color: blue;">Add</span>`;
+    }
+    return data.deptname;
   };
 
   return (
@@ -311,6 +329,8 @@ const AddUser = ({ setLoading, setActiveTabIndex }) => {
                 valueExpr={"transid"}
                 value={formData?.cmpdeptid}
                 className="required"
+                itemTemplate={itemTemplate}
+                searchEnabled={true}
               >
                 <Validator>
                   <RequiredRule message="Department is required" />

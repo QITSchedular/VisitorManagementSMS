@@ -124,7 +124,8 @@ const VerifyVisitorMain = () => {
       setIsLoading(false);
       setVisitorDataState([]);
       setVisitorCount([]);
-      return toastDisplayer("error", `${visitorData.error}`);
+      // return toastDisplayer("error", `${visitorData.error}`);
+      return console.log("error", `${visitorData.error}`);
     }
     const data = visitorData.responseData;
     setIsLoading(false);
@@ -180,7 +181,7 @@ const VerifyVisitorMain = () => {
         </div>
 
         <div className="visitor-cards-container">
-          {visitorDataState && (
+          {visitorDataState && visitorDataState.length > 0 ? (
             <>
               {searchText || selectedDateFilter
                 ? filteredVisitors.map((visitor, index) => (
@@ -204,6 +205,10 @@ const VerifyVisitorMain = () => {
                     />
                   ))}
             </>
+          ) : (
+            <div className="no-visitors-message">
+              There are no visitors at the moment.
+            </div>
           )}
         </div>
       </div>
