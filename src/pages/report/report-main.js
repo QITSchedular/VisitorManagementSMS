@@ -353,6 +353,7 @@ const ReportMain = () => {
                 width={45}
                 className="left-textbox"
                 onClick={handleDownload}
+                disabled={!reportData.length}
               />
             </Item>
           </Toolbar>

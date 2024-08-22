@@ -78,6 +78,14 @@ const AddUser = ({ setLoading, setActiveTabIndex }) => {
     if (isMatch === false) {
       return toastDisplayer("error", "Please enter a valid email address.");
     }
+    const mobileRegex = /^\d{10}$/;
+    const isMobileMatch = mobileRegex.test(formData?.phone);
+    if (!isMobileMatch) {
+      return toastDisplayer(
+        "error",
+        "Please enter a valid 10-digit mobile number."
+      );
+    }
     GenerateOTP(formData?.e_mail, "user", formData?.phone);
   };
 
@@ -267,26 +275,6 @@ const AddUser = ({ setLoading, setActiveTabIndex }) => {
             </div>
             <div className="form-input popup-textbox">
               <TextBox
-                label="Mobile Number"
-                placeholder="Enter mobile number"
-                labelMode="static"
-                stylingMode="outlined"
-                onValueChanged={(e) => handleInputChange("phone", e)}
-                value={formData?.phone}
-              >
-                <Validator>
-                  {/* <RequiredRule message="Mobile is required" /> */}
-                  <PatternRule
-                    message="Invalid mobile number"
-                    pattern="^\d{10}$"
-                  />
-                </Validator>
-              </TextBox>
-            </div>
-          </div>
-          <div className="personal-detail-form">
-            <div className="form-input popup-textbox">
-              <TextBox
                 label="Email Address"
                 placeholder="Enter your email address."
                 labelMode="static"
@@ -297,14 +285,35 @@ const AddUser = ({ setLoading, setActiveTabIndex }) => {
                 value={formData?.e_mail}
                 className="required"
               >
+                <Validator>
+                  <RequiredRule message="Email address is required." />
+                  <EmailRule message="Email is invalid" />
+                </Validator>
+              </TextBox>
+            </div>
+          </div>
+          <div className="personal-detail-form">
+            <div className="form-input popup-textbox">
+              <TextBox
+                label="Mobile Number"
+                placeholder="Enter mobile number"
+                labelMode="static"
+                stylingMode="outlined"
+                onValueChanged={(e) => handleInputChange("phone", e)}
+                value={formData?.phone}
+                readOnly={isOTPVerified}
+              >
                 <TextBoxButton
                   name="popupSearch"
                   location="after"
                   options={mobileOption}
                 />
                 <Validator>
-                  <RequiredRule message="Email address is required." />
-                  <EmailRule message="Email is invalid" />
+                  {/* <RequiredRule message="Mobile is required" /> */}
+                  <PatternRule
+                    message="Invalid mobile number"
+                    pattern="^\d{10}$"
+                  />
                 </Validator>
               </TextBox>
             </div>

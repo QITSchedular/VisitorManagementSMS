@@ -233,6 +233,9 @@ const UserProfile = ({ setLoading }) => {
                 // allowEditing={allowEdit}
                 allowEditing={true}
                 // allowEditing={1 ? false : true}
+                editorOptions={{
+                  mode: "password",
+                }}
               />
               {/* <Column
             dataField="deptName"
