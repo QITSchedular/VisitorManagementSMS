@@ -202,6 +202,12 @@ const VisitorMain = () => {
           );
         },
       },
+      {
+        text: "Clone",
+        onClick: () => {
+          console.log("first");
+        },
+      },
     ];
 
     const sanitizedClassName = `actionbtn-${sanitizeClassName(
@@ -238,6 +244,12 @@ const VisitorMain = () => {
           navigate(
             `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`
           );
+        },
+      },
+      {
+        text: "Clone",
+        onClick: () => {
+          console.log("first");
         },
       },
     ];
@@ -284,6 +296,12 @@ const VisitorMain = () => {
           navigate(
             `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`
           );
+        },
+      },
+      {
+        text: "Clone",
+        onClick: () => {
+          console.log("first");
         },
       },
     ];
