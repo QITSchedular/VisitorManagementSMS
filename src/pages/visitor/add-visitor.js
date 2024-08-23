@@ -27,7 +27,7 @@ import { GetCmpDept } from "../../api/userAPI";
 import { requestOtp } from "../../api/registorApi";
 import { registerVisitorApi } from "../../api/mobileVisitorApi";
 import CustomLoader from "../../components/customerloader/CustomLoader";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { saveNotification } from "../../api/notification";
 import { useRecoilState } from "recoil";
 import { configAtom } from "../../contexts/atom";
@@ -49,6 +49,22 @@ const AddVisitor = () => {
     hardware: "",
     purpose: "",
   });
+  const [cloneData, setCloneData] = useState(null);
+  const location = useLocation();
+  const { state } = location;
+
+  useEffect(() => {
+    console.log(state);
+    if (state) {
+      console.log(state);
+      setCloneData(state);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(cloneData);
+  }, [cloneData]);
+
   const validateFields = () => {
     const requiredFields = [
       "username",
@@ -79,6 +95,7 @@ const AddVisitor = () => {
   const handleClosePopup = () => {
     setIsPopupVisible(false);
   };
+
   const handleOpenPopup = (e) => {
     e.preventDefault();
     if (isOTPVerified) {
@@ -90,6 +107,7 @@ const AddVisitor = () => {
       toastDisplayer("error", "Email or Phone is not verified.");
     }
   };
+
   const handleCloseOtpPopup = () => {
     setrefFocused(false);
     setIsOtpPopupVisible(false);
@@ -112,7 +130,7 @@ const AddVisitor = () => {
 
   const handleDateChange = (field, e) => {
     const dateValue = e.value;
-    const formattedDate = formatDateTime(dateValue);
+    // const formattedDate = formatDateTime(dateValue);
     setFormData((prev) => ({
       ...prev,
       [field]: dateValue,
@@ -404,7 +422,7 @@ const AddVisitor = () => {
                 labelMode="static"
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("username", e)}
-                value={formData?.username}
+                value={cloneData ? cloneData?.vName : formData?.username}
                 className="required"
               >
                 <Validator>
@@ -420,7 +438,7 @@ const AddVisitor = () => {
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("e_mail", e)}
                 // readOnly={isOTPVerified}
-                value={formData?.e_mail}
+                value={cloneData ? cloneData?.vEmail : formData?.e_mail}
                 style={{ cursor: "pointer" }}
                 valueChangeEvent="keyup"
                 className="required"
@@ -446,7 +464,7 @@ const AddVisitor = () => {
                 labelMode="static"
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("phone1", e)}
-                value={formData?.phone1}
+                value={cloneData ? cloneData?.vPhone1 : formData?.phone1}
                 className="required"
                 valueChangeEvent="keyup"
                 // readOnly={isOTPVerified}
@@ -535,7 +553,7 @@ const AddVisitor = () => {
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("company", e)}
                 className="required"
-                value={formData?.company}
+                value={cloneData ? cloneData?.vCmpname : formData?.company}
               >
                 <Validator>
                   <RequiredRule message="Company is required" />
@@ -551,7 +569,7 @@ const AddVisitor = () => {
                 labelMode="static"
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("location", e)}
-                value={formData?.location}
+                value={cloneData ? cloneData?.vLocation : formData?.location}
                 className="required"
               >
                 <Validator>
@@ -577,7 +595,7 @@ const AddVisitor = () => {
                 items={companyUserData}
                 displayExpr={"username"}
                 valueExpr={"username"}
-                value={formData?.meetPerson}
+                value={cloneData ? cloneData?.cnctperson : formData?.meetPerson}
                 itemTemplate={useritemTemplate}
                 searchEnabled={true}
                 className="required"
@@ -597,7 +615,7 @@ const AddVisitor = () => {
                 items={deptData}
                 displayExpr={"deptname"}
                 valueExpr={"transid"}
-                value={formData?.cmpdeptid}
+                value={cloneData ? cloneData?.deptId : formData?.cmpdeptid}
                 itemTemplate={itemTemplate}
                 className="required"
                 searchEnabled={true}
@@ -619,7 +637,8 @@ const AddVisitor = () => {
                 placeholder="Select Time Slot"
                 displayFormat="dd-MM-yyyy, HH:mm:ss"
                 onValueChanged={(e) => handleDateChange("timeslot", e)}
-                value={formData.timeslot}
+                value={cloneData ? cloneData?.timeslot : formData.timeslot}
+                // value={formData.timeslot}
                 // min={currentDate}
                 className="required"
               >
@@ -639,7 +658,7 @@ const AddVisitor = () => {
                 labelMode="static"
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("hardware", e)}
-                value={formData?.hardware}
+                value={cloneData ? cloneData?.anyhardware : formData?.hardware}
               >
                 {/* <Validator>
                   <RequiredRule message="Feild is required" />
@@ -655,7 +674,9 @@ const AddVisitor = () => {
                 labelMode="static"
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("purpose", e)}
-                value={formData?.purpose}
+                value={
+                  cloneData ? cloneData?.purposeofvisit : formData?.purpose
+                }
                 className="required"
               >
                 <Validator>
