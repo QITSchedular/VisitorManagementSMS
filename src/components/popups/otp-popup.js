@@ -85,10 +85,11 @@ const OtpPopup = ({
       return toastDisplayer("error", verifyMyOtp.errorMessage);
     } else {
       setIsOTPVrified(true);
-      setTimeout(() => {
-        clearState();
-        return toastDisplayer("success", "OTP has been successfully verified.");
-      }, 1000); // Delay for 1 second (1000 milliseconds)
+      // setTimeout(() => {
+      clearState();
+
+      return toastDisplayer("success", "OTP has been successfully verified.");
+      // }, 1000); // Delay for 1 second (1000 milliseconds)
       // clearState();
       // return toastDisplayer("success", "OTP verified successfully..!!");
     }

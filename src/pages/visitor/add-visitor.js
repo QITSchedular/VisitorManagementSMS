@@ -70,6 +70,7 @@ const AddVisitor = () => {
   const [refFocused, setrefFocused] = useState(false);
   const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const [verifiedData, setVerifiedData] = useState(null);
 
   const [stagedChanges, setStagedChanges] = useRecoilState(configAtom);
 
@@ -80,10 +81,14 @@ const AddVisitor = () => {
   };
   const handleOpenPopup = (e) => {
     e.preventDefault();
-    if (!validateFields()) {
-      return toastDisplayer("error", "Please complete all required fields.");
+    if (isOTPVerified) {
+      if (!validateFields()) {
+        return toastDisplayer("error", "Please complete all required fields.");
+      }
+      setIsPopupVisible(true);
+    } else {
+      toastDisplayer("error", "Email or Phone is not verified.");
     }
-    setIsPopupVisible(true);
   };
   const handleCloseOtpPopup = () => {
     setrefFocused(false);
@@ -115,6 +120,27 @@ const AddVisitor = () => {
   };
 
   const handleInputChange = (field, e) => {
+    if (field == "e_mail") {
+      if (
+        verifiedData?.officialMail == e.value &&
+        verifiedData?.mobile == formData?.phone1
+      ) {
+        setIsOTPVrified(true);
+      } else {
+        setIsOTPVrified(false);
+      }
+    }
+    if (field == "phone1") {
+      console.log(verifiedData);
+      if (
+        verifiedData?.officialMail != formData?.e_mail ||
+        verifiedData?.mobile != e.value
+      ) {
+        setIsOTPVrified(false);
+      } else {
+        setIsOTPVrified(true);
+      }
+    }
     if (field == "cmpdeptid") {
       if (e.value == "specialAction") {
         navigate("/generalsettings");
@@ -156,6 +182,7 @@ const AddVisitor = () => {
     } else {
       setrefFocused(true);
       setIsOtpPopupVisible(true);
+      setVerifiedData({ officialMail, mobile });
       setLoading(false);
       return toastDisplayer("success", "OTP send successfully");
     }
@@ -327,7 +354,7 @@ const AddVisitor = () => {
       return navigate("/Visitors");
     }
     // } else {
-    //   toastDisplayer("error", "Visitor is already Exist");
+    //   toastDisplayer("error", "Email or Phone is not verified.");
     // }
   };
   const validateDate = (e) => {
@@ -386,37 +413,13 @@ const AddVisitor = () => {
               </TextBox>
             </div>
             <div className="form-input popup-textbox">
-              {/* {stagedChanges && stagedChanges.OtpVerification ? (
-                <TextBox
-                  label="Email Address"
-                  placeholder="Enter email address"
-                  labelMode="static"
-                  stylingMode="outlined"
-                  onValueChanged={(e) => handleInputChange("e_mail", e)}
-                  readOnly={isOTPVerified}
-                  value={formData?.e_mail}
-                  style={{ cursor: "pointer" }}
-                  valueChangeEvent="keyup"
-                  className="required"
-                >
-                  <TextBoxButton
-                    name="popupSearch"
-                    location="after"
-                    options={mobileOption}
-                  />
-                  <Validator>
-                    <RequiredRule message="Email address is required." />
-                    <EmailRule message="Email is invalid" />
-                  </Validator>
-                </TextBox>
-              ) : ( */}
               <TextBox
                 label="Email Address"
                 placeholder="Enter email address"
                 labelMode="static"
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("e_mail", e)}
-                readOnly={isOTPVerified}
+                // readOnly={isOTPVerified}
                 value={formData?.e_mail}
                 style={{ cursor: "pointer" }}
                 valueChangeEvent="keyup"
@@ -446,15 +449,17 @@ const AddVisitor = () => {
                 value={formData?.phone1}
                 className="required"
                 valueChangeEvent="keyup"
-                readOnly={isOTPVerified}
+                // readOnly={isOTPVerified}
               >
-                {stagedChanges && stagedChanges.OtpVerification && (
-                  <TextBoxButton
-                    name="popupSearch"
-                    location="after"
-                    options={mobileOption}
-                  />
-                )}
+                {stagedChanges &&
+                  stagedChanges.OtpVerification &&
+                  !isOTPVerified && (
+                    <TextBoxButton
+                      name="popupSearch"
+                      location="after"
+                      options={mobileOption}
+                    />
+                  )}
                 {/* <TextBoxButton
                   name="popupSearch"
                   location="after"
