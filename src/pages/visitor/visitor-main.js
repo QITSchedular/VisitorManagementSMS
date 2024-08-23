@@ -186,6 +186,11 @@ const VisitorMain = () => {
     selectedRowData = e.data;
   };
 
+  const handleClone = (data) => {
+    console.log(data);
+    navigate("/Visitors/Add-Visitors", { state: data });
+  };
+
   const actionTemplate = (cellData, e) => {
     const actionMenuItems = [
       {
@@ -205,6 +210,7 @@ const VisitorMain = () => {
       {
         text: "Clone",
         onClick: () => {
+          handleClone(cellData?.data);
           console.log("first");
         },
       },
@@ -249,6 +255,7 @@ const VisitorMain = () => {
       {
         text: "Clone",
         onClick: () => {
+          handleClone(cellData?.data);
           console.log("first");
         },
       },
@@ -301,6 +308,7 @@ const VisitorMain = () => {
       {
         text: "Clone",
         onClick: () => {
+          handleClone(cellData?.data);
           console.log("first");
         },
       },
