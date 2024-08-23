@@ -256,7 +256,7 @@ export const Step4 = () => {
               items={contactList}
               displayExpr={"username"}
               valueExpr={"username"}
-              className="step-textbox"
+              className="step-textbox required"
               height={"56px"}
               searchEnabled={true}
             ></SelectBox>
@@ -269,7 +269,7 @@ export const Step4 = () => {
               labelMode="static"
               stylingMode="outlined"
               value={registerVisitor?.department_id}
-              className="step-textbox"
+              className="step-textbox required"
               height={"56px"}
               searchEnabled={true}
               onValueChanged={(e) => handleInputChange("department_id", e)}
@@ -287,7 +287,7 @@ export const Step4 = () => {
               placeholder="Select Timeslot"
               stylingMode="outlined"
               height={"56px"}
-              className="step-textbox"
+              className="step-textbox required"
               value={registerVisitor?.timeslot}
               onValueChanged={(e) => handleInputTime(e)}
             >
@@ -315,7 +315,7 @@ export const Step4 = () => {
               labelMode="static"
               stylingMode="outlined"
               height={"56px"}
-              className="last-textbox"
+              className="last-textbox required"
               onValueChanged={(e) =>
                 hanldeInputChange({
                   target: { name: "purposeofvisit", value: e.value },

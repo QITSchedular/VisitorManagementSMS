@@ -167,7 +167,7 @@ export const Step1 = () => {
             labelMode="static"
             stylingMode="outlined"
             height={"56px"}
-            className="step-textbox"
+            className="step-textbox required"
             onValueChanged={(e) =>
               handleInputChange({ target: { name: "vname", value: e.value } })
             }
@@ -182,7 +182,7 @@ export const Step1 = () => {
             labelMode="static"
             stylingMode="outlined"
             height={"56px"}
-            className="step-textbox"
+            className="step-textbox required"
             placeholder="Enter your email address"
             Validator={true}
             onValueChanged={(e) =>
@@ -201,7 +201,7 @@ export const Step1 = () => {
             labelMode="static"
             stylingMode="outlined"
             height={"56px"}
-            className="step-textbox"
+            className="step-textbox required"
             onValueChanged={(e) =>
               handleInputChange({ target: { name: "phone1", value: e.value } })
             }
@@ -218,7 +218,7 @@ export const Step1 = () => {
             labelMode="static"
             stylingMode="outlined"
             height={"56px"}
-            className="step-textbox"
+            className="step-textbox required"
             onValueChanged={(e) =>
               handleInputChange({
                 target: { name: "vcmpname", value: e.value },
@@ -236,7 +236,7 @@ export const Step1 = () => {
             labelMode="static"
             stylingMode="outlined"
             height={"56px"}
-            className="last-textbox"
+            className="last-textbox required"
             onValueChanged={(e) =>
               handleInputChange({
                 target: { name: "vlocation", value: e.value },
