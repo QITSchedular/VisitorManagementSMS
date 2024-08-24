@@ -88,8 +88,8 @@ function Configuration() {
     { id: "1W", value: "One Week" },
   ];
   const VerificationOTP = [
-    { id: false, value: "No" },
     { id: true, value: "Yes" },
+    { id: false, value: "No" },
   ];
   const handleInputChange = (fieldname, e) => {
     // if(fieldname){

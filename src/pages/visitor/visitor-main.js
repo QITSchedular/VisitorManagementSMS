@@ -499,6 +499,7 @@ const VisitorMain = () => {
               width="auto"
               height={44}
               onClick={handleDownload}
+              disabled={!visitors.length}
             />
             <Button
               text="Manual Entry"
