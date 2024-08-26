@@ -58,6 +58,19 @@ const FillDetails = () => {
 
   // Previous Button function
   const handlePreviousBtn = () => {
+    setRegisterUser({
+      e_mail: "",
+      password: "",
+      bname: "",
+      blocation: "",
+      city: "",
+      state: "",
+      country: "",
+      zipcode: "",
+      phone1: "",
+      websitelink: "",
+      createdby: "",
+    });
     navigate("/otp-verification");
   };
 

@@ -98,13 +98,21 @@ const AddVisitor = () => {
 
   const handleOpenPopup = (e) => {
     e.preventDefault();
-    if (isOTPVerified) {
-      if (!validateFields()) {
-        return toastDisplayer("error", "Please complete all required fields.");
+
+    if (stagedChanges.OtpVerification === true) {
+      if (isOTPVerified) {
+        if (!validateFields()) {
+          return toastDisplayer(
+            "error",
+            "Please complete all required fields."
+          );
+        }
+        setIsPopupVisible(true);
+      } else {
+        toastDisplayer("error", "Email or Phone is not verified.");
       }
-      setIsPopupVisible(true);
     } else {
-      toastDisplayer("error", "Email or Phone is not verified.");
+      setIsPopupVisible(true);
     }
   };
 
