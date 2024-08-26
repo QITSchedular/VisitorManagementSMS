@@ -11,7 +11,6 @@ import "./user-profile.scss";
 import { useAuth } from "./../../../contexts/auth";
 import { toastDisplayer } from "../../../components/toastDisplayer/toastdisplayer";
 import { EditUser, GetAllUser, GetCmpDept } from "../../../api/userAPI";
-import CustomLoader from "../../../components/customerloader/CustomLoader";
 
 const getStatusColor = (status) => {
   const statusColors = {
@@ -22,7 +21,7 @@ const getStatusColor = (status) => {
   return statusColors[status];
 };
 
-const UserProfile = ({ setLoading }) => {
+const UserProfile = ({ setLoading, activeTabIndex }) => {
   // const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState(false);
   const [allowEdit, setAllowEdit] = useState(false);
@@ -61,6 +60,9 @@ const UserProfile = ({ setLoading }) => {
     getAllUserData();
     loadDeptData();
   }, []);
+  useEffect(() => {
+    getAllUserData();
+  }, [activeTabIndex]);
 
   const allowEditingPassword = (rowData) => {
     return rowData.changepassstatus !== "Changed";
