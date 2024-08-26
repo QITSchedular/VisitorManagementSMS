@@ -127,14 +127,15 @@ const Companymain = () => {
       {
         text: "Make it Inactive ",
         onClick: () => {
-          setSelectedRow(cellData.data.transid);
+          // console.log("id : ", cellData.data.transid);
+          // setSelectedRow(cellData.data.transid);
           handleActivePopUp();
         },
       },
       {
         text: "Edit & View Details",
         onClick: () => {
-          setSelectedRow(cellData.data.transid);
+          // setSelectedRow(cellData.data.transid);
           navigate(`/Company/Company-Details`, { state: cellData.data });
         },
       },
@@ -171,14 +172,14 @@ const Companymain = () => {
       {
         text: "Make it Active",
         onClick: () => {
-          setSelectedRow(cellData.data.transid);
+          // setSelectedRow(cellData.data.transid);
           handleInactivePopUp();
         },
       },
       {
         text: "Edit & View Details",
         onClick: () => {
-          setSelectedRow(cellData.data.transid);
+          // setSelectedRow(cellData.data.transid);
           navigate(`/Company/Company-Details`, { state: cellData.data });
         },
       },
@@ -320,6 +321,7 @@ const Companymain = () => {
           // dataGrid = ref;
           // }}
           onRowDblClick={handleRowDblClick}
+          onRowClick={(e) => setSelectedRow(e.data.transid)}
         >
           <SearchPanel
             visible={true}
@@ -349,6 +351,7 @@ const Companymain = () => {
                 return actionTemplate2(e);
               }
             }}
+            onClick={(e) => console.log(e)}
             caption="ACTIONS"
             allowSorting={false}
             allowSearch={false}

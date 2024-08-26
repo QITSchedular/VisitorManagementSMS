@@ -55,7 +55,10 @@ const UserSettingsMain = () => {
             />
           </Item>
           <Item title="User’s Profile" deferRendering={true}>
-            <UserProfile setLoading={setLoading} />
+            <UserProfile
+              setLoading={setLoading}
+              activeTabIndex={activeTabIndex}
+            />
           </Item>
           <Item title="Authorise User" deferRendering={true}>
             <UserAuthorization setLoading={setLoading} />
