@@ -135,6 +135,9 @@ const VisitorDetail = () => {
   };
 
   useEffect(() => {
+    setTimeout(() => {
+      sessionStorage.setItem("prevPath", `/Visitors/Details-of-Visitor?visitorId=${visitorId}`);
+    }, 1000);
     getVisitorDetails();
   }, []);
 

@@ -202,6 +202,9 @@ const VisitorMain = () => {
       {
         text: "View Details",
         onClick: () => {
+          setTimeout(() => {
+            sessionStorage.setItem("prevPath", `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`);
+          }, 1000);
           navigate(
             `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`
           );
@@ -247,6 +250,9 @@ const VisitorMain = () => {
       {
         text: "View Details",
         onClick: () => {
+          setTimeout(() => {
+            sessionStorage.setItem("prevPath", `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`);
+          }, 1000);
           navigate(
             `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`
           );
@@ -300,6 +306,9 @@ const VisitorMain = () => {
       {
         text: "View Details",
         onClick: () => {
+          setTimeout(() => {
+            sessionStorage.setItem("prevPath", `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`);
+          }, 1000);
           navigate(
             `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`
           );
@@ -450,6 +459,9 @@ const VisitorMain = () => {
 
   const handleRowDblClick = (event) => {
     const rowData = event.data; // Access the data of the double-clicked row
+    setTimeout(() => {
+      sessionStorage.setItem("prevPath", `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`);
+    }, 1000);
     navigate(`/Visitors/Details-of-Visitor?visitorId=${rowData.id}`);
     // Add your custom logic here, e.g., opening a detailed view
   };

@@ -25,6 +25,7 @@ const RejectEntryPopup = ({
 }) => {
   const [status, setStatus] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const handleAllowVisitor = async () => {
     if (verifyData.reason === "" || verifyData.reason === null) {
       return toastDisplayer(
@@ -54,6 +55,9 @@ const RejectEntryPopup = ({
       if (refresh === true) {
         getAllVisitor();
         onToggleExpand(index);
+      }
+      if (refresh === false) {
+        return navigate("/Verify-Visitors");
       }
       setIsLoading(false);
     }, 2400);

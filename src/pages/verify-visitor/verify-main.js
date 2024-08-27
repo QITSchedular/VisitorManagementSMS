@@ -123,7 +123,7 @@ const VerifyVisitorMain = () => {
     if (visitorData.hasError === true) {
       setIsLoading(false);
       setVisitorDataState([]);
-      setVisitorCount([]);
+      setVisitorCount(0);
       // return toastDisplayer("error", `${visitorData.error}`);
       return console.log("error", `${visitorData.error}`);
     }
