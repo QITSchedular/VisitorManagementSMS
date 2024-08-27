@@ -44,7 +44,14 @@ export const Step3 = () => {
   const startCamera = () => {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices
-        .getUserMedia({ video: { width: 720, height: 1280 } }) // 9:16 aspect ratio
+        .getUserMedia({
+          video: {
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+            aspectRatio: { ideal: 1.777778 }, // Adjust based on your requirement
+            zoom: 1, // Ensure no additional zoom is applied
+          },
+        }) // 9:16 aspect ratio
         .then((stream) => {
           videoRef.current.srcObject = stream;
         })
@@ -155,7 +162,7 @@ export const Step3 = () => {
             <img
               src={imageSrcBase}
               alt="profile"
-              height="160px"
+              height="240px"
               width="140px"
             />
           </div>

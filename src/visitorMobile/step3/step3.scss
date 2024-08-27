@@ -58,6 +58,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 0;
+      margin: 0;
     }
 
     .imgcapture {
@@ -66,7 +68,7 @@
       margin-bottom: 40px;
       justify-content: center;
       img {
-        border-radius: 8px;
+        border-radius: 20px;
       }
     }
 
@@ -90,18 +92,16 @@
   justify-content: center;
 }
 
-.video-wrapper {
-  position: relative;
+.video-wrapper video {
   width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100vh;
+  object-fit: contain; /* Reduces zoom by containing the video within the available space */
+  transform: scaleX(-1); /* Corrects the mirror effect */
 }
 
 .video-wrapper video {
-  width: 100%;
-  height: auto;
+  transform: scaleX(-1); /* Corrects the mirror effect */
+  object-fit: cover; /* Ensures full coverage */
 }
 
 .photo-button {
@@ -160,4 +160,20 @@
   display: flex;
   justify-content: center;
   color: red;
+}
+
+video,
+img {
+  transform: scaleX(-1); /* This flips the image horizontally */
+  -webkit-transform: scaleX(-1); /* Safari compatibility */
+  -moz-transform: scaleX(-1); /* Firefox compatibility */
+  -ms-transform: scaleX(-1); /* IE compatibility */
+  -o-transform: scaleX(-1); /* Opera compatibility */
+}
+#camera-feed,
+#captured-image {
+  width: 100%; /* Make the width responsive */
+  height: auto; /* Keep the height automatically calculated to maintain the aspect ratio */
+  object-fit: cover; /* Ensure the content fits within the container without stretching */
+  aspect-ratio: 4 / 3; /* Optional: Lock the aspect ratio to 4:3 (or 16:9 depending on your camera) */
 }
