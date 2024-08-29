@@ -118,7 +118,6 @@ export const visitorDecision = async (payload) => {
     responseBody.responseData = response.data;
     let notificationMessage = `${payload.visitor_name} can enter into the premises to meet ${payload.cnctperson}.`;
     if (payload.status === "R") {
-      console.log("payload : ",payload)
       notificationMessage = `${payload.visitor_name} is Rejected successfully.`;
     }
 

@@ -161,8 +161,8 @@ const UserProfile = ({ setLoading, activeTabIndex }) => {
           labelMode="static"
           stylingMode="outlined"
           items={Genders}
+          onValueChanged={(e) => onValueChanged(e)}
           value={data?.data.gender}
-          onValueChanged={onValueChanged}
         ></SelectBox>
       </>
     );

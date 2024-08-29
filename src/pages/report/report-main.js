@@ -271,7 +271,7 @@ const ReportMain = () => {
         >
           <SearchPanel
             visible={true}
-            width={300}
+            width={250}
             height={44}
             placeholder="Search visitors"
           />

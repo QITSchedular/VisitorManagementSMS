@@ -146,7 +146,6 @@ const LogReportMain = () => {
         usertype: "COMPANY",
       };
       Data.push(new_data);
-      console.log(Data);
       setUserData(Data);
     } else {
       const new_data = Data.filter((user) => user.usertype !== "Admin");
@@ -170,7 +169,6 @@ const LogReportMain = () => {
   }, []);
   const [loginUser, setLogedInUser] = useState([]);
   useEffect(() => {
-    console.log(UserData);
     if (user && user.userrole == "USER") {
       const new_data = UserData.filter((user1) => user1.e_mail == user.e_mail);
       setLogedInUser(new_data);
@@ -326,6 +324,7 @@ const LogReportMain = () => {
             <DateBox
               label="From Date"
               height={56}
+              width={250}
               displayFormat="dd-MM-yyyy"
               placeholder="Input"
               labelMode="static"
@@ -340,6 +339,7 @@ const LogReportMain = () => {
             <DateBox
               label="To Date"
               height={56}
+              width={250}
               displayFormat="dd-MM-yyyy"
               placeholder="Input"
               labelMode="static"
@@ -356,6 +356,7 @@ const LogReportMain = () => {
               height={56}
               showClearButton={true}
               items={modules}
+              width={250}
               // displayExpr="module"
               // valueExpr="module"
               labelMode="static"
@@ -368,6 +369,7 @@ const LogReportMain = () => {
             <SelectBox
               label="Log Level"
               height={56}
+              width={250}
               showClearButton={true}
               items={logLevel}
               displayExpr="text"
@@ -383,6 +385,7 @@ const LogReportMain = () => {
               label="User"
               placeholder="Input"
               height={56}
+              width={250}
               labelMode="static"
               stylingMode="outlined"
               disabled={user ? (user.userrole == "USER" ? true : false) : false}

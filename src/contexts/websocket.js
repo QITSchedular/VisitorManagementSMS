@@ -47,7 +47,11 @@ export const WebSocketProvider = ({ children }) => {
         };
       } else {
         ws.current.onopen = () => {
-          send({ type: "send_notifications", usrid: user.transid ,cmpid:user.cmpid});
+          send({
+            type: "send_notifications",
+            usrid: user.transid,
+            cmpid: user.cmpid,
+          });
         };
       }
 
@@ -103,7 +107,6 @@ export const WebSocketProvider = ({ children }) => {
       });
     };
     const handleSaNotification = (data) => {
-      console.log("Data : ", data.data);
       // const newData = data.data;
       setNotificationData(data.data);
       setNotificationAtomState(data.data);
@@ -128,7 +131,6 @@ export const WebSocketProvider = ({ children }) => {
       ]);
     };
     const onUpdateSaNotification = (data) => {
-      console.log("data : ",data)
       setNotificationData((prevNotificationData) => [
         data.notification,
         ...prevNotificationData,

@@ -25,7 +25,6 @@ const FillDetails = () => {
       return null;
     }
 
-    console.log(registerUser);
     const getUserRegistered = await registerUserApi(registerUser);
     if (getUserRegistered.hasError === true) {
       return toastDisplayer("error", `${getUserRegistered.error}`);

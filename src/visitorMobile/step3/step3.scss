@@ -162,13 +162,15 @@
   color: red;
 }
 
-video,
-img {
-  transform: scaleX(-1); /* This flips the image horizontally */
-  -webkit-transform: scaleX(-1); /* Safari compatibility */
-  -moz-transform: scaleX(-1); /* Firefox compatibility */
-  -ms-transform: scaleX(-1); /* IE compatibility */
-  -o-transform: scaleX(-1); /* Opera compatibility */
+.imgcapture {
+  video,
+  img {
+    transform: scaleX(-1); /* This flips the image horizontally */
+    -webkit-transform: scaleX(-1); /* Safari compatibility */
+    -moz-transform: scaleX(-1); /* Firefox compatibility */
+    -ms-transform: scaleX(-1); /* IE compatibility */
+    -o-transform: scaleX(-1); /* Opera compatibility */
+  }
 }
 #camera-feed,
 #captured-image {

@@ -302,7 +302,7 @@ export const Step4 = () => {
               stylingMode="outlined"
               height={"56px"}
               className="last-textbox"
-              placeholder="Eg. Phone ,Laptop ,ect. "
+              placeholder="Eg. Phone ,Laptop ,etc. "
               onValueChanged={(e) =>
                 hanldeInputChange({
                   target: { name: "anyhardware", value: e.value },
