@@ -139,7 +139,7 @@ function Configuration() {
               />
             </div>
           </div>
-          {/* <div>
+          <div>
             <div className="SubHeaderTxt">Auto Approval</div>
             <div className="chkBoxGroup">
               <SelectBox
@@ -154,7 +154,7 @@ function Configuration() {
                 displayExpr={"value"}
               ></SelectBox>
             </div>
-          </div> */}
+          </div>
           <div style={{ paddingTop: "8px" }}>
             <div className="SubHeaderTxt">OTP Verification</div>
             <div className="chkBoxGroup">

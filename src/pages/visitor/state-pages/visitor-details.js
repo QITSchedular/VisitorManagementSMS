@@ -136,7 +136,10 @@ const VisitorDetail = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      sessionStorage.setItem("prevPath", `/Visitors/Details-of-Visitor?visitorId=${visitorId}`);
+      sessionStorage.setItem(
+        "prevPath",
+        `/Visitors/Details-of-Visitor?visitorId=${visitorId}`
+      );
     }, 1000);
     getVisitorDetails();
   }, []);
@@ -445,8 +448,9 @@ const VisitorDetail = () => {
         </div>
       </div>
 
-      {visitorDetailbrief.state !== "Rejected" &&
-        visitorDetailbrief.state !== "Rejected" && (
+      {(visitorDetailbrief.state !== "Rejected" &&
+        visitorDetailbrief.state !== "Rejected") ||
+        (visitorDetailbrief.addedBy == "External" && (
           <div className="content-block dx-card">
             <div className="title-section">
               <FormText text="Personal Details" />
@@ -496,10 +500,11 @@ const VisitorDetail = () => {
               </div>
             </div>
           </div>
-        )}
+        ))}
 
-      {visitorDetailbrief.state !== "Rejected" &&
-        visitorDetailbrief.state !== "Rejected" && (
+      {(visitorDetailbrief.state !== "Rejected" &&
+        visitorDetailbrief.state !== "Rejected") ||
+        (visitorDetailbrief.addedBy == "External" && (
           <div className="content-block dx-card">
             <div className="title-section">
               <FormText text="Other Details" />
@@ -553,9 +558,10 @@ const VisitorDetail = () => {
               </div>
             </div>
           </div>
-        )}
+        ))}
       {visitorDetailbrief.state === "Rejected" &&
-        visitorDetailbrief.state === "Rejected" && (
+        visitorDetailbrief.state === "Rejected" &&
+        visitorDetailbrief.addedBy != "External" && (
           <div className="content-block dx-card">
             <div className="title-section">
               <FormText text="Personal Details" />
@@ -677,7 +683,8 @@ const VisitorDetail = () => {
         )}
 
       {visitorDetailbrief.state === "Rejected" &&
-        visitorDetailbrief.state === "Rejected" && (
+        visitorDetailbrief.state === "Rejected" &&
+        visitorDetailbrief.addedBy != "External" && (
           <div className="content-block dx-card">
             <div className="title-section">
               <FormText text="Other Details" />

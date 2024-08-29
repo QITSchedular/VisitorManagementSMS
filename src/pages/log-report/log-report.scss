@@ -4,9 +4,10 @@
   display: flex;
   flex-direction: row;
   gap: 24px;
+  flex-wrap: wrap;
 
   .form-input {
-    flex: 1;
+    // flex: 1;
 
     .dx-texteditor-input-container {
       width: 100%;

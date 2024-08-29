@@ -52,7 +52,32 @@
       padding: 0 !important;
     }
     .dx-toolbar {
-      height: 250px;
+      height: 200px;
+      max-width: 100%;
+      // height: 250px;
+      // max-width: 100%;
+    }
+    .dx-toolbar-after {
+      .dx-item-content.dx-toolbar-item-content {
+        padding-top: 10px;
+        // width: 250px !important;
+      }
+    }
+    .dx-datagrid-search-panel {
+      margin: 0 0 0 5px;
+    }
+  }
+  @include md {
+    .dx-toolbar-after {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .dx-toolbar .dx-toolbar-after {
+      margin-top: 50px;
+      padding: 0 !important;
+    }
+    .dx-toolbar {
+      height: 200px;
       max-width: 100%;
       // height: 250px;
       // max-width: 100%;

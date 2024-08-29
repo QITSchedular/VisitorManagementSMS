@@ -127,7 +127,6 @@ const Companymain = () => {
       {
         text: "Make it Inactive ",
         onClick: () => {
-          // console.log("id : ", cellData.data.transid);
           // setSelectedRow(cellData.data.transid);
           handleActivePopUp();
         },
@@ -351,7 +350,6 @@ const Companymain = () => {
                 return actionTemplate2(e);
               }
             }}
-            onClick={(e) => console.log(e)}
             caption="ACTIONS"
             allowSorting={false}
             allowSearch={false}

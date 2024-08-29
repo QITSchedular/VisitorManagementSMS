@@ -34,15 +34,15 @@ const VistorsDetails = () => {
     setIsPopupRejectVisible(true);
     const authState = JSON.parse(sessionStorage.getItem("authState"));
     const company_id = authState.user.cmpid;
-    setVerifyData((prevData)=>({
+    setVerifyData((prevData) => ({
       ...prevData,
-      "company_id": company_id,
-      "visitor_id": visitorId,
-      "reason": "",
-      "status": "R",
-      "sender_email": user.e_mail,
-      "sender_role": user.userrole,
-    }))
+      company_id: company_id,
+      visitor_id: visitorId,
+      reason: "",
+      status: "R",
+      sender_email: user.e_mail,
+      sender_role: user.userrole,
+    }));
   };
   const handleClosePopup = () => {
     setIsPopupVisible(false);
@@ -65,19 +65,22 @@ const VistorsDetails = () => {
     setLoading(true);
     const authState = JSON.parse(sessionStorage.getItem("authState"));
     const cmp_id = authState.user.cmpid;
-    console.log("cmp_id : ",visitorId)
     const getData = await getVisitorDetailsApi(cmp_id, visitorId);
     setAllVisitor(getData.responseData.Data);
     const myallVisitor = getData.responseData.Data;
-    setVerifyData((prevData)=>({
+    setVerifyData((prevData) => ({
       ...prevData,
-      "visitor_name":myallVisitor.vName}))
+      visitor_name: myallVisitor.vName,
+    }));
     setSingleVisitor(myallVisitor);
     setLoading(false);
   };
   useEffect(() => {
     setTimeout(() => {
-      sessionStorage.setItem("prevPath", `/Verify-Visitors/Details-of-Visitor?visitorId=${visitorId}`);
+      sessionStorage.setItem(
+        "prevPath",
+        `/Verify-Visitors/Details-of-Visitor?visitorId=${visitorId}`
+      );
     }, 1000);
     detailedVisitor();
   }, []);

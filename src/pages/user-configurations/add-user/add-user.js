@@ -172,6 +172,7 @@ const AddUser = ({ setLoading, setActiveTabIndex }) => {
       [fieldName]: e.value,
     }));
   };
+
   // Custom item template
   const itemTemplate = (data) => {
     if (data.transid === "specialAction") {

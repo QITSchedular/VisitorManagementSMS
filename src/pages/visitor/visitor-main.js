@@ -187,8 +187,7 @@ const VisitorMain = () => {
   };
 
   const handleClone = (data) => {
-    console.log(data);
-    navigate("/Visitors/Add-Visitors", { state: data });
+    navigate("/Visitors/Add-Visitors", { state: clickedRowData });
   };
 
   const actionTemplate = (cellData, e) => {
@@ -203,7 +202,10 @@ const VisitorMain = () => {
         text: "View Details",
         onClick: () => {
           setTimeout(() => {
-            sessionStorage.setItem("prevPath", `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`);
+            sessionStorage.setItem(
+              "prevPath",
+              `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`
+            );
           }, 1000);
           navigate(
             `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`
@@ -214,7 +216,6 @@ const VisitorMain = () => {
         text: "Clone",
         onClick: () => {
           handleClone(cellData?.data);
-          console.log("first");
         },
       },
     ];
@@ -251,7 +252,10 @@ const VisitorMain = () => {
         text: "View Details",
         onClick: () => {
           setTimeout(() => {
-            sessionStorage.setItem("prevPath", `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`);
+            sessionStorage.setItem(
+              "prevPath",
+              `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`
+            );
           }, 1000);
           navigate(
             `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`
@@ -262,7 +266,6 @@ const VisitorMain = () => {
         text: "Clone",
         onClick: () => {
           handleClone(cellData?.data);
-          console.log("first");
         },
       },
     ];
@@ -307,7 +310,10 @@ const VisitorMain = () => {
         text: "View Details",
         onClick: () => {
           setTimeout(() => {
-            sessionStorage.setItem("prevPath", `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`);
+            sessionStorage.setItem(
+              "prevPath",
+              `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`
+            );
           }, 1000);
           navigate(
             `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`
@@ -318,7 +324,6 @@ const VisitorMain = () => {
         text: "Clone",
         onClick: () => {
           handleClone(cellData?.data);
-          console.log("first");
         },
       },
     ];
@@ -460,7 +465,10 @@ const VisitorMain = () => {
   const handleRowDblClick = (event) => {
     const rowData = event.data; // Access the data of the double-clicked row
     setTimeout(() => {
-      sessionStorage.setItem("prevPath", `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`);
+      sessionStorage.setItem(
+        "prevPath",
+        `/Visitors/Details-of-Visitor?visitorId=${selectedRowData.id}`
+      );
     }, 1000);
     navigate(`/Visitors/Details-of-Visitor?visitorId=${rowData.id}`);
     // Add your custom logic here, e.g., opening a detailed view
@@ -541,6 +549,7 @@ const VisitorMain = () => {
           //   dataGrid = ref;
           // }}
           onRowDblClick={handleRowDblClick}
+          onRowClick={(e) => setClickedRowData(e?.data)}
         >
           <SearchPanel
             visible={true}

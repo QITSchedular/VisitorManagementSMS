@@ -54,16 +54,10 @@ const AddVisitor = () => {
   const { state } = location;
 
   useEffect(() => {
-    console.log(state);
     if (state) {
-      console.log(state);
       setCloneData(state);
     }
   }, []);
-
-  useEffect(() => {
-    console.log(cloneData);
-  }, [cloneData]);
 
   const validateFields = () => {
     const requiredFields = [
@@ -157,7 +151,6 @@ const AddVisitor = () => {
       }
     }
     if (field == "phone1") {
-      console.log(verifiedData);
       if (
         verifiedData?.officialMail != formData?.e_mail ||
         verifiedData?.mobile != e.value
