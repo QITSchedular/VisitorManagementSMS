@@ -448,9 +448,9 @@ const VisitorDetail = () => {
         </div>
       </div>
 
-      {(visitorDetailbrief.state !== "Rejected" &&
+      {((visitorDetailbrief.state !== "Rejected" &&
         visitorDetailbrief.state !== "Rejected") ||
-        (visitorDetailbrief.addedBy == "External" && (
+        visitorDetailbrief.addedBy == "External") && (
           <div className="content-block dx-card">
             <div className="title-section">
               <FormText text="Personal Details" />
@@ -500,11 +500,12 @@ const VisitorDetail = () => {
               </div>
             </div>
           </div>
-        ))}
+          // )
+        )}
 
-      {(visitorDetailbrief.state !== "Rejected" &&
+      {((visitorDetailbrief.state !== "Rejected" &&
         visitorDetailbrief.state !== "Rejected") ||
-        (visitorDetailbrief.addedBy == "External" && (
+        visitorDetailbrief.addedBy == "External") && (
           <div className="content-block dx-card">
             <div className="title-section">
               <FormText text="Other Details" />
@@ -558,7 +559,8 @@ const VisitorDetail = () => {
               </div>
             </div>
           </div>
-        ))}
+          // )
+        )}
       {visitorDetailbrief.state === "Rejected" &&
         visitorDetailbrief.state === "Rejected" &&
         visitorDetailbrief.addedBy != "External" && (
@@ -577,7 +579,7 @@ const VisitorDetail = () => {
                   height={"56px"}
                   // className="required"
                   className="last-textbox required"
-                  value={visitorDetailbrief.vName}
+                  defaultValue={visitorDetailbrief.vName}
                   //readOnly={isEdit}
                   onValueChanged={(e) =>
                     handleInputChange({
@@ -598,7 +600,7 @@ const VisitorDetail = () => {
                   height={"56px"}
                   className="last-textbox required"
                   //readOnly={isEdit}
-                  value={visitorDetailbrief.vEmail}
+                  defaultValue={visitorDetailbrief.vEmail}
                   onValueChanged={(e) =>
                     handleInputChange({
                       target: { name: "e_mail", value: e.value },
@@ -620,7 +622,7 @@ const VisitorDetail = () => {
                   height={"56px"}
                   className="last-textbox required"
                   //readOnly={isEdit}
-                  value={visitorDetailbrief.vPhone1}
+                  defaultValue={visitorDetailbrief.vPhone1}
                   onValueChanged={(e) =>
                     handleInputChange({
                       target: { name: "phone1", value: e.value },
@@ -644,7 +646,7 @@ const VisitorDetail = () => {
                   height={"56px"}
                   className="last-textbox required"
                   //readOnly={isEdit}
-                  value={visitorDetailbrief.vCmpname}
+                  defaultValue={visitorDetailbrief.vCmpname}
                   onValueChanged={(e) =>
                     handleInputChange({
                       target: { name: "vcmpname", value: e.value },
@@ -666,7 +668,7 @@ const VisitorDetail = () => {
                   height={"56px"}
                   className="last-textbox required"
                   //readOnly={isEdit}
-                  value={visitorDetailbrief.vLocation}
+                  defaultValue={visitorDetailbrief.vLocation}
                   onValueChanged={(e) =>
                     handleInputChange({
                       target: { name: "vlocation", value: e.value },
@@ -697,7 +699,7 @@ const VisitorDetail = () => {
                   stylingMode="outlined"
                   height={"56px"}
                   className="last-textbox required"
-                  value={visitorDetailbrief.cnctperson}
+                  defaultValue={visitorDetailbrief.cnctperson}
                   items={companyUserData}
                   displayExpr={"username"}
                   valueExpr={"username"}
@@ -726,7 +728,7 @@ const VisitorDetail = () => {
                   height={"56px"}
                   className="last-textbox required"
                   //readOnly={isEdit}
-                  value={editingData.department_id}
+                  defaultValue={editingData.department_id}
                   searchEnabled={true}
                   onValueChanged={(e) =>
                     handleInputChange({
@@ -756,7 +758,7 @@ const VisitorDetail = () => {
                       target: { name: "timeslot", value: e.value },
                     })
                   }
-                  value={editingData.timeslot}
+                  defaultValue={editingData.timeslot}
                   // selectedItem={visitorDetailbrief.timeslot}
                   // min={currentDate}
                   className="required"
@@ -778,7 +780,7 @@ const VisitorDetail = () => {
                   height={"56px"}
                   className="last-textbox"
                   //readOnly={isEdit}
-                  value={visitorDetailbrief.anyhardware}
+                  defaultValue={visitorDetailbrief.anyhardware}
                   onValueChanged={(e) =>
                     handleInputChange({
                       target: { name: "anyhardware", value: e.value },
@@ -796,7 +798,7 @@ const VisitorDetail = () => {
                   height={"56px"}
                   className="last-textbox required"
                   //readOnly={isEdit}
-                  value={visitorDetailbrief.purposeofvisit}
+                  defaultValue={visitorDetailbrief.purposeofvisit}
                   onValueChanged={(e) =>
                     handleInputChange({
                       target: { name: "purposeofvisit", value: e.value },

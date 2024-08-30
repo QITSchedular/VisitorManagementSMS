@@ -141,7 +141,7 @@ const UserProfile = ({ setLoading, activeTabIndex }) => {
           items={deptData}
           displayExpr={"deptname"}
           valueExpr={"transid"}
-          value={data?.data.cmpdeptid}
+          defaultValue={data?.data.cmpdeptid}
           onValueChanged={onValueChanged}
         ></SelectBox>
       </>
@@ -150,8 +150,12 @@ const UserProfile = ({ setLoading, activeTabIndex }) => {
 
   const genderRender = (data) => {
     const Genders = ["Male", "Female"];
+    // console.log(data)
     const onValueChanged = (e) => {
+      console.log(data)
+      console.log(e)
       data.setValue(e.value);
+      console.log(data)
     };
     return (
       <>
@@ -162,7 +166,8 @@ const UserProfile = ({ setLoading, activeTabIndex }) => {
           stylingMode="outlined"
           items={Genders}
           onValueChanged={(e) => onValueChanged(e)}
-          value={data?.data.gender}
+          // selectedItem={data?.data.gender}
+          defaultValue={data?.data.gender}
         ></SelectBox>
       </>
     );
