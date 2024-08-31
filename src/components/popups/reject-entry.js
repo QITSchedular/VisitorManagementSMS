@@ -72,11 +72,6 @@ const RejectEntryPopup = ({
 
   return (
     <>
-      {isLoading && (
-        <div className="Myloader">
-          <CustomLoader />
-        </div>
-      )}
       <Popup
         visible={isVisible}
         onHiding={onHide}
@@ -86,6 +81,11 @@ const RejectEntryPopup = ({
         dragEnabled={false}
         showTitle={false}
       >
+        {isLoading && (
+          <div className="Myloader">
+            <CustomLoader />
+          </div>
+        )}
         {status === "rejected" && (
           <div className="verification-popup-main">
             <div className="statusGifHeader">

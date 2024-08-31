@@ -24,6 +24,7 @@ const OtpPopup = ({
   refFocused,
   setLoading,
   isOTPVerified,
+  loading,
 }) => {
   const [otp, setOtp] = useState(Array(6).fill(""));
   const [isAutoFocus, setISAutoFocus] = useState();
@@ -143,6 +144,11 @@ const OtpPopup = ({
         dragEnabled={false}
         showTitle={false}
       >
+        {loading && (
+          <div className="Myloader">
+            <CustomLoader />
+          </div>
+        )}
         <div className="verification-popup-main">
           <PopupHeaderText text={header} />
           <div className="popup-subtext">

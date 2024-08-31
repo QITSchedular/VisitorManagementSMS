@@ -690,6 +690,7 @@ const VisitorMain = () => {
         statusMessage={statusMessage}
         isVisible={isPopupVisible}
         onHide={handleClosePopup}
+        loading={loading}
       />
       <SendVerification
         header="Check-in Confirmation"
@@ -699,6 +700,7 @@ const VisitorMain = () => {
         saveFunction={handleCheckIn}
         isVisible={isChkInPopupVisible}
         onHide={handleCloseChkInPopup}
+        loading={loading}
       />
     </>
   );

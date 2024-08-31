@@ -34,7 +34,10 @@ const VisitorCard = ({
   const handleClick = () => {
     const visitorId = visitor.id;
     setTimeout(() => {
-      sessionStorage.setItem("prevPath", `/Verify-Visitors/Details-of-Visitor?visitorId=${visitorId}`);
+      sessionStorage.setItem(
+        "prevPath",
+        `/Verify-Visitors/Details-of-Visitor?visitorId=${visitorId}`
+      );
     }, 1000);
     navigate(`/Verify-Visitors/Details-of-Visitor?visitorId=${visitorId}`);
   };

@@ -462,6 +462,7 @@ const Companymain = () => {
             isActive={false}
             handleReasonInput={handleReasonInput}
             handleSubmit={handleActivateSave}
+            loading={loading}
           />
         </>
       )}
@@ -476,6 +477,7 @@ const Companymain = () => {
             isActive={true}
             handleReasonInput={handleReasonInput}
             handleSubmit={handleInactivateSave}
+            loading={loading}
           />
         </>
       )}

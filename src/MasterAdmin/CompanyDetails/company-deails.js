@@ -435,6 +435,7 @@ function CompanyDeails() {
             isActive={false}
             handleReasonInput={handleReasonInput}
             handleSubmit={handleActivateSave}
+            loading={loading}
           />
         </>
       )}
@@ -449,6 +450,7 @@ function CompanyDeails() {
             isActive={true}
             handleReasonInput={handleReasonInput}
             handleSubmit={handleInactivateSave}
+            loading={loading}
           />
         </>
       )}

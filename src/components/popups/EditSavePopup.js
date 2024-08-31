@@ -6,6 +6,7 @@ import {
 } from "../typographyText/TypograghyText";
 import "./send-verification.scss";
 import successGif from "../../assets/images/success.gif";
+import CustomLoader from "../customerloader/CustomLoader";
 
 const EditSavePopup = ({
   header,
@@ -16,6 +17,7 @@ const EditSavePopup = ({
   isVisible,
   onHide,
   status,
+  loading,
 }) => {
   const handleSubmit = () => {
     saveFunction();
@@ -33,6 +35,11 @@ const EditSavePopup = ({
         showTitle={false}
         className="responsive-popup"
       >
+        {loading && (
+          <div className="Myloader">
+            <CustomLoader />
+          </div>
+        )}
         {status === "success" && (
           <div className="verification-popup-main">
             <div className="statusGifHeader">

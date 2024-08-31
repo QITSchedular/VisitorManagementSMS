@@ -177,6 +177,7 @@ const EditVisitorDetail = () => {
         // saveFunction={handleSaveFunction}
         isVisible={isPopupVisible}
         onHide={handleClosePopup}
+        loading={loading}
       />
     </>
   );

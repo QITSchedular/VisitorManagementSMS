@@ -19,7 +19,7 @@ import { eyeclose, eyeopen } from "../../../assets/icon";
 import { useNavigate } from "react-router-dom";
 // import { eyeopen, eyeclose } from "../../assets/icon";
 
-const AddUser = ({ setLoading, setActiveTabIndex }) => {
+const AddUser = ({ setLoading, setActiveTabIndex, loading }) => {
   const [isOtpPopupVisible, setIsOtpPopupVisible] = useState(false);
   const [formData, setFormData] = useState(null);
   const [refFocused, setrefFocused] = useState(false);
@@ -369,6 +369,7 @@ const AddUser = ({ setLoading, setActiveTabIndex }) => {
         setrefFocused={setrefFocused}
         refFocused={refFocused}
         setLoading={setLoading}
+        loading={loading}
       />
     </>
   );
