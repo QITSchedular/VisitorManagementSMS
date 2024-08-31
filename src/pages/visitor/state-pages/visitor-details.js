@@ -451,116 +451,116 @@ const VisitorDetail = () => {
       {((visitorDetailbrief.state !== "Rejected" &&
         visitorDetailbrief.state !== "Rejected") ||
         visitorDetailbrief.addedBy == "External") && (
-          <div className="content-block dx-card">
-            <div className="title-section">
-              <FormText text="Personal Details" />
-            </div>
-            <div className="visitor-personal-detail">
-              <div className="visitor-personal-data">
-                <div className="visitor-header">Name</div>
-                <div className="visitor-sub-header">
-                  {visitorDetailbrief.vName}{" "}
-                </div>
-              </div>
-              <div className="visitor-personal-data">
-                <div className="visitor-header">Email</div>
-                <div className="visitor-sub-header">
-                  {visitorDetailbrief.vEmail === ""
-                    ? "--"
-                    : visitorDetailbrief.vEmail}
-                </div>
+        <div className="content-block dx-card">
+          <div className="title-section">
+            <FormText text="Personal Details" />
+          </div>
+          <div className="visitor-personal-detail">
+            <div className="visitor-personal-data">
+              <div className="visitor-header">Name</div>
+              <div className="visitor-sub-header">
+                {visitorDetailbrief.vName}{" "}
               </div>
             </div>
-            <div className="visitor-personal-detail">
-              <div className="visitor-personal-data">
-                <div className="visitor-header">Mobile Number</div>
-                <div className="visitor-sub-header">
-                  {visitorDetailbrief.vPhone1 === ""
-                    ? "--"
-                    : visitorDetailbrief.vPhone1}
-                </div>
-              </div>
-              <div className="visitor-personal-data">
-                <div className="visitor-header">Name of the Company</div>
-                <div className="visitor-sub-header">
-                  {visitorDetailbrief.vCmpname === ""
-                    ? "--"
-                    : visitorDetailbrief.vCmpname}
-                </div>
-              </div>
-            </div>
-            <div className="visitor-personal-detail">
-              <div className="visitor-personal-data">
-                <div className="visitor-header">Company Address</div>
-                <div className="visitor-sub-header">
-                  {visitorDetailbrief.vLocation === ""
-                    ? "--"
-                    : visitorDetailbrief.vLocation}
-                </div>
+            <div className="visitor-personal-data">
+              <div className="visitor-header">Email</div>
+              <div className="visitor-sub-header">
+                {visitorDetailbrief.vEmail === ""
+                  ? "--"
+                  : visitorDetailbrief.vEmail}
               </div>
             </div>
           </div>
-          // )
-        )}
+          <div className="visitor-personal-detail">
+            <div className="visitor-personal-data">
+              <div className="visitor-header">Mobile Number</div>
+              <div className="visitor-sub-header">
+                {visitorDetailbrief.vPhone1 === ""
+                  ? "--"
+                  : visitorDetailbrief.vPhone1}
+              </div>
+            </div>
+            <div className="visitor-personal-data">
+              <div className="visitor-header">Name of the Company</div>
+              <div className="visitor-sub-header">
+                {visitorDetailbrief.vCmpname === ""
+                  ? "--"
+                  : visitorDetailbrief.vCmpname}
+              </div>
+            </div>
+          </div>
+          <div className="visitor-personal-detail">
+            <div className="visitor-personal-data">
+              <div className="visitor-header">Company Address</div>
+              <div className="visitor-sub-header">
+                {visitorDetailbrief.vLocation === ""
+                  ? "--"
+                  : visitorDetailbrief.vLocation}
+              </div>
+            </div>
+          </div>
+        </div>
+        // )
+      )}
 
       {((visitorDetailbrief.state !== "Rejected" &&
         visitorDetailbrief.state !== "Rejected") ||
         visitorDetailbrief.addedBy == "External") && (
-          <div className="content-block dx-card">
-            <div className="title-section">
-              <FormText text="Other Details" />
-            </div>
-            <div className="visitor-personal-detail">
-              <div className="visitor-personal-data">
-                <div className="visitor-header">Contact Person</div>
-                <div className="visitor-sub-header">
-                  {visitorDetailbrief.cnctperson === ""
-                    ? "--"
-                    : visitorDetailbrief.cnctperson}
-                </div>
-              </div>
-              <div className="visitor-personal-data">
-                <div className="visitor-header">Department</div>
-                <div className="visitor-sub-header">
-                  {visitorDetailbrief.deptName === ""
-                    ? "--"
-                    : visitorDetailbrief.deptName}
-                </div>
+        <div className="content-block dx-card">
+          <div className="title-section">
+            <FormText text="Other Details" />
+          </div>
+          <div className="visitor-personal-detail">
+            <div className="visitor-personal-data">
+              <div className="visitor-header">Contact Person</div>
+              <div className="visitor-sub-header">
+                {visitorDetailbrief.cnctperson === ""
+                  ? "--"
+                  : visitorDetailbrief.cnctperson}
               </div>
             </div>
-            <div className="visitor-personal-detail">
-              <div className="visitor-personal-data">
-                <div className="visitor-header">Time Slot</div>
-                <div className="visitor-sub-header">
-                  {visitorDetailbrief.timeslot === "" ? (
-                    "--"
-                  ) : (
-                    <> {formatDate(visitorDetailbrief.timeslot)}</>
-                  )}
-                </div>
-              </div>
-              <div className="visitor-personal-data">
-                <div className="visitor-header">Hardware</div>
-                <div className="visitor-sub-header">
-                  {visitorDetailbrief.anyhardware === ""
-                    ? "--"
-                    : visitorDetailbrief.anyhardware}
-                </div>
-              </div>
-            </div>
-            <div className="visitor-personal-detail">
-              <div className="visitor-personal-data">
-                <div className="visitor-header">Purpose of Visit</div>
-                <div className="visitor-sub-header">
-                  {visitorDetailbrief.purposeofvisit === ""
-                    ? "--"
-                    : visitorDetailbrief.purposeofvisit}
-                </div>
+            <div className="visitor-personal-data">
+              <div className="visitor-header">Department</div>
+              <div className="visitor-sub-header">
+                {visitorDetailbrief.deptName === ""
+                  ? "--"
+                  : visitorDetailbrief.deptName}
               </div>
             </div>
           </div>
-          // )
-        )}
+          <div className="visitor-personal-detail">
+            <div className="visitor-personal-data">
+              <div className="visitor-header">Time Slot</div>
+              <div className="visitor-sub-header">
+                {visitorDetailbrief.timeslot === "" ? (
+                  "--"
+                ) : (
+                  <> {formatDate(visitorDetailbrief.timeslot)}</>
+                )}
+              </div>
+            </div>
+            <div className="visitor-personal-data">
+              <div className="visitor-header">Hardware</div>
+              <div className="visitor-sub-header">
+                {visitorDetailbrief.anyhardware === ""
+                  ? "--"
+                  : visitorDetailbrief.anyhardware}
+              </div>
+            </div>
+          </div>
+          <div className="visitor-personal-detail">
+            <div className="visitor-personal-data">
+              <div className="visitor-header">Purpose of Visit</div>
+              <div className="visitor-sub-header">
+                {visitorDetailbrief.purposeofvisit === ""
+                  ? "--"
+                  : visitorDetailbrief.purposeofvisit}
+              </div>
+            </div>
+          </div>
+        </div>
+        // )
+      )}
       {visitorDetailbrief.state === "Rejected" &&
         visitorDetailbrief.state === "Rejected" &&
         visitorDetailbrief.addedBy != "External" && (
@@ -823,6 +823,7 @@ const VisitorDetail = () => {
         saveFunction={handleCheckOut}
         isVisible={isPopupVisible}
         onHide={handleClosePopup}
+        loading={isLoading}
       />
 
       <SendVerification
@@ -834,6 +835,7 @@ const VisitorDetail = () => {
         saveFunction={handleCheckIn}
         isVisible={isChkINPopupVisible}
         onHide={handleChkINClosePopup}
+        loading={isLoading}
       />
 
       {/* <CheckoutPopup
@@ -852,6 +854,7 @@ const VisitorDetail = () => {
         isVisible={isEditPopupVisible}
         onHide={handleEditClosePopup}
         status={statusMessage}
+        loading={isLoading}
       />
     </>
   );

@@ -55,6 +55,13 @@ const AddVisitor = () => {
 
   useEffect(() => {
     if (state) {
+      const providedDate = new Date(state?.timeslot);
+      console.log(providedDate);
+      const adjustedDate = new Date(
+        providedDate.getTime() - 5 * 60 * 60 * 1000 - 30 * 60 * 1000
+      );
+      console.log(adjustedDate);
+      state.timeslot = adjustedDate;
       setCloneData(state);
     }
   }, []);
@@ -131,6 +138,7 @@ const AddVisitor = () => {
   };
 
   const handleDateChange = (field, e) => {
+    console.log(e);
     const dateValue = e.value;
     // const formattedDate = formatDateTime(dateValue);
     setFormData((prev) => ({
@@ -713,6 +721,7 @@ const AddVisitor = () => {
         refFocused={refFocused}
         setLoading={setLoading}
         isOTPVerified={isOTPVerified}
+        loading={loading}
       />
     </>
   );

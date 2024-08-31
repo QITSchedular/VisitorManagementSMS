@@ -4,6 +4,7 @@ import {
   PopupHeaderText,
   PopupSubText,
 } from "../typographyText/TypograghyText";
+import CustomLoader from "../customerloader/CustomLoader";
 
 function ChangeCmpStatus({
   header,
@@ -14,6 +15,7 @@ function ChangeCmpStatus({
   isActive,
   handleReasonInput,
   handleSubmit,
+  loading,
 }) {
   return (
     <>
@@ -27,6 +29,11 @@ function ChangeCmpStatus({
           dragEnabled={false}
           showTitle={false}
         >
+          {loading && (
+            <div className="Myloader">
+              <CustomLoader />
+            </div>
+          )}
           {/* {status === "success" && (
             <div className="verification-popup-main">
               <div className="statusGifHeader">

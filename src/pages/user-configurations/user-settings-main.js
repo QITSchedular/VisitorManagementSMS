@@ -52,6 +52,7 @@ const UserSettingsMain = () => {
               setLoading={setLoading}
               activeTabIndex={parseInt(activeTabIndex)}
               setActiveTabIndex={setActiveTabIndex}
+              loading={loading}
             />
           </Item>
           <Item title="User’s Profile" deferRendering={true}>

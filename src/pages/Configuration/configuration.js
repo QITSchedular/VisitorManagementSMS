@@ -148,7 +148,9 @@ function Configuration() {
                 onValueChanged={(e) =>
                   handleInputChange("ApprovalTime", e.value)
                 }
-                value={stagedChanges ? stagedChanges["ApprovalTime"] : "O"}
+                value={
+                  tempStagedChanges ? tempStagedChanges["ApprovalTime"] : "O"
+                }
                 items={Source}
                 valueExpr={"id"}
                 displayExpr={"value"}

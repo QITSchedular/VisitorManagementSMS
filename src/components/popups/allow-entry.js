@@ -60,11 +60,6 @@ const AllowEntryPopup = ({
 
   return (
     <>
-      {isLoading && (
-        <div className="Myloader">
-          <CustomLoader />
-        </div>
-      )}
       <Popup
         visible={isVisible}
         onHiding={onHide}
@@ -74,6 +69,11 @@ const AllowEntryPopup = ({
         dragEnabled={false}
         showTitle={false}
       >
+        {isLoading && (
+          <div className="Myloader">
+            <CustomLoader />
+          </div>
+        )}
         {status === "success" && (
           <div className="verification-popup-main">
             <div className="statusGifHeader">

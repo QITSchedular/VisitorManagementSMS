@@ -5,6 +5,7 @@ import {
   PopupSubText,
 } from "../typographyText/TypograghyText";
 import successGif from "../../assets/images/success.gif";
+import CustomLoader from "../customerloader/CustomLoader";
 
 const CheckoutPopup = ({
   header,
@@ -15,6 +16,7 @@ const CheckoutPopup = ({
   isVisible,
   onHide,
   status,
+  loading,
 }) => {
   const handleSubmit = () => {
     saveFunction();
@@ -31,6 +33,11 @@ const CheckoutPopup = ({
         showTitle={false}
         className="responsive-popup"
       >
+        {loading && (
+          <div className="Myloader">
+            <CustomLoader />
+          </div>
+        )}
         {status === "success" && (
           <div className="verification-popup-main">
             <div className="statusGifHeader">
