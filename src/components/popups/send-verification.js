@@ -76,7 +76,7 @@ const SendVerification = ({
                 text={approval}
                 width={216}
                 height={44}
-                onClick={handleSubmit}
+                onClick={saveFunction}
                 // disabled={isDisabled}
               />
             </div>

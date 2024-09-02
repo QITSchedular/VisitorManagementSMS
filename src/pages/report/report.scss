@@ -6,8 +6,8 @@
   gap: 24px;
 
   .form-input {
-    flex: 1 1 300px;
-    max-width: 300px;
+    flex: 1 1 265px;
+    max-width: 265px;
 
     .dx-texteditor-input-container {
       width: 100%;
@@ -68,6 +68,9 @@
     }
   }
   @include md {
+    .dx-toolbar-after .dx-toolbar-item:last-child {
+      padding-inline-start: 0px;
+    }
     .dx-toolbar-after {
       display: flex;
       flex-wrap: wrap;
