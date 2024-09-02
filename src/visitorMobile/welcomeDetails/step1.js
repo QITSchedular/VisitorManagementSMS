@@ -89,9 +89,36 @@ export const Step1 = () => {
         });
         // navigate(`/welcomevisitor?cmpId=${cmpId}`);
         // return toastDisplayer("success", "Checked In");
+      }else if(prevData.status == "P" && prevData.checkinstatus ==null){
+        setRegisterVisitor({
+          vavatar: "",
+          cnctperson: "",
+          department_id: "",
+          timeslot: "",
+          anyhardware: "",
+          purposeofvisit: "",
+          company_id: "",
+          reason: "",
+          status: "",
+          createdby: null,
+          vname: "",
+          phone1: "",
+          vcmpname: "",
+          vlocation: "",
+          e_mail: "",
+        });
+  
+        sessionStorage.removeItem("registerVisitor");
+
+        toastDisplayer("error", `Your request is already pending.`);
+        return handlePreviousBtn();
+        // navigate(`/welcomevisitor?cmpId=${cmpId}`);
+        // return toastDisplayer("success", "Checked In");
+      }else{
+
+        hanldeGetOtp();
+        return navigate(`/checkinotp?cmpId=${cmpId}`);
       }
-      hanldeGetOtp();
-      return navigate(`/checkinotp?cmpId=${cmpId}`);
     }
   };
 
