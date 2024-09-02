@@ -267,7 +267,7 @@ const AddVisitor = () => {
       };
       setCompanyUserData([...response.responseData.Data, specialActionItem]);
       // setCompanyUserData(response.responseData.Data);
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
@@ -706,6 +706,7 @@ const AddVisitor = () => {
         isVisible={isPopupVisible}
         // isVisible={true}
         onHide={handleClosePopup}
+        loading={loading}
       />
       <OtpPopup
         header="OTP Verification"
