@@ -83,9 +83,8 @@ function Configuration() {
     }
   };
   const Source = [
-    { id: "O", value: "OFF" },
-    { id: "1D", value: "One Day" },
-    { id: "1W", value: "One Week" },
+    { id: "OFF", value: "Off" },
+    { id: "ON", value: "On" },
   ];
   const VerificationOTP = [
     { id: true, value: "Yes" },
@@ -110,6 +109,8 @@ function Configuration() {
       });
     }
   };
+
+  console.log("tempStagedChanges : ",tempStagedChanges)
   return (
     <>
       {loading && (
@@ -149,7 +150,7 @@ function Configuration() {
                   handleInputChange("ApprovalTime", e.value)
                 }
                 value={
-                  tempStagedChanges ? tempStagedChanges["ApprovalTime"] : "O"
+                  tempStagedChanges ? tempStagedChanges["ApprovalTime"] : "OFF"
                 }
                 items={Source}
                 valueExpr={"id"}
