@@ -29,7 +29,7 @@
       }
     }
     .about-profile {
-      height: 104px;
+      height: auto;
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -64,6 +64,20 @@
           }
         }
       }
+
+      @include md {
+        .name-address {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          align-items: start;
+          width: 80%;
+          span:nth-of-type(2) {
+            display: none;
+          }
+        }
+      }
+
       .forget-pass {
         color: #6941c6;
         font-weight: 500;

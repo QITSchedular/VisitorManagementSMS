@@ -7,6 +7,7 @@ import { TextBox, Button as TextBoxButton } from "devextreme-react/text-box";
 import { Button, CheckBox } from "devextreme-react";
 import { forgetPasswordChk } from "../../api/common";
 import CustomLoader from "../customerloader/CustomLoader";
+import { toastDisplayer } from "../toastDisplayer/toastdisplayer";
 
 export default function ResetPasswordForm() {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ export default function ResetPasswordForm() {
     try {
       setLoading(true);
       var apiRes = await forgetPasswordChk(email);
+      console.log(apiRes);
       setLoading(false);
       if (!apiRes.hasError) {
         const data = apiRes.responseData;
@@ -44,6 +46,8 @@ export default function ResetPasswordForm() {
           });
         }
         // navigate("/change-password");
+      } else {
+        return toastDisplayer("error", apiRes.errorMessage);
       }
     } catch (error) {}
   };

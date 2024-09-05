@@ -163,6 +163,7 @@
   @include sm {
     .dx-toolbar-after {
       display: flex;
+      gap: 8px;
       flex-wrap: wrap;
     }
     .dx-toolbar .dx-toolbar-after {

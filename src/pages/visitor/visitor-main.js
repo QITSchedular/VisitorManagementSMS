@@ -553,7 +553,7 @@ const VisitorMain = () => {
         >
           <SearchPanel
             visible={true}
-            width={300}
+            width={250}
             height={44}
             placeholder="Search visitors"
           />
@@ -650,7 +650,7 @@ const VisitorMain = () => {
                 />
               </div>
             </Item>
-            <Item name="searchPanel" />
+            <Item name="searchPanel" cssClass="searchBox" />
             <Item location="after">
               <SelectBox
                 // width={116}
