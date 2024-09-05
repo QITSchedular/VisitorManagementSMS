@@ -36,6 +36,7 @@ export default function Profile() {
   const activePageText = "Profile";
   const [isProfExpand, setIsProfExpand] = useState(false);
   const [isCmpExpand, setIsCmpExpand] = useState(false);
+  const [isValidLogo, setIsValidLogo] = useState(false);
   const [formData, setFormData] = useState(null);
   const [userFormData, setUserFormData] = useState(null);
   const [isCmp, setIsCmp] = useState(
@@ -209,7 +210,8 @@ export default function Profile() {
           const width = img.width;
           const height = img.height;
 
-          if (width <= 500 && height <= 500) {
+          if (width <= 500 && height <= 500 && width >=150 && height >=60) {
+            setIsValidLogo(false);
             convertToBase64(file).then((base64) => {
               setUploadedFileName(file.name);
               setFormData((prevState) => ({
@@ -218,6 +220,7 @@ export default function Profile() {
               }));
             });
           } else {
+            setIsValidLogo(true);
             return toastDisplayer(
               "error",
               "The company logo dimensions must between 500 x 500 pixels."
@@ -384,11 +387,14 @@ export default function Profile() {
             padding: 0;
             width: 100%;
             height: 100%;
+            display:flex;
+            align-items: center;
+            justify-content: center;
           }
           img {
             display: block;
-            width: 100%;
-            height: 100%;
+            width: 80%;
+            height: 80%;
             object-fit: contain;
           }
         </style>
@@ -789,8 +795,13 @@ export default function Profile() {
               />
               {isCmp && (
                 <span style={{ width: "50%" }}>
-
-                  <label className="uplaod_btn" htmlFor="file_upload">
+                  <label
+                    className="uplaod_btn"
+                    htmlFor="file_upload"
+                    style={
+                      isValidLogo ? { border: "1px dashed red" } : undefined
+                    }
+                  >
                     <i className="ri-upload-2-fill"></i>
                     {uploadedFileName ? (
                       <p>{uploadedFileName}</p>
@@ -799,24 +810,14 @@ export default function Profile() {
                     )}
                   </label>
                   <input
-                    //disabled={enableOnVerification}
                     type="file"
                     id="file_upload"
                     style={{ display: "none" }}
                     onChange={handleFileUpload}
                     accept="image/png, image/jpeg"
                   />
-                  <span
-                    className="otp-terms-condition"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "8px",
-                      paddingTop: "2px",
-                      color:"red"
-                    }}
-                  >
-                    <span>* Compnay logo must between 500x500 px.</span>
+                  <span className="cmplogo_span">
+                    * Compnay logo must between 500x500 px.
                   </span>
                 </span>
               )}

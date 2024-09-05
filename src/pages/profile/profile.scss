@@ -127,6 +127,15 @@
         border-radius: 4px;
         margin-top: 6px;
       }
+
+      .cmplogo_span{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-top: 2px;
+        color:red;
+        font-size:12px;
+      }
     }
   }
 }
