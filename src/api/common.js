@@ -32,8 +32,9 @@ export async function forgetPasswordChk(email) {
       responseBody.errorMessage = "Not Save Data";
     }
   } catch (error) {
+    console.log(error);
     responseBody.errorMessage = responseBody.errorMessage =
-      error.response?.data?.statusMsg || error.response?.data?.errors;
+      error.response?.data?.StatusMsg || error.response?.data?.errors;
     await logToServer(
       "ForgotPassword",
       "common",
@@ -588,18 +589,21 @@ export async function postNotificationRule(payload) {
 }
 
 // Read Notification API
-export const updateNotificationStatus = async (type,nid, email, cmpid) => {
+export const updateNotificationStatus = async (type, nid, email, cmpid) => {
   const responseBody = {
     responseData: null,
     hasError: false,
     errorMessage: null,
   };
   try {
-    const response = await axios.post(`${API_URL}VMS/Notification/${type}Read`, {
-      transid: nid,
-      email: email,
-      cmptransid: cmpid,
-    });
+    const response = await axios.post(
+      `${API_URL}VMS/Notification/${type}Read`,
+      {
+        transid: nid,
+        email: email,
+        cmptransid: cmpid,
+      }
+    );
 
     responseBody.responseData = response.data;
     await logToServer(
@@ -636,7 +640,7 @@ export const updateNotificationStatus = async (type,nid, email, cmpid) => {
 };
 
 // Get Notification auth rule by user
-export const getAllNotification = async (type,email, cmpid) => {
+export const getAllNotification = async (type, email, cmpid) => {
   // const myCookieValue = localStorage.getItem("token");
   // const userData = localStorage.getItem("User");
   const responseBody = {

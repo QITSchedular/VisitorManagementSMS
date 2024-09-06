@@ -6,6 +6,9 @@ import DataGrid, {
   Paging,
   Pager,
   Editing,
+  PatternRule,
+  ValidationRule,
+  Selection,
 } from "devextreme-react/data-grid";
 import "./user-profile.scss";
 import { useAuth } from "./../../../contexts/auth";
@@ -152,10 +155,10 @@ const UserProfile = ({ setLoading, activeTabIndex }) => {
     const Genders = ["Male", "Female"];
     // console.log(data)
     const onValueChanged = (e) => {
-      console.log(data)
-      console.log(e)
+      console.log(data);
+      console.log(e);
       data.setValue(e.value);
-      console.log(data)
+      console.log(data);
     };
     return (
       <>
@@ -204,9 +207,6 @@ const UserProfile = ({ setLoading, activeTabIndex }) => {
             <DataGrid
               dataSource={userData}
               showBorders={false}
-              selection={{
-                mode: "multiple",
-              }}
               className="data-grid on-hover-data"
               hoverStateEnabled={true}
               columnAutoWidth={true}
@@ -234,7 +234,7 @@ const UserProfile = ({ setLoading, activeTabIndex }) => {
                 <Button name="edit" />
                 <Button name="delete" />
               </Column>
-              <Column
+              {/* <Column
                 caption="Password"
                 dataField="password"
                 allowEditing={true}
@@ -242,13 +242,40 @@ const UserProfile = ({ setLoading, activeTabIndex }) => {
                 // editorOptions={{
                 //   mode: "password",
                 // }}
-              />
+              /> */}
+              <Column
+                caption="Password"
+                dataField="password"
+                allowEditing={true}
+                // editorOptions={{
+                //   mode: "password", // Mask the password input
+                // }}
+                // cellTemplate={(cellElement, cellInfo) => {
+                //   // Mask the password display with asterisks
+                //   cellElement.textContent = "*****"; // Mask for display
+                // }}
+                validationRules={[
+                  {
+                    type: "pattern",
+                    pattern:
+                      "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,}",
+                    message:
+                      "Password must be minimum 6 chars, with 1 uppercase, 1 number, and 1 special character.",
+                  },
+                ]}
+              ></Column>
               <Column
                 dataField="deptName"
                 caption="Department"
                 allowEditing={true}
                 editCellRender={departmentRender}
-              ></Column>
+              />
+              <Column
+                dataField="usertype"
+                caption="user type"
+                allowEditing={true}
+                editCellRender={departmentRender}
+              />
               <Column
                 dataField="gender"
                 editCellRender={genderRender}

@@ -20,6 +20,14 @@ export const CheckInOtp = () => {
   const email = registerVisitor.e_mail;
   const mobile = registerVisitor.phone1;
 
+  useEffect(() => {
+    const path = localStorage.getItem("previousPath");
+    if (path == "/step3") {
+      localStorage.setItem("previousPath", "/step2");
+      navigate(`/welcomestep1?cpmId=${cmpId}`);
+    }
+  }, []);
+
   const handleChange = (index, e) => {
     const value = e.target.value;
     if (isNaN(value)) return;
@@ -52,6 +60,7 @@ export const CheckInOtp = () => {
   };
 
   const onOtpSubmit = async (combinedOtp) => {
+    // return navigate(`/welcomestep3?cmpId=${cmpId}`);
     try {
       const role = "visitor";
       const checkOtp = await VerifyOtp(email, combinedOtp, role);
@@ -134,6 +143,8 @@ export const CheckInOtp = () => {
                     onClick={() => handleClick(index)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     className="otp-input-box"
+                    inputMode="numeric" // Optional: Suggest numeric input mode for better compatibility
+                    pattern="[0-9]*" // Optional: Ensure only numeric input is accepted
                   />
                 ))}
               </div>
