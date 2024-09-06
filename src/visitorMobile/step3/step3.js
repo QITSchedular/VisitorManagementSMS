@@ -18,6 +18,7 @@ export const Step3 = () => {
   const cmpId = queryParams.get("cmpId");
 
   useEffect(() => {
+    localStorage.setItem("previousPath", "/step3");
     // Check if the camera is available
     if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
       navigator.mediaDevices
