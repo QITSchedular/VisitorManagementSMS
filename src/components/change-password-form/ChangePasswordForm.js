@@ -3,7 +3,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TextBox, Button as TextBoxButton } from "devextreme-react/text-box";
 import { Button, CheckBox } from "devextreme-react";
 import { eyeopen, eyeclose } from "../../assets/icon";
-import { Validator, RequiredRule } from "devextreme-react/validator";
+import {
+  Validator,
+  RequiredRule,
+  PatternRule,
+} from "devextreme-react/validator";
 import { LoginImage, LoginLogo } from "../../assets";
 import { GenerateNewPassword } from "../../api/common";
 import { toastDisplayer } from "../toastDisplayer/toastdisplayer";
@@ -33,6 +37,14 @@ export default function ChangePasswordForm() {
   };
   const handleSubmit = async () => {
     try {
+      const passwordPattern =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+      if (!passwordPattern.test(password)) {
+        return toastDisplayer(
+          "error",
+          "Password must be 6+ chars, with 1 uppercase, 1 number, and 1 special character."
+        );
+      }
       if (password == cpassword) {
         var apiRes = await GenerateNewPassword(email, password);
         if (!apiRes.hasError) {
@@ -78,6 +90,10 @@ export default function ChangePasswordForm() {
               >
                 <Validator className="custom-validator">
                   <RequiredRule message="Password is required." />
+                  <PatternRule
+                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}"
+                    message="Password must be minimum 6 chars, with 1 uppercase, 1 number, and 1 special character."
+                  />
                 </Validator>
               </TextBox>
             </div>

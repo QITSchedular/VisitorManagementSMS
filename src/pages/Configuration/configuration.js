@@ -110,7 +110,7 @@ function Configuration() {
     }
   };
 
-  console.log("tempStagedChanges : ",tempStagedChanges)
+  console.log("tempStagedChanges : ", tempStagedChanges);
   return (
     <>
       {loading && (
@@ -128,7 +128,7 @@ function Configuration() {
         <div className="content-block dx-card">
           <div className="navigation-header-main">
             <div className="title-section">
-              <HeaderText text="Configuration" />
+              <HeaderText text="Configuration (Visitor Manual Entry)" />
             </div>
             <div className="title-section-btn">
               <Button

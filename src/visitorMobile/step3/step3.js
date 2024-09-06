@@ -16,6 +16,7 @@ export const Step3 = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const cmpId = queryParams.get("cmpId");
+
   useEffect(() => {
     // Check if the camera is available
     if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
@@ -112,6 +113,21 @@ export const Step3 = () => {
 
     return navigate(`/welcomestep4?cmpId=${cmpId}`);
   };
+
+  // useEffect(() => {
+  //   const handleBackButton = (event) => {
+  //     // Your custom logic here
+  //     console.log("Back button pressed!");
+  //     handleActionContinue();
+  //   };
+
+  //   window.onpopstate = handleBackButton;
+
+  //   // Cleanup event listener
+  //   return () => {
+  //     window.onpopstate = null;
+  //   };
+  // }, []);
 
   return (
     <div className="step3">

@@ -73,8 +73,8 @@ export const Step1 = () => {
     } else if (registerVisitor.vlocation === "") {
       return toastDisplayer("error", "Enter the company location.");
     } else {
-      if(prevData.status == "A" && prevData.checkinstatus ==null){
-        console.log("=======>if")
+      if (prevData.status == "A" && prevData.checkinstatus == null) {
+
         const payload = {
           company_id: prevData.cmptransid,
           e_mail: registerVisitor.e_mail,
@@ -85,12 +85,12 @@ export const Step1 = () => {
         if (checkIn.hasError === true) {
           return toastDisplayer("error", `${checkIn.error}`);
         }
-        return navigate(`/Success?cmpId=${cmpId}`,{
+        return navigate(`/Success?cmpId=${cmpId}`, {
           state: { Message: "Checked In Successfully" },
         });
         // navigate(`/welcomevisitor?cmpId=${cmpId}`);
         // return toastDisplayer("success", "Checked In");
-      }else if(prevData.status == "P" && prevData.checkinstatus ==null){
+      } else if (prevData.status == "P" && prevData.checkinstatus == null) {
         setRegisterVisitor({
           vavatar: "",
           cnctperson: "",
@@ -108,15 +108,15 @@ export const Step1 = () => {
           vlocation: "",
           e_mail: "",
         });
-        console.log("=======>else if")
         sessionStorage.removeItem("registerVisitor");
 
         toastDisplayer("error", `Your request is already pending.`);
         return handlePreviousBtn();
         // navigate(`/welcomevisitor?cmpId=${cmpId}`);
         // return toastDisplayer("success", "Checked In");
-      }else{
-        console.log("=======>else")
+
+      } else {
+
         hanldeGetOtp();
         return navigate(`/checkinotp?cmpId=${cmpId}`);
       }
@@ -128,7 +128,7 @@ export const Step1 = () => {
     const email = registerVisitor.e_mail;
     const mobile = registerVisitor.phone1;
     const role = "visitor";
-    const handleOtp = requestOtp(email, role,mobile);
+    const handleOtp = requestOtp(email, role, mobile);
 
     if (handleOtp === true) {
     }
@@ -168,6 +168,7 @@ export const Step1 = () => {
       checkPrevUser();
     }
   }, [registerVisitor.e_mail]);
+
   return (
     <div className="Step1">
       <form>

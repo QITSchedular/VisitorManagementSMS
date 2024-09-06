@@ -167,7 +167,11 @@ const VerifyVisitorMain = () => {
             />
           </div>
           <div className="title-section-search">
-            <SearchBox searchText={searchText} setSearchText={setSearchText} />
+            <SearchBox
+              width={250}
+              searchText={searchText}
+              setSearchText={setSearchText}
+            />
           </div>
 
           <SelectBox

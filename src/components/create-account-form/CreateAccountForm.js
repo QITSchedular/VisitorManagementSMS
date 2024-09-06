@@ -5,7 +5,11 @@ import notify from "devextreme/ui/notify";
 import { useAuth } from "../../contexts/auth";
 import { Button, CheckBox } from "devextreme-react";
 import { eyeopen, eyeclose } from "../../assets/icon";
-import { Validator, RequiredRule } from "devextreme-react/validator";
+import {
+  Validator,
+  RequiredRule,
+  PatternRule,
+} from "devextreme-react/validator";
 import { LoginImage, LoginLogo } from "../../assets";
 import { createAccount } from "../../api/auth";
 import "./CreateAccountForm.scss";
@@ -54,6 +58,16 @@ export default function CreateAccountForm() {
     if (!emailRegex.test(myCheck.e_mail)) {
       toastDisplayer("error", "Please enter a valid email address.");
       return null;
+    }
+
+    const passwordPattern =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+    if (!passwordPattern.test(myCheck.password)) {
+      return toastDisplayer(
+        "error",
+        "Password must be minimum 6 chars, with 1 uppercase, 1 number, and 1 special character."
+      );
     }
 
     const userEmail = registerUser.e_mail;
@@ -170,6 +184,10 @@ export default function CreateAccountForm() {
                     />
                     <Validator>
                       <RequiredRule message="Password is required." />
+                      <PatternRule
+                        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}"
+                        message="Password must be minimum 6 chars, with 1 uppercase, 1 number, and 1 special character."
+                      />
                     </Validator>
                   </TextBox>
                 </div>
