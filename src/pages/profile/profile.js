@@ -22,7 +22,7 @@ import {
 import { forgetPasswordChk, forgetPasswordRequestLink } from "../../api/common";
 import { useNavigate } from "react-router-dom";
 import { FormText } from "../../components/typographyText/TypograghyText";
-import AddAPhotoOutlinedIcon from "@mui/icons-material/Download";
+import AddAPhotoOutlinedIcon from "@mui/icons-material/Print";
 import qitlogo from "../../assets/images/QIT_LOGO.png";
 import {
   GetSuperAdminDetail,
@@ -36,6 +36,7 @@ export default function Profile() {
   const activePageText = "Profile";
   const [isProfExpand, setIsProfExpand] = useState(false);
   const [isCmpExpand, setIsCmpExpand] = useState(false);
+  const [isValidLogo, setIsValidLogo] = useState(false);
   const [formData, setFormData] = useState(null);
   const [userFormData, setUserFormData] = useState(null);
   const [isCmp, setIsCmp] = useState(
@@ -188,17 +189,52 @@ export default function Profile() {
 
   const [uploadedFileName, setUploadedFileName] = useState("");
   const handleFileUpload = async (e) => {
-    const file = e.target.files[0];
-    setUploadedFileName(file.name);
-    const base64 = await convertToBase64(file);
-    setFormData((prevState) => ({
-      ...prevState,
-      ["cmplogo"]: base64,
-    }));
-    // setUser((prevState) => ({
-    //   ...prevState,
-    //   ["cmpLogo"]: base64,
-    // }));
+    try {
+      const file = e.target.files[0];
+      // setUploadedFileName(file.name);
+      // const base64 = await convertToBase64(file);
+      // setFormData((prevState) => ({
+      //   ...prevState,
+      //   ["cmplogo"]: base64,
+      // }));
+      // Create an image element to load the file and check dimensions
+      const img = new Image();
+      const reader = new FileReader();
+
+      // Read the file as a Data URL
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        img.src = event.target.result;
+
+        img.onload = () => {
+          const width = img.width;
+          const height = img.height;
+
+          if (width <= 500 && height <= 500 && width >=150 && height >=60) {
+            setIsValidLogo(false);
+            convertToBase64(file).then((base64) => {
+              setUploadedFileName(file.name);
+              setFormData((prevState) => ({
+                ...prevState,
+                ["cmplogo"]: base64,
+              }));
+            });
+          } else {
+            setIsValidLogo(true);
+            return toastDisplayer(
+              "error",
+              "The company logo dimensions must between 500 x 500 pixels."
+            );
+          }
+        };
+      };
+    } catch (error) {
+      console.log("error : ", error);
+      // return toastDisplayer(
+      //   "error",
+      //   error
+      // );
+    }
   };
 
   const handleInputChange = (fieldName, e) => {
@@ -321,12 +357,60 @@ export default function Profile() {
   };
 
   const handleDownload = () => {
+    // const canvas = canvasRef.current;
+    // const imageUrl = canvas.toDataURL("image/png");
+    // const link = document.createElement("a");
+    // link.href = imageUrl;
+    // // link.download = "qrcode.png";
+    // // link.click();
+    // const printWindow = window.open("", "", "width=800,height=600");
+    // printWindow.document.open();
+    // printWindow.document.write(link);
+    // printWindow.document.close();
+
+    // setTimeout(() => {
+    //   printWindow.print();
+    //   printWindow.close();
+    // }, 1000);
     const canvas = canvasRef.current;
     const imageUrl = canvas.toDataURL("image/png");
-    const link = document.createElement("a");
-    link.href = imageUrl;
-    link.download = "qrcode.png";
-    link.click();
+
+    const printWindow = window.open("", "", "width=800,height=600");
+    printWindow.document.open();
+
+    printWindow.document.write(`
+    <html>
+      <head>
+        <style>
+          body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+          }
+          img {
+            display: block;
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+          }
+        </style>
+      </head>
+      <body>
+        <img src="${imageUrl}" />
+      </body>
+    </html>
+  `);
+
+    printWindow.document.close();
+
+    setTimeout(() => {
+      printWindow.print();
+      printWindow.close();
+    }, 1000);
   };
 
   return (
@@ -710,8 +794,14 @@ export default function Profile() {
                 readOnly={!isCmp}
               />
               {isCmp && (
-                <>
-                  <label className="uplaod_btn" htmlFor="file_upload">
+                <span style={{ width: "50%" }}>
+                  <label
+                    className="uplaod_btn"
+                    htmlFor="file_upload"
+                    style={
+                      isValidLogo ? { border: "1px dashed red" } : undefined
+                    }
+                  >
                     <i className="ri-upload-2-fill"></i>
                     {uploadedFileName ? (
                       <p>{uploadedFileName}</p>
@@ -720,14 +810,16 @@ export default function Profile() {
                     )}
                   </label>
                   <input
-                    //disabled={enableOnVerification}
                     type="file"
                     id="file_upload"
                     style={{ display: "none" }}
                     onChange={handleFileUpload}
                     accept="image/png, image/jpeg"
                   />
-                </>
+                  <span className="cmplogo_span">
+                    * Compnay logo must between 500x500 px.
+                  </span>
+                </span>
               )}
             </div>
           </div>

@@ -74,6 +74,7 @@ export const Step1 = () => {
       return toastDisplayer("error", "Enter the company location.");
     } else {
       if (prevData.status == "A" && prevData.checkinstatus == null) {
+
         const payload = {
           company_id: prevData.cmptransid,
           e_mail: registerVisitor.e_mail,
@@ -107,14 +108,15 @@ export const Step1 = () => {
           vlocation: "",
           e_mail: "",
         });
-
         sessionStorage.removeItem("registerVisitor");
 
         toastDisplayer("error", `Your request is already pending.`);
         return handlePreviousBtn();
         // navigate(`/welcomevisitor?cmpId=${cmpId}`);
         // return toastDisplayer("success", "Checked In");
+
       } else {
+
         hanldeGetOtp();
         return navigate(`/checkinotp?cmpId=${cmpId}`);
       }
