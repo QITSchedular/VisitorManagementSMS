@@ -78,7 +78,8 @@ export const Step1 = () => {
     } else if (registerVisitor.vlocation === "") {
       return toastDisplayer("error", "Enter the company location.");
     } else {
-      if (prevData.status == "A" && prevData.checkinstatus == null) {
+      if(prevData.status == "A" && prevData.isToday == "Y" && prevData.checkinstatus ==null){
+
         const payload = {
           company_id: prevData.cmptransid,
           e_mail: registerVisitor.e_mail,
