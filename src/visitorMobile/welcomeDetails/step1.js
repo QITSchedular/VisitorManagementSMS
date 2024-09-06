@@ -26,6 +26,10 @@ export const Step1 = () => {
   const [companyId, setCompanyId] = useState();
 
   useEffect(() => {
+    localStorage.setItem("previousPath", "/step1");
+  }, []);
+
+  useEffect(() => {
     if (cmpId) {
       const getCmpData = async () => {
         const data = await checkCompanyByQr(cmpId);
@@ -62,6 +66,7 @@ export const Step1 = () => {
 
   // Handle Continue Button
   const hanldeOnContinue = async (e) => {
+    // return navigate(`/checkinotp?cmpId=${cmpId}`);
     if (registerVisitor.vname === "") {
       return toastDisplayer("error", "Enter the name.");
     } else if (registerVisitor.e_mail === "") {
@@ -74,7 +79,6 @@ export const Step1 = () => {
       return toastDisplayer("error", "Enter the company location.");
     } else {
       if (prevData.status == "A" && prevData.checkinstatus == null) {
-
         const payload = {
           company_id: prevData.cmptransid,
           e_mail: registerVisitor.e_mail,
@@ -114,9 +118,7 @@ export const Step1 = () => {
         return handlePreviousBtn();
         // navigate(`/welcomevisitor?cmpId=${cmpId}`);
         // return toastDisplayer("success", "Checked In");
-
       } else {
-
         hanldeGetOtp();
         return navigate(`/checkinotp?cmpId=${cmpId}`);
       }
