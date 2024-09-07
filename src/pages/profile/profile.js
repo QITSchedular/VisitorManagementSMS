@@ -6,6 +6,7 @@ import {
   GetCmpDept,
   GetCmpDetail,
   GetUserDetail,
+  requestAddressFromPin,
   UpdateCmpData,
   UpdateUserData,
 } from "../../api/userAPI";
@@ -210,7 +211,7 @@ export default function Profile() {
           const width = img.width;
           const height = img.height;
 
-          if (width <= 500 && height <= 500 && width >=150 && height >=60) {
+          if (width <= 500 && height <= 500 && width >= 150 && height >= 60) {
             setIsValidLogo(false);
             convertToBase64(file).then((base64) => {
               setUploadedFileName(file.name);
@@ -411,6 +412,19 @@ export default function Profile() {
       printWindow.print();
       printWindow.close();
     }, 1000);
+  };
+
+  const handleGetAddress = async (pinCode) => {
+    setLoading(true);
+    if (pinCode.length === 6) {
+      const getAddress = await requestAddressFromPin(pinCode);
+      console.log(getAddress);
+      const add = getAddress[0].PostOffice[0];
+      handleInputChange("country", add.District);
+      handleInputChange("state", add.State);
+      handleInputChange("city", add.Country);
+    }
+    setLoading(false);
   };
 
   return (
@@ -746,6 +760,20 @@ export default function Profile() {
               />
 
               <TextBox
+                label="Pincode"
+                labelMode="static"
+                stylingMode="outlined"
+                className="step-textbox"
+                height={"56px"}
+                width={"304px"}
+                value={formData?.zipcode}
+                onValueChange={handleGetAddress}
+                onValueChanged={(e) => handleInputChange("zipcode", e.value)}
+                readOnly={!isCmp}
+              />
+            </div>
+            <div className="profile-section-editor">
+              <TextBox
                 label="City"
                 labelMode="static"
                 stylingMode="outlined"
@@ -754,19 +782,6 @@ export default function Profile() {
                 width={"304px"}
                 value={formData?.city}
                 onValueChanged={(e) => handleInputChange("city", e.value)}
-                readOnly={!isCmp}
-              />
-            </div>
-            <div className="profile-section-editor">
-              <TextBox
-                label="Pincode"
-                labelMode="static"
-                stylingMode="outlined"
-                className="step-textbox"
-                height={"56px"}
-                width={"304px"}
-                value={formData?.zipcode}
-                onValueChanged={(e) => handleInputChange("zipcode", e.value)}
                 readOnly={!isCmp}
               />
               <TextBox

@@ -3,6 +3,19 @@ import { logToServer } from "./logger";
 import { saveNotification } from "./notification";
 const API_URL = process.env.REACT_APP_API;
 
+export const requestAddressFromPin = async (pinCode) => {
+  try {
+    const response = await axios.get(
+      `https://api.postalpincode.in/pincode/${pinCode}`
+    );
+
+    const responseData = response.data;
+    return responseData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // get department data
 export const GetCmpDept = async (cid) => {
   const storedSessionValue = JSON.parse(sessionStorage.getItem("authState"));
