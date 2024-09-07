@@ -579,7 +579,11 @@ const VisitorMain = () => {
             cellRender={(e) => {
               if (e.data.status == "Check in") {
                 return actionTemplate(e);
-              } else if (e.data.status == null && e.data.state == "Approved") {
+              } else if (
+                e.data.status == null &&
+                e.data.state == "Approved" &&
+                new Date(e.data.timeslot) >= new Date().setHours(0, 0, 0, 0)
+              ) {
                 return actionTemplate3(e);
               } else {
                 return actionTemplate2(e);
