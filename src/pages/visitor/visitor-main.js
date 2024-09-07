@@ -39,6 +39,7 @@ const getStatusColor = (status) => {
     Approved: "#124d22",
     Pending: "#934908",
     Rejected: "#AD1820",
+    Canceled: "#344450",
     "Check in": "0D4D8B",
     "Check Out": "#AD1820",
   };
@@ -75,6 +76,7 @@ const VisitorMain = () => {
     { value: "Pending", text: "Pending " },
     { value: "Approved", text: "Approved " },
     { value: "Rejected", text: "Rejected " },
+    { value: "Canceled", text: "Canceled " },
   ];
 
   const handleFilterChange = (newStatus) => {
