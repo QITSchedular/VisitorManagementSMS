@@ -18,7 +18,7 @@ export const registerUserApi = async (payload) => {
       "CreateCompany",
       "S",
       "SuccessFully register company Data...",
-      JSON.stringify(payload),
+      JSON.stringify(payload.e_mail),
       "",
       "",
       responseBody.responseData?.APICode
@@ -36,7 +36,7 @@ export const registerUserApi = async (payload) => {
       "CreateCompany",
       "E",
       "UnSuccessFully register company Data...",
-      JSON.stringify(payload),
+      JSON.stringify(payload.e_mail),
       "",
       "",
       error.response?.data?.APICode

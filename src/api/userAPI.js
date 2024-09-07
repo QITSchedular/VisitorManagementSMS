@@ -94,7 +94,7 @@ export const SaveUserData = async (reqPayload) => {
       "save_user",
       "S",
       "SuccessFully save user Data...",
-      JSON.stringify(reqPayload),
+      JSON.stringify(reqPayload.sender_email),
       user.e_mail,
       user.cmpid,
       responseBody.responseData.APICode
@@ -112,7 +112,7 @@ export const SaveUserData = async (reqPayload) => {
       "save_user",
       "E",
       "UnSuccessFully save user Data...",
-      JSON.stringify(reqPayload),
+      JSON.stringify(reqPayload.sender_email),
       user.e_mail,
       user.cmpid,
       error.response?.data?.APICode
@@ -197,7 +197,7 @@ export const EditUser = async (reqBody) => {
       "update_user",
       "S",
       "SuccessFully Edit Data...",
-      JSON.stringify(reqBody),
+      JSON.stringify(reqBody.sender_email),
       user.e_mail,
       user.cmpid,
       responseBody.responseData.APICode
@@ -215,7 +215,7 @@ export const EditUser = async (reqBody) => {
       "update_user",
       "E",
       "UnSuccessFully Edit Data...",
-      JSON.stringify(reqBody),
+      JSON.stringify(reqBody.sender_email),
       user.e_mail,
       user.cmpid,
       error.response?.data?.APICode
@@ -299,7 +299,7 @@ export const UpdateCmpData = async (reqPayload) => {
       "EditComapnyDataById",
       "S",
       "SuccessFully Edit Data...",
-      JSON.stringify(reqPayload),
+      JSON.stringify(reqPayload.sender_email),
       user.e_mail,
       user.cmpid,
       responseBody.responseData?.APICode
@@ -317,7 +317,7 @@ export const UpdateCmpData = async (reqPayload) => {
       "EditComapnyDataById",
       "E",
       "UnSuccessFully Edit Data...",
-      JSON.stringify(reqPayload),
+      JSON.stringify(reqPayload.sender_email),
       user.e_mail,
       user.cmpid,
       error.response?.data?.APICode

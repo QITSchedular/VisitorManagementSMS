@@ -127,6 +127,10 @@ export async function GenerateNewPassword(email, password) {
     e_mail: email,
     password: password,
   };
+  const logpayload = {
+    e_mail: email,
+    password: password,
+  };
   try {
     var apiRes = await axios.post(`${API_URL}VMS/GenerateNewPassword`, payload);
     if (apiRes.status == 200) {
@@ -138,7 +142,7 @@ export async function GenerateNewPassword(email, password) {
         "GenerateNewPassword",
         "S",
         "SuccessFully Generate New Password...",
-        JSON.stringify(payload),
+        JSON.stringify(logpayload),
         email,
         0
       );
@@ -151,7 +155,7 @@ export async function GenerateNewPassword(email, password) {
         "GenerateNewPassword",
         "I",
         "Something wrong...",
-        JSON.stringify(payload),
+        JSON.stringify(logpayload),
         email,
         0
       );
@@ -165,7 +169,7 @@ export async function GenerateNewPassword(email, password) {
       "GenerateNewPassword",
       "E",
       "UnSuccessFully Generate New Password...",
-      JSON.stringify(payload),
+      JSON.stringify(logpayload),
       email,
       0
     );

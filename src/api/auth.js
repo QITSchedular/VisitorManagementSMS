@@ -8,6 +8,9 @@ export async function signIn(email, password) {
     email: email,
     password: password,
   };
+  const logpayload = {
+    email: email,
+  };
   try {
     // Send request
     const response = await axios.post(`${API_URL}VMS/Login`, payload);
@@ -18,7 +21,7 @@ export async function signIn(email, password) {
         "login_view",
         "S",
         "SuccessFully LoggedIn...",
-        JSON.stringify(payload),
+        JSON.stringify(logpayload),
         email,
         response.data.user.cmpid,
         response.data?.APICode
@@ -35,7 +38,7 @@ export async function signIn(email, password) {
       "login_view",
       "E",
       "UnSuccessFully LoggedIn...",
-      JSON.stringify(payload),
+      JSON.stringify(logpayload),
       email,
       0,
       error.response.data?.APICode
