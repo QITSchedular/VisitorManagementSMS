@@ -131,6 +131,7 @@ const VisitorDetail = () => {
       visitor_id: parseInt(visitorId),
     });
     setIsLoading(false);
+    console.log(visitorData);
     setVisitorDetailbrief(visitorData);
   };
 
@@ -368,7 +369,9 @@ const VisitorDetail = () => {
             {visitorDetailbrief.state === "Approved" &&
               visitorDetailbrief.addedBy === "Company" &&
               visitorDetailbrief.status !== "Check in" &&
-              visitorDetailbrief.status !== "Check Out" && (
+              visitorDetailbrief.status !== "Check Out" &&
+              new Date(visitorDetailbrief.timeslot) >=
+                new Date().setHours(0, 0, 0, 0) && (
                 <Button
                   text="Check-in"
                   width="auto"
