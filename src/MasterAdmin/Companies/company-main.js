@@ -291,6 +291,7 @@ const Companymain = () => {
               stylingMode="outlined"
               width="auto"
               height={44}
+              disabled={!companiesData.length}
               onClick={handleDownload}
             />
             <Button

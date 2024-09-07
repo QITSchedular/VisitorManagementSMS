@@ -188,6 +188,7 @@ const OtpVerificationForm = () => {
                       onClick={() => handleClick(index)}
                       onKeyDown={(e) => handleKeyDown(index, e)}
                       className="otp-input-box"
+                      inputMode="numeric"
                     />
                   );
                 })}
