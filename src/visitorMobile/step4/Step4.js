@@ -92,14 +92,14 @@ export const Step4 = () => {
     const departmentData = await GettingDepratmentdata(company_id);
     if (departmentData.hasError === true) {
     }
-    const specialActionItem = {
-      transid: 0,
-      deptname: "Other",
-      transid: "specialAction",
-    };
+    // const specialActionItem = {
+    //   transid: 0,
+    //   deptname: "Other",
+    //   transid: "specialAction",
+    // };
     return setDepartmentdataState([
       ...departmentData.repsonseData.Data,
-      specialActionItem,
+      // specialActionItem,
     ]);
   };
 
@@ -135,7 +135,8 @@ export const Step4 = () => {
           department_id: selectedUser.cmpdeptid,
         }));
       }
-    } else if (field === "cmpdeptid" && e?.value) {
+    } else if (field === "department_id" && e?.value) {
+      console.log("=====>", e.value);
       setRegisterVisitor((prevFormData) => ({
         ...prevFormData,
         department_id: e.value,
@@ -262,13 +263,13 @@ export const Step4 = () => {
             ></SelectBox>
             <SelectBox
               label="Select Department"
-              dataSource={departmentdataState}
+              items={departmentdataState}
               displayExpr="deptname"
               valueExpr="transid"
               placeholder="Select Department"
               labelMode="static"
               stylingMode="outlined"
-              value={registerVisitor?.department_id}
+              defaultValue={registerVisitor?.department_id}
               className="step-textbox required"
               height={"56px"}
               searchEnabled={true}

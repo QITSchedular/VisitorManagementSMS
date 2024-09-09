@@ -420,9 +420,9 @@ export default function Profile() {
       const getAddress = await requestAddressFromPin(pinCode);
       console.log(getAddress);
       const add = getAddress[0].PostOffice[0];
-      handleInputChange("country", add.District);
+      handleInputChange("country", add.Country);
       handleInputChange("state", add.State);
-      handleInputChange("city", add.Country);
+      handleInputChange("city", add.District);
     }
     setLoading(false);
   };
