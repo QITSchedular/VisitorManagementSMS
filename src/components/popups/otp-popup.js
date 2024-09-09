@@ -174,6 +174,7 @@ const OtpPopup = ({
                   onKeyDown={(e) => handleKeyDown(index, e)}
                   className="otp-input-box"
                   disabled={isOTPVerified}
+                  inputMode="numeric"
                 />
               );
             })}

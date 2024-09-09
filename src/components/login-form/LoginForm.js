@@ -45,7 +45,7 @@ export default function LoginForm() {
       }
 
       const passwordPattern =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$/;
 
       if (!passwordPattern.test(password)) {
         return toastDisplayer(
@@ -177,7 +177,7 @@ export default function LoginForm() {
                   <Validator>
                     <RequiredRule message="Password is required." />
                     <PatternRule
-                      pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}"
+                      pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[#@$!%*?&])[A-Za-z\d#@$!%*?&]{6,}$"
                       message="Password must be minimum 6 chars, with 1 uppercase, 1 number, and 1 special character."
                     />
                   </Validator>
