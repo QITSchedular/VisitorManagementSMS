@@ -380,30 +380,65 @@ export default function Profile() {
     printWindow.document.open();
 
     printWindow.document.write(`
-    <html>
-      <head>
-        <style>
-          body, html {
+   <html>
+
+<head>
+    <style>
+        body,
+        html {
             margin: 0;
-            padding: 0;
             width: 100%;
             height: 100%;
-            display:flex;
+            display: flex;
+            align-items: center;
+            /* justify-content: center; */
+            flex-direction: column;
+        }
+
+        .qr {
+            display: flex;
             align-items: center;
             justify-content: center;
-          }
-          img {
-            display: block;
-            width: 80%;
-            height: 80%;
-            object-fit: contain;
-          }
-        </style>
-      </head>
-      <body>
-        <img src="${imageUrl}" />
-      </body>
-    </html>
+            flex-direction: column;
+            height: 90vh;
+            /* border: 1px solid red; */
+
+            img {
+                display: block;
+                width: 100%;
+                object-fit: contain;
+                padding: 5rem 0px 16px 0px;
+            }
+
+            .cmpName {
+                font-size: 22px;
+                font-weight: 600;
+            }
+        }
+
+        .footer {
+            position: absolute;
+            width: 99vw;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: end;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="qr">
+        <h1>Visitor Management System</h1>
+       <img src="${imageUrl}" />
+        <span class="cmpName">${companyData.bname}</span>
+    </div>
+    <div class="footer">
+        <span>Powered By Quantum IT Solutions</span>
+    </div>
+</body>
+
+</html>
   `);
 
     printWindow.document.close();
@@ -832,7 +867,7 @@ export default function Profile() {
                     accept="image/png, image/jpeg"
                   />
                   <span className="cmplogo_span">
-                    * Compnay logo must between 500x500 px.
+                    * Company logo must between 500x500 px.
                   </span>
                 </span>
               )}
