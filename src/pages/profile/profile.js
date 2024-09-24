@@ -122,8 +122,8 @@ export default function Profile() {
           qrcode.toCanvas(
             canvasRef.current,
             process.env.REACT_APP_URL +
-              "#/welcomevisitor/?cmpId=" +
-              dataRes.qrstring,
+            "#/welcomevisitor/?cmpId=" +
+            dataRes.qrstring,
             (error) => {
               if (error) {
                 console.error("Error while genratting  QR code:", error);
@@ -471,7 +471,7 @@ export default function Profile() {
                     <div className="name-address">
                       <span className="bname">{companyData.bname}</span>
                       {companyData.blocation != null &&
-                      companyData.blocation != "" ? (
+                        companyData.blocation != "" ? (
                         <>
                           <span>|</span>
                           <span className="cityTxt">
@@ -832,7 +832,7 @@ export default function Profile() {
                     accept="image/png, image/jpeg"
                   />
                   <span className="cmplogo_span">
-                    * Compnay logo must between 500x500 px.
+                    * company logo should be sized between 500x500px
                   </span>
                 </span>
               )}
