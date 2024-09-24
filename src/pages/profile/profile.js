@@ -832,7 +832,7 @@ export default function Profile() {
                     accept="image/png, image/jpeg"
                   />
                   <span className="cmplogo_span">
-                    * company logo should be sized between 500x500px
+                    * company logo should be sized between 500x500 px
                   </span>
                 </span>
               )}
