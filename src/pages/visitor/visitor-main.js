@@ -197,7 +197,8 @@ const VisitorMain = () => {
       {
         text: "Check Out",
         onClick: () => {
-          handleOpenPopup();
+          console.log(cellData.data);
+          handleOpenPopup(cellData.data.id);
         },
       },
       {
@@ -358,7 +359,9 @@ const VisitorMain = () => {
     );
   };
 
-  const handleOpenPopup = () => {
+  const handleOpenPopup = (vid) => {
+    console.log("id : ", vid);
+    console.log("selectedRowData : ", selectedRowData);
     setCheckOutRowData(selectedRowData);
     setIsPopupVisible(true);
   };
@@ -421,6 +424,7 @@ const VisitorMain = () => {
   };
 
   const handleCheckOut = async () => {
+    console.log("selectedRowData :==> ", checkOutRowData);
     setLoading(true);
     const authState = JSON.parse(sessionStorage.getItem("authState"));
     const cmpid = authState.user.cmpid;

@@ -12,7 +12,7 @@ export const requestAddressFromPin = async (pinCode) => {
     const responseData = response.data;
     return responseData;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 

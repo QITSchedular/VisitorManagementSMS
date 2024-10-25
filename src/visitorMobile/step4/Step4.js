@@ -3,6 +3,7 @@ import "./step4.scss";
 import {
   Autocomplete,
   Button,
+  DateBox,
   SelectBox,
   TextBox,
   Validator,
@@ -11,7 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useRegisterVisitor } from "../../Atoms/customHook";
 import { GettingDepratmentdata } from "../../api/departmentAPi";
 import { registerVisitorApi } from "../../api/mobileVisitorApi";
-import { RequiredRule } from "devextreme-react/cjs/data-grid";
+import { CustomRule, RequiredRule } from "devextreme-react/cjs/data-grid";
 import { toastDisplayer } from "../../components/toastDisplayer/toastdisplayer";
 import { useResetRecoilState } from "recoil";
 import { saveNotification } from "../../api/notification";
@@ -41,6 +42,11 @@ export const Step4 = () => {
     ) {
       return;
     }
+
+    // return console.log(
+    //   "formatDateTime : ",
+    //   formatDateTime(registerVisitor.timeslot)
+    // );
 
     setLoading(true);
 
@@ -115,7 +121,7 @@ export const Step4 = () => {
     if (e?.value) {
       setRegisterVisitor((prev) => ({
         ...prev,
-        timeslot: e.value,
+        timeslot: formatDateTime(e.value),
       }));
     } else {
       console.error("Invalid value provided for timeslot");
@@ -279,7 +285,7 @@ export const Step4 = () => {
                 <RequiredRule message="Select the department" />
               </Validator>
             </SelectBox>
-            <SelectBox
+            {/* <SelectBox
               label="Time Slot"
               dataSource={timeSlots}
               displayExpr="text"
@@ -295,7 +301,24 @@ export const Step4 = () => {
               <Validator>
                 <RequiredRule message="Time Slot is required" />
               </Validator>
-            </SelectBox>
+            </SelectBox> */}
+            <DateBox
+              labelMode="static"
+              stylingMode="outlined"
+              type="time"
+              pickerType="rollers"
+              label="Time Slot"
+              height={"56px"}
+              placeholder="Select Time Slot"
+              displayFormat="dd-MM-yyyy, HH:mm"
+              onValueChanged={(e) => handleInputTime(e)}
+              defaultValue={new Date()} // Sets the default to current date and time
+              className="step-textbox required"
+            >
+              <Validator>
+                <RequiredRule message="Time Slot is required" />
+              </Validator>
+            </DateBox>
 
             <TextBox
               label="Any Hardware"

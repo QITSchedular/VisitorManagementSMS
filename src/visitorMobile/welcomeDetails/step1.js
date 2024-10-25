@@ -78,23 +78,13 @@ export const Step1 = () => {
     } else if (registerVisitor.vlocation === "") {
       return toastDisplayer("error", "Enter the company location.");
     } else {
-      if(prevData.status == "A" && prevData.isToday == "Y" && prevData.checkinstatus ==null){
-
-        const payload = {
-          company_id: prevData.cmptransid,
-          e_mail: registerVisitor.e_mail,
-          sender_email: registerVisitor.e_mail,
-          sender_role: "visitor",
-        };
-        const checkIn = await checkInVisitorApi(payload);
-        if (checkIn.hasError === true) {
-          return toastDisplayer("error", `${checkIn.error}`);
-        }
-        return navigate(`/Success?cmpId=${cmpId}`, {
-          state: { Message: "Checked In Successfully" },
-        });
-        // navigate(`/welcomevisitor?cmpId=${cmpId}`);
-        // return toastDisplayer("success", "Checked In");
+      if (
+        prevData.status == "A" &&
+        prevData.isToday == "Y" &&
+        prevData.checkinstatus == "I"
+      ) {
+        navigate(`/welcomevisitor?cmpId=${cmpId}`);
+        return toastDisplayer("error", "Visitor already Checked In");
       } else if (prevData.status == "P" && prevData.checkinstatus == null) {
         setRegisterVisitor({
           vavatar: "",
@@ -117,6 +107,26 @@ export const Step1 = () => {
 
         toastDisplayer("error", `Your request is already pending.`);
         return handlePreviousBtn();
+        // navigate(`/welcomevisitor?cmpId=${cmpId}`);
+        // return toastDisplayer("success", "Checked In");
+      } else if (
+        prevData.status == "A" &&
+        prevData.isToday == "Y" &&
+        prevData.checkinstatus == null
+      ) {
+        const payload = {
+          company_id: prevData.cmptransid,
+          e_mail: registerVisitor.e_mail,
+          sender_email: registerVisitor.e_mail,
+          sender_role: "visitor",
+        };
+        const checkIn = await checkInVisitorApi(payload);
+        if (checkIn.hasError === true) {
+          return toastDisplayer("error", `${checkIn.error}`);
+        }
+        return navigate(`/Success?cmpId=${cmpId}`, {
+          state: { Message: "Checked In Successfully" },
+        });
         // navigate(`/welcomevisitor?cmpId=${cmpId}`);
         // return toastDisplayer("success", "Checked In");
       } else {

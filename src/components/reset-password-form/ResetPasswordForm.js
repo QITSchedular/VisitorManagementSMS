@@ -27,7 +27,6 @@ export default function ResetPasswordForm() {
     try {
       setLoading(true);
       var apiRes = await forgetPasswordChk(email);
-      console.log(apiRes);
       setLoading(false);
       if (!apiRes.hasError) {
         const data = apiRes.responseData;

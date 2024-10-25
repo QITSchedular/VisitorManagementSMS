@@ -41,7 +41,7 @@ function CompanyDeails() {
             cmpData.qrstring,
           (error) => {
             if (error) {
-              console.error("Error while genratting  QR code:", error);
+              // console.error("Error while genratting  QR code:", error);
             }
           }
         );

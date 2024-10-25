@@ -6,7 +6,6 @@ const getInitialState = (key, defaultValue) => {
     try {
       return JSON.parse(atob(savedValue)); // Decode and parse the data
     } catch (e) {
-      console.error("Failed to decode state from sessionStorage", e);
       return defaultValue;
     }
   }
@@ -32,7 +31,7 @@ const syncWithSessionStorageEffect =
         try {
           sessionStorage.setItem(key, btoa(JSON.stringify(newValue))); // Encode and store the data
         } catch (e) {
-          console.error("Failed to encode state for sessionStorage", e);
+          // console.error("Failed to encode state for sessionStorage", e);
         }
       }
     });

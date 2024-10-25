@@ -126,7 +126,7 @@ export default function Profile() {
               dataRes.qrstring,
             (error) => {
               if (error) {
-                console.error("Error while genratting  QR code:", error);
+                // console.error("Error while genratting  QR code:", error);
               }
             }
           );
@@ -230,7 +230,7 @@ export default function Profile() {
         };
       };
     } catch (error) {
-      console.log("error : ", error);
+      // console.log("error : ", error);
       // return toastDisplayer(
       //   "error",
       //   error
@@ -364,7 +364,7 @@ export default function Profile() {
     // link.href = imageUrl;
     // // link.download = "qrcode.png";
     // // link.click();
-    // const printWindow = window.open("", "", "width=800,height=600");
+    // const printWindow = window.open("", "", "width=800,height=500");
     // printWindow.document.open();
     // printWindow.document.write(link);
     // printWindow.document.close();
@@ -376,71 +376,123 @@ export default function Profile() {
     const canvas = canvasRef.current;
     const imageUrl = canvas.toDataURL("image/png");
 
-    const printWindow = window.open("", "", "width=800,height=600");
+    const printWindow = window.open("", "", "width=800,height=500");
     printWindow.document.open();
 
     printWindow.document.write(`
    <html>
 
-<head>
-    <style>
-        body,
-        html {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            /* justify-content: center; */
-            flex-direction: column;
-        }
+  <head>
+      <style>
+          body,
+          html {
+              margin: 0;
+              width: 100%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              /* justify-content: center; */
+              flex-direction: column;
+          }
 
-        .qr {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            height: 90vh;
-            /* border: 1px solid red; */
+          .qr {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-direction: column;
+              height: 90vh;
+              gap: 54px;
+              /* border: 1px solid red; */
 
-            img {
-                display: block;
-                width: 100%;
-                object-fit: contain;
-                padding: 5rem 0px 16px 0px;
-            }
+              .headder {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
 
-            .cmpName {
-                font-size: 22px;
-                font-weight: 600;
-            }
-        }
+                  .welcome-text {
+                      font-size: 42px;
+                      font-weight: 500;
+                      font-family: 'Inter', sans-serif;
+                      color: #344450;
+                      line-height: 150%;
+                  }
 
-        .footer {
-            position: absolute;
-            width: 99vw;
-            padding-bottom: 12px;
-            display: flex;
-            justify-content: end;
-            bottom: 0;
-        }
-    </style>
-</head>
+                  .cmpName {
+                      font-size: 54px;
+                      font-weight: 500;
+                      font-family: 'Inter', sans-serif;
+                      color: #344450;
+                      line-height: 150%;
+                  }
+              }
 
-<body>
-    <div class="qr">
-        <h1>Visitor Management System</h1>
-       <img src="${imageUrl}" />
-        <span class="cmpName">${companyData.bname}</span>
-    </div>
-    <div class="footer">
-        <span>Powered By Quantum IT Solutions</span>
-    </div>
-</body>
+              .qrBody {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 12px;
+                  margin-top: 8px;
 
-</html>
+                  span {
+                      font-size: 38px;
+                      font-weight: 500;
+                      font-family: 'Inter', sans-serif;
+                      color: #344450;
+                      line-height: 150%;
+                  }
+
+                  img {
+                      height: 380px;
+                      /* padding: 5rem 0px 16px 0px; */
+                  }
+
+                  /* .cmpName {
+                      font-size: 30px;
+                      font-weight: 500;
+                  } */
+              }
+
+
+              .footter {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+
+                  .footer-text {
+                      font-size: 34px;
+                      font-weight: 500;
+                      font-family: 'Inter', sans-serif;
+                      color: #344450;
+                      line-height: 150%;
+                  }
+
+                  .cmp-text {
+                      font-size: 36px;
+                  }
+              }
+          }
+      </style>
+  </head>
+
+  <body>
+      <div class="qr">
+          <div class="headder">
+              <div class="welcome-text">Welcome to the</div>
+              <div class="cmpName">${companyData.bname}</div>
+          </div>
+          <div class="qrBody">
+              <span>Scan the QR Code for entry</span>
+              <img src="${imageUrl}" />
+          </div>
+          <div class="footter">
+              <div class="footer-text">Visitor Management System</div>
+              <div class="footer-text cmp-text">Powered by Quantum IT Solution</div>
+          </div>
+      </div>
+  </body>
+
+  </html>
   `);
-
     printWindow.document.close();
 
     setTimeout(() => {
@@ -453,7 +505,7 @@ export default function Profile() {
     setLoading(true);
     if (pinCode.length === 6) {
       const getAddress = await requestAddressFromPin(pinCode);
-      console.log(getAddress);
+      // console.log(getAddress);
       const add = getAddress[0].PostOffice[0];
       handleInputChange("country", add.Country);
       handleInputChange("state", add.State);

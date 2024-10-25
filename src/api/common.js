@@ -32,7 +32,6 @@ export async function forgetPasswordChk(email) {
       responseBody.errorMessage = "Not Save Data";
     }
   } catch (error) {
-    console.log(error);
     responseBody.errorMessage = responseBody.errorMessage =
       error.response?.data?.StatusMsg || error.response?.data?.errors;
     await logToServer(
