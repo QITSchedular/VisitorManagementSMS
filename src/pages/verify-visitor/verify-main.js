@@ -124,8 +124,6 @@ const VerifyVisitorMain = () => {
       setIsLoading(false);
       setVisitorDataState([]);
       setVisitorCount(0);
-      // return toastDisplayer("error", `${visitorData.error}`);
-      return console.log("error", `${visitorData.error}`);
     }
     const data = visitorData.responseData;
     setIsLoading(false);

@@ -13,24 +13,33 @@ export const CheckOut = () => {
   const [QrCode, setQrCode] = useState(null);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const cmpId = queryParams.get("cmpId");
+  // const cmpId = queryParams.get("cmpId");
+
+  const [cmpId, setcmpId] = useState(
+    localStorage.getItem("cmpId") || queryParams.get("cmpId")
+  );
 
   useEffect(() => {
-    if (cmpId) {
+    if (cmpId && cmpId != "null") {
+      localStorage.setItem("cmpId", cmpId);
       const getCmpData = async () => {
         const data = await checkCompanyByQr(cmpId);
         const response = data.responseData;
         if (!data.hasError) setQrCode(response.Data[0]);
       };
       getCmpData();
+    } else {
+      navigate("/welcomevisitor?cmpId=");
     }
   }, [cmpId]);
 
   const handlePreviousBtn = () => {
-    navigate(`/welcomevisitor?cmpId=${cmpId}`);
+    if (cmpId && cmpId != "null") navigate(`/welcomevisitor?cmpId=${cmpId}`);
+    else navigate("/welcomevisitor?cmpId=");
   };
   const handleCheckInNavigate = () => {
-    navigate(`/welcomestep1?cmpId=${cmpId}`);
+    if (cmpId && cmpId != "null") navigate(`/welcomestep1?cmpId=${cmpId}`);
+    else navigate("/welcomevisitor?cmpId=");
   };
 
   const handleInputChange = (e) => {
@@ -54,7 +63,7 @@ export const CheckOut = () => {
       return toastDisplayer("error", `${checkOut.error}`);
     }
     toastDisplayer("success", "Checked Out");
-    return navigate(`/Success?cmpId=${cmpId}`,{
+    return navigate(`/Success?cmpId=${cmpId}`, {
       state: { Message: "Checkout Successfully" },
     });
     // navigate(`/welcomevisitor?cmpId=${cmpId}`);

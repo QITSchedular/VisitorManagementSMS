@@ -27,8 +27,18 @@ export const Step4 = () => {
   const [contactList, setContactList] = useState([]);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const cmpId = queryParams.get("cmpId");
+  // const cmpId = queryParams.get("cmpId");
+  const [cmpId, setcmpId] = useState(
+    localStorage.getItem("cmpId") || queryParams.get("cmpId")
+  );
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setRegisterVisitor((prev) => ({
+      ...prev,
+      timeslot: formatDateTime(new Date(new Date().getTime() + 5 * 60000)),
+    }));
+  }, []);
 
   const handlePreviousBtn = () => {
     navigate(`/welcomestep3?cmpId=${cmpId}`);
@@ -52,6 +62,12 @@ export const Step4 = () => {
 
     try {
       const registor = await registerVisitorApi(registerVisitor);
+
+      if (registor.hasError) {
+        toastDisplayer("error", `${registor.error}`);
+        return;
+      }
+
       saveNotification(
         "Visitors",
         0,
@@ -59,11 +75,6 @@ export const Step4 = () => {
         `${registerVisitor.vname} will be arriving for a ${registerVisitor.purposeofvisit} at ${registerVisitor.timeslot}`,
         registerVisitor.company_id
       );
-
-      if (registor.hasError) {
-        toastDisplayer("error", `${registor.error}`);
-        return;
-      }
 
       setRegisterVisitor({
         vavatar: "",
@@ -142,7 +153,6 @@ export const Step4 = () => {
         }));
       }
     } else if (field === "department_id" && e?.value) {
-      console.log("=====>", e.value);
       setRegisterVisitor((prevFormData) => ({
         ...prevFormData,
         department_id: e.value,
@@ -312,7 +322,8 @@ export const Step4 = () => {
               placeholder="Select Time Slot"
               displayFormat="dd-MM-yyyy, HH:mm"
               onValueChanged={(e) => handleInputTime(e)}
-              defaultValue={new Date()} // Sets the default to current date and time
+              defaultValue={new Date(new Date().getTime() + 5 * 60000)} // Sets the default to current date and time
+              min={new Date()}
               className="step-textbox required"
             >
               <Validator>

@@ -175,7 +175,7 @@
 
 .dx-theme-material-typography .dx-swatch-additional a,
 .dx-theme-material-typography.dx-swatch-additional a {
-  color: #03a9f4;
+  color: #7F56D9;
 }
 
 .dx-swatch-additional .dx-icon-accountbox,
@@ -1879,7 +1879,7 @@
 }
 
 .dx-swatch-additional .dx-theme-accent-as-text-color {
-  color: #03a9f4 !important;
+  color: #7F56D9 !important;
 }
 
 .dx-swatch-additional .dx-theme-text-color {
@@ -1895,8 +1895,8 @@
 }
 
 .dx-swatch-additional .dx-theme-accent-as-background-color {
-  background-color: #03a9f4 !important;
-  fill: #03a9f4 !important;
+  background-color: #7F56D9 !important;
+  fill: #7F56D9 !important;
 }
 
 .dx-swatch-additional .dx-theme-text-color-as-background-color {
@@ -1919,7 +1919,7 @@
 }
 
 .dx-swatch-additional .dx-theme-accent-as-border-color {
-  border-color: #03a9f4 !important;
+  border-color: #7F56D9 !important;
 }
 
 .dx-swatch-additional .dx-theme-text-color-as-border-color {
@@ -2639,7 +2639,7 @@
 
 .dx-swatch-additional .dx-button.dx-button-default {
   border-radius: 4px;
-  background-color: #03a9f4;
+  background-color: #7F56D9;
   color: #fff;
 }
 
@@ -2833,11 +2833,11 @@
 
 .dx-swatch-additional .dx-button-mode-text.dx-button-default {
   background-color: transparent;
-  color: #03a9f4;
+  color: #7F56D9;
 }
 
 .dx-swatch-additional .dx-button-mode-text.dx-button-default .dx-icon {
-  color: #03a9f4;
+  color: #7F56D9;
 }
 
 .dx-swatch-additional .dx-button-mode-text.dx-button-default.dx-state-selected {
@@ -2846,7 +2846,7 @@
 
 .dx-swatch-additional .dx-button-mode-text.dx-button-default.dx-state-selected,
 .dx-swatch-additional .dx-button-mode-text.dx-button-default.dx-state-selected .dx-icon {
-  color: #03a9f4;
+  color: #7F56D9;
 }
 
 .dx-swatch-additional .dx-button-mode-text.dx-button-default.dx-state-focused,
@@ -2957,13 +2957,13 @@
 }
 
 .dx-swatch-additional .dx-button-mode-outlined.dx-button-default {
-  border: 1px solid #03a9f4;
+  border: 1px solid #7F56D9;
   background-color: transparent;
-  color: #03a9f4;
+  color: #7F56D9;
 }
 
 .dx-swatch-additional .dx-button-mode-outlined.dx-button-default .dx-icon {
-  color: #03a9f4;
+  color: #7F56D9;
 }
 
 .dx-swatch-additional .dx-button-mode-outlined.dx-button-default.dx-state-selected {
@@ -2972,7 +2972,7 @@
 
 .dx-swatch-additional .dx-button-mode-outlined.dx-button-default.dx-state-selected,
 .dx-swatch-additional .dx-button-mode-outlined.dx-button-default.dx-state-selected .dx-icon {
-  color: #03a9f4;
+  color: #7F56D9;
 }
 
 .dx-swatch-additional .dx-button-mode-outlined.dx-button-default.dx-state-focused,
@@ -3166,7 +3166,7 @@
 
 .dx-swatch-additional .dx-checkbox-checked .dx-checkbox-icon {
   color: #fff;
-  background-color: #03a9f4;
+  background-color: #7F56D9;
   border: none;
   font: 16px/1em DXIcons;
   text-align: center;
@@ -3192,7 +3192,7 @@
 }
 
 .dx-swatch-additional .dx-checkbox-indeterminate .dx-checkbox-icon {
-  background-color: #03a9f4;
+  background-color: #7F56D9;
   color: #fff;
   border: none;
   font: 20px/1em DXIcons;
@@ -3486,7 +3486,7 @@
 }
 
 .dx-swatch-additional .dx-texteditor.dx-state-focused .dx-texteditor-label {
-  color: #03a9f4;
+  color: #7F56D9;
   font-size: 12px;
 }
 
@@ -3509,7 +3509,7 @@
 
 .dx-swatch-additional .dx-texteditor.dx-state-active::before,
 .dx-swatch-additional .dx-texteditor.dx-state-focused::before {
-  border-bottom: 2px solid #03a9f4;
+  border-bottom: 2px solid #7F56D9;
   transform: scale(1);
   transition: transform .6s cubic-bezier(.4, 0, .02, 1);
 }
@@ -3975,7 +3975,7 @@
 .dx-swatch-additional .dx-editor-outlined.dx-texteditor-with-label.dx-state-focused .dx-label,
 .dx-swatch-additional .dx-editor-outlined.dx-texteditor-with-label.dx-state-focused .dx-label-after,
 .dx-swatch-additional .dx-editor-outlined.dx-texteditor-with-label.dx-state-focused .dx-label-before {
-  border-color: #03a9f4;
+  border-color: #7F56D9;
 }
 
 .dx-swatch-additional .dx-editor-outlined.dx-texteditor-with-floating-label.dx-state-focused .dx-label,
@@ -4631,7 +4631,7 @@
 .dx-swatch-additional .dx-loadindicator-segment-inner {
   position: relative;
   height: 100%;
-  border-color: #03a9f4 #03a9f4 transparent;
+  border-color: #7F56D9 #7F56D9 transparent;
   border-width: .12em;
   border-style: solid;
   animation: none;

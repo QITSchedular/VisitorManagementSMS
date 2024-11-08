@@ -34,7 +34,6 @@ import CheckoutPopup from "../../../components/popups/CheckoutPopup";
 import { GetCmpDept } from "../../../api/userAPI";
 
 const getStatusColor = (state) => {
-  console.log(state);
   const statusColors = {
     Approved: "#124d22",
     Pending: "#934908",
@@ -134,7 +133,6 @@ const VisitorDetail = () => {
       visitor_id: parseInt(visitorId),
     });
     setIsLoading(false);
-    console.log(visitorData);
     setVisitorDetailbrief(visitorData);
   };
 

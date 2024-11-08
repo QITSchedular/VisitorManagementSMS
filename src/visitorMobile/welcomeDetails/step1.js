@@ -20,7 +20,7 @@ export const Step1 = () => {
   const location = useLocation();
   const { state } = location;
   const queryParams = new URLSearchParams(location.search);
-  const cmpId = queryParams.get("cmpId");
+  // const cmpId = queryParams.get("cmpId");
 
   const [prevData, setPrevData] = useState([]);
   const [companyId, setCompanyId] = useState();
@@ -29,15 +29,33 @@ export const Step1 = () => {
     localStorage.setItem("previousPath", "/step1");
   }, []);
 
+  // useEffect(() => {
+  //   if (cmpId) {
+  //     const getCmpData = async () => {
+  //       const data = await checkCompanyByQr(cmpId);
+  //       const response = data.responseData;
+
+  //       setCompanyId(response.Data[0].transid);
+  //     };
+  //     getCmpData();
+  //   }
+  // }, [cmpId]);
+
+  const [cmpId, setcmpId] = useState(
+    localStorage.getItem("cmpId") || queryParams.get("cmpId")
+  );
+
   useEffect(() => {
-    if (cmpId) {
+    if (cmpId && cmpId != "null") {
+      localStorage.setItem("cmpId", cmpId);
       const getCmpData = async () => {
         const data = await checkCompanyByQr(cmpId);
         const response = data.responseData;
-
-        setCompanyId(response.Data[0].transid);
+        if (!data.hasError) setCompanyId(response.Data[0].transid);
       };
       getCmpData();
+    } else {
+      navigate("/welcomevisitor?cmpId=");
     }
   }, [cmpId]);
 

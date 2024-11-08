@@ -314,6 +314,7 @@ const ReportMain = () => {
           <Column caption="any hardware" dataField="anyhardware" />
           <Column caption="added By" dataField="addedBy" />
           <Column caption="Phone" dataField="vPhone1" />
+          <Column caption="reason" dataField="reason" />
 
           <Toolbar className="toolbar-item">
             <Item location="before">
