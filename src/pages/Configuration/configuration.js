@@ -110,7 +110,6 @@ function Configuration() {
     }
   };
 
-  console.log("tempStagedChanges : ", tempStagedChanges);
   return (
     <>
       {loading && (
@@ -150,6 +149,7 @@ function Configuration() {
                   handleInputChange("ApprovalTime", e.value)
                 }
                 value={
+                  // "ON"
                   tempStagedChanges ? tempStagedChanges["ApprovalTime"] : "OFF"
                 }
                 items={Source}

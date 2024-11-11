@@ -301,9 +301,20 @@ const ReportMain = () => {
             dataField="timeslot"
             cellRender={(data) => formatDate1(data.value)}
           />
+          <Column
+            caption="CheckIn Time"
+            dataField="checkintime"
+            cellRender={(data) => formatDate1(data.value)}
+          />
+          <Column
+            caption="CheckOut Time"
+            dataField="checkouttime"
+            cellRender={(data) => (data?.value ? formatDate1(data.value) : "-")}
+          />
           <Column caption="any hardware" dataField="anyhardware" />
           <Column caption="added By" dataField="addedBy" />
           <Column caption="Phone" dataField="vPhone1" />
+          <Column caption="reason" dataField="reason" />
 
           <Toolbar className="toolbar-item">
             <Item location="before">

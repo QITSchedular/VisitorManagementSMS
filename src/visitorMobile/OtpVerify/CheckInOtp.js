@@ -14,7 +14,10 @@ export const CheckInOtp = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const cmpId = queryParams.get("cmpId");
+  // const cmpId = queryParams.get("cmpId");
+  const [cmpId, setcmpId] = useState(
+    localStorage.getItem("cmpId") || queryParams.get("cmpId")
+  );
   const [registerVisitor, setRegisterVisitor] = useRegisterVisitor();
 
   const email = registerVisitor.e_mail;

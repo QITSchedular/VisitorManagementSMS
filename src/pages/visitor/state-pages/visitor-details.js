@@ -38,6 +38,7 @@ const getStatusColor = (state) => {
     Approved: "#124d22",
     Pending: "#934908",
     Rejected: "#AD1820",
+    Canceled: "rgba(104, 119, 135)",
   };
 
   return statusColors[state];
@@ -47,6 +48,7 @@ const getStatusBackground = (state) => {
     Approved: "rgba(18, 77, 34, 0.06)",
     Pending: "rgba(233, 115, 12, 0.06)",
     Rejected: "rgba(173, 24, 32, 0.06)",
+    Canceled: "rgba(104, 119, 135, 0.1411764706)",
   };
   return statusColors[state] || "#000";
 };
@@ -131,7 +133,6 @@ const VisitorDetail = () => {
       visitor_id: parseInt(visitorId),
     });
     setIsLoading(false);
-    console.log(visitorData);
     setVisitorDetailbrief(visitorData);
   };
 

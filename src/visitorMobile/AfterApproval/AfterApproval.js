@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import success from "../../assets/images/success.gif";
 import "./afterApproval.scss";
@@ -8,7 +8,10 @@ const AfterApproval = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const cmpId = queryParams.get("cmpId");
+  // const cmpId = queryParams.get("cmpId");
+  const [cmpId, setcmpId] = useState(
+    localStorage.getItem("cmpId") || queryParams.get("cmpId")
+  );
   const { state } = location;
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,15 +32,15 @@ const AfterApproval = () => {
           <img src={success} alt="success" />
         </div>
         {/* {currentStatus !== "A" && ( */}
-          <div className="button">
-            <Button
-              text="Go back to home page"
-              height={"44px"}
-              width={"100%"}
-              stylingMode="outlined"
-              onClick={() => navigate(`/welcomevisitor?cmpId=${cmpId}`)}
-            />
-          </div>
+        <div className="button">
+          <Button
+            text="Go back to home page"
+            height={"44px"}
+            width={"100%"}
+            stylingMode="outlined"
+            onClick={() => navigate(`/welcomevisitor?cmpId=${cmpId}`)}
+          />
+        </div>
         {/* )} */}
       </div>
     </div>

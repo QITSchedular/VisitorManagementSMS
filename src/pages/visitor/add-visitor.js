@@ -56,12 +56,47 @@ const AddVisitor = () => {
   useEffect(() => {
     if (state) {
       const providedDate = new Date(state?.timeslot);
-      console.log(providedDate);
       const adjustedDate = new Date(
         providedDate.getTime() - 5 * 60 * 60 * 1000 - 30 * 60 * 1000
       );
-      console.log(adjustedDate);
       state.timeslot = adjustedDate;
+
+      // cloneData?.vName : formData?.username
+      // cloneData?.vEmail : formData?.e_mail
+      // cloneData?.vPhone1 : formData?.phone1
+      // cloneData?.vCmpname : formData?.company
+      // cloneData?.vLocation : formData?.location
+      // cloneData?.cnctperson : formData?.meetPerson
+      // cloneData?.deptId : formData?.cmpdeptid
+      // cloneData?.timeslot : formData.timeslot
+      // cloneData?.anyhardware : formData?.hardware
+      // cloneData?.purposeofvisit : formData?.purpose
+
+      // formData.username = cloneData?.vName;
+      // formData.e_mail = cloneData?.vEmail;
+      // formData.phone1 = cloneData?.vPhone1;
+      // formData.company = cloneData?.vCmpname;
+      // formData.location = cloneData?.vLocation;
+      // formData.meetPerson = cloneData?.cnctperson;
+      // formData.cmpdeptid = cloneData?.deptId;
+      // formData.timeslot = adjustedDate;
+      // formData.hardware = cloneData?.anyhardware;
+      // formData.purpose = cloneData?.purposeofvisit;
+
+      setFormData((prev) => ({
+        ...prev,
+        username: state?.vName,
+        e_mail: state?.vEmail,
+        phone1: state?.vPhone1,
+        company: state?.vCmpname,
+        location: state?.vLocation,
+        meetPerson: state?.cnctperson,
+        cmpdeptid: state?.deptId,
+        timeslot: adjustedDate,
+        hardware: state?.anyhardware,
+        purpose: state?.purposeofvisit,
+      }));
+
       setCloneData(state);
     }
   }, []);
@@ -138,7 +173,6 @@ const AddVisitor = () => {
   };
 
   const handleDateChange = (field, e) => {
-    console.log(e);
     const dateValue = e.value;
     // const formattedDate = formatDateTime(dateValue);
     setFormData((prev) => ({
@@ -431,7 +465,7 @@ const AddVisitor = () => {
                 labelMode="static"
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("username", e)}
-                value={cloneData ? cloneData?.vName : formData?.username}
+                value={formData && formData?.username}
                 className="required"
               >
                 <Validator>
@@ -447,7 +481,7 @@ const AddVisitor = () => {
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("e_mail", e)}
                 // readOnly={isOTPVerified}
-                value={cloneData ? cloneData?.vEmail : formData?.e_mail}
+                value={formData && formData?.e_mail}
                 style={{ cursor: "pointer" }}
                 valueChangeEvent="keyup"
                 className="required"
@@ -473,7 +507,7 @@ const AddVisitor = () => {
                 labelMode="static"
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("phone1", e)}
-                value={cloneData ? cloneData?.vPhone1 : formData?.phone1}
+                value={formData && formData?.phone1}
                 className="required"
                 valueChangeEvent="keyup"
                 // readOnly={isOTPVerified}
@@ -513,7 +547,7 @@ const AddVisitor = () => {
                     labelMode="static"
                     stylingMode="outlined"
                     onValueChanged={(e) => handleInputChange("phone1", e)}
-                    value={formData?.phone1}
+                    value={formData && formData?.phone1}
                     className="required"
                     // maxLength={10}
                   >
@@ -539,7 +573,7 @@ const AddVisitor = () => {
                     labelMode="static"
                     stylingMode="outlined"
                     onValueChanged={(e) => handleInputChange("phone1", e)}
-                    value={formData?.phone1}
+                    value={formData && formData?.phone1}
                     className="required"
                     // maxLength={10}
                   >
@@ -562,7 +596,7 @@ const AddVisitor = () => {
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("company", e)}
                 className="required"
-                value={cloneData ? cloneData?.vCmpname : formData?.company}
+                value={formData && formData?.company}
               >
                 <Validator>
                   <RequiredRule message="Company is required" />
@@ -578,7 +612,7 @@ const AddVisitor = () => {
                 labelMode="static"
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("location", e)}
-                value={cloneData ? cloneData?.vLocation : formData?.location}
+                value={formData && formData?.location}
                 className="required"
               >
                 <Validator>
@@ -604,7 +638,7 @@ const AddVisitor = () => {
                 items={companyUserData}
                 displayExpr={"username"}
                 valueExpr={"username"}
-                value={cloneData ? cloneData?.cnctperson : formData?.meetPerson}
+                value={formData && formData?.meetPerson}
                 itemTemplate={useritemTemplate}
                 searchEnabled={true}
                 className="required"
@@ -624,7 +658,7 @@ const AddVisitor = () => {
                 items={deptData}
                 displayExpr={"deptname"}
                 valueExpr={"transid"}
-                value={cloneData ? cloneData?.deptId : formData?.cmpdeptid}
+                value={formData && formData?.cmpdeptid}
                 itemTemplate={itemTemplate}
                 className="required"
                 searchEnabled={true}
@@ -646,7 +680,7 @@ const AddVisitor = () => {
                 placeholder="Select Time Slot"
                 displayFormat="dd-MM-yyyy, HH:mm:ss"
                 onValueChanged={(e) => handleDateChange("timeslot", e)}
-                value={cloneData ? cloneData?.timeslot : formData.timeslot}
+                value={formData.timeslot}
                 // value={formData.timeslot}
                 // min={currentDate}
                 className="required"
@@ -667,7 +701,7 @@ const AddVisitor = () => {
                 labelMode="static"
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("hardware", e)}
-                value={cloneData ? cloneData?.anyhardware : formData?.hardware}
+                value={formData && formData?.hardware}
               >
                 {/* <Validator>
                   <RequiredRule message="Feild is required" />
@@ -683,9 +717,7 @@ const AddVisitor = () => {
                 labelMode="static"
                 stylingMode="outlined"
                 onValueChanged={(e) => handleInputChange("purpose", e)}
-                value={
-                  cloneData ? cloneData?.purposeofvisit : formData?.purpose
-                }
+                value={formData && formData?.purpose}
                 className="required"
               >
                 <Validator>

@@ -52,14 +52,15 @@ const VistorsDetails = () => {
     const authState = JSON.parse(sessionStorage.getItem("authState"));
     const cmp_id = authState.user.cmpid;
 
-    setVerifyData({
+    setVerifyData((prevData) => ({
+      ...prevData,
       company_id: cmp_id,
       visitor_id: visitorId,
       reason: "",
       status: "A",
       sender_email: user.e_mail,
       sender_role: user.userrole,
-    });
+    }));
   };
   const detailedVisitor = async () => {
     setLoading(true);
@@ -71,6 +72,7 @@ const VistorsDetails = () => {
     setVerifyData((prevData) => ({
       ...prevData,
       visitor_name: myallVisitor.vName,
+      cnctperson: myallVisitor.cnctperson,
     }));
     setSingleVisitor(myallVisitor);
     setLoading(false);

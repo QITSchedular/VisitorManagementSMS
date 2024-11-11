@@ -275,6 +275,19 @@
       line-height: 21px;
       margin-left: 18px;
     }
+    &[data-type="Canceled"] {
+      .status-circle {
+        background-color: #344450;
+      }
+
+      color: #344450;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 21px;
+      margin-left: 18px;
+    }
   }
 }
 .header-status {

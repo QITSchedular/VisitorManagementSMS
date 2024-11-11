@@ -155,10 +155,7 @@ const UserProfile = ({ setLoading, activeTabIndex }) => {
     const Genders = ["Male", "Female"];
     // console.log(data)
     const onValueChanged = (e) => {
-      console.log(data);
-      console.log(e);
       data.setValue(e.value);
-      console.log(data);
     };
     return (
       <>
@@ -273,8 +270,8 @@ const UserProfile = ({ setLoading, activeTabIndex }) => {
               <Column
                 dataField="usertype"
                 caption="user type"
-                allowEditing={true}
-                editCellRender={departmentRender}
+                allowEditing={false}
+                // editCellRender={departmentRender}
               />
               <Column
                 dataField="gender"

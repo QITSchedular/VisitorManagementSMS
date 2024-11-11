@@ -20,7 +20,7 @@ export const Step1 = () => {
   const location = useLocation();
   const { state } = location;
   const queryParams = new URLSearchParams(location.search);
-  const cmpId = queryParams.get("cmpId");
+  // const cmpId = queryParams.get("cmpId");
 
   const [prevData, setPrevData] = useState([]);
   const [companyId, setCompanyId] = useState();
@@ -29,15 +29,33 @@ export const Step1 = () => {
     localStorage.setItem("previousPath", "/step1");
   }, []);
 
+  // useEffect(() => {
+  //   if (cmpId) {
+  //     const getCmpData = async () => {
+  //       const data = await checkCompanyByQr(cmpId);
+  //       const response = data.responseData;
+
+  //       setCompanyId(response.Data[0].transid);
+  //     };
+  //     getCmpData();
+  //   }
+  // }, [cmpId]);
+
+  const [cmpId, setcmpId] = useState(
+    localStorage.getItem("cmpId") || queryParams.get("cmpId")
+  );
+
   useEffect(() => {
-    if (cmpId) {
+    if (cmpId && cmpId != "null") {
+      localStorage.setItem("cmpId", cmpId);
       const getCmpData = async () => {
         const data = await checkCompanyByQr(cmpId);
         const response = data.responseData;
-
-        setCompanyId(response.Data[0].transid);
+        if (!data.hasError) setCompanyId(response.Data[0].transid);
       };
       getCmpData();
+    } else {
+      navigate("/welcomevisitor?cmpId=");
     }
   }, [cmpId]);
 
@@ -78,23 +96,13 @@ export const Step1 = () => {
     } else if (registerVisitor.vlocation === "") {
       return toastDisplayer("error", "Enter the company location.");
     } else {
-      if(prevData.status == "A" && prevData.isToday == "Y" && prevData.checkinstatus ==null){
-
-        const payload = {
-          company_id: prevData.cmptransid,
-          e_mail: registerVisitor.e_mail,
-          sender_email: registerVisitor.e_mail,
-          sender_role: "visitor",
-        };
-        const checkIn = await checkInVisitorApi(payload);
-        if (checkIn.hasError === true) {
-          return toastDisplayer("error", `${checkIn.error}`);
-        }
-        return navigate(`/Success?cmpId=${cmpId}`, {
-          state: { Message: "Checked In Successfully" },
-        });
-        // navigate(`/welcomevisitor?cmpId=${cmpId}`);
-        // return toastDisplayer("success", "Checked In");
+      if (
+        prevData.status == "A" &&
+        prevData.isToday == "Y" &&
+        prevData.checkinstatus == "I"
+      ) {
+        navigate(`/welcomevisitor?cmpId=${cmpId}`);
+        return toastDisplayer("error", "Visitor already Checked In");
       } else if (prevData.status == "P" && prevData.checkinstatus == null) {
         setRegisterVisitor({
           vavatar: "",
@@ -117,6 +125,26 @@ export const Step1 = () => {
 
         toastDisplayer("error", `Your request is already pending.`);
         return handlePreviousBtn();
+        // navigate(`/welcomevisitor?cmpId=${cmpId}`);
+        // return toastDisplayer("success", "Checked In");
+      } else if (
+        prevData.status == "A" &&
+        prevData.isToday == "Y" &&
+        prevData.checkinstatus == null
+      ) {
+        const payload = {
+          company_id: prevData.cmptransid,
+          e_mail: registerVisitor.e_mail,
+          sender_email: registerVisitor.e_mail,
+          sender_role: "visitor",
+        };
+        const checkIn = await checkInVisitorApi(payload);
+        if (checkIn.hasError === true) {
+          return toastDisplayer("error", `${checkIn.error}`);
+        }
+        return navigate(`/Success?cmpId=${cmpId}`, {
+          state: { Message: "Checked In Successfully" },
+        });
         // navigate(`/welcomevisitor?cmpId=${cmpId}`);
         // return toastDisplayer("success", "Checked In");
       } else {

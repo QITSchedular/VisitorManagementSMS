@@ -3,6 +3,7 @@ import "./step4.scss";
 import {
   Autocomplete,
   Button,
+  DateBox,
   SelectBox,
   TextBox,
   Validator,
@@ -11,7 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useRegisterVisitor } from "../../Atoms/customHook";
 import { GettingDepratmentdata } from "../../api/departmentAPi";
 import { registerVisitorApi } from "../../api/mobileVisitorApi";
-import { RequiredRule } from "devextreme-react/cjs/data-grid";
+import { CustomRule, RequiredRule } from "devextreme-react/cjs/data-grid";
 import { toastDisplayer } from "../../components/toastDisplayer/toastdisplayer";
 import { useResetRecoilState } from "recoil";
 import { saveNotification } from "../../api/notification";
@@ -26,8 +27,18 @@ export const Step4 = () => {
   const [contactList, setContactList] = useState([]);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const cmpId = queryParams.get("cmpId");
+  // const cmpId = queryParams.get("cmpId");
+  const [cmpId, setcmpId] = useState(
+    localStorage.getItem("cmpId") || queryParams.get("cmpId")
+  );
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setRegisterVisitor((prev) => ({
+      ...prev,
+      timeslot: formatDateTime(new Date(new Date().getTime() + 5 * 60000)),
+    }));
+  }, []);
 
   const handlePreviousBtn = () => {
     navigate(`/welcomestep3?cmpId=${cmpId}`);
@@ -42,10 +53,21 @@ export const Step4 = () => {
       return;
     }
 
+    // return console.log(
+    //   "formatDateTime : ",
+    //   formatDateTime(registerVisitor.timeslot)
+    // );
+
     setLoading(true);
 
     try {
       const registor = await registerVisitorApi(registerVisitor);
+
+      if (registor.hasError) {
+        toastDisplayer("error", `${registor.error}`);
+        return;
+      }
+
       saveNotification(
         "Visitors",
         0,
@@ -53,11 +75,6 @@ export const Step4 = () => {
         `${registerVisitor.vname} will be arriving for a ${registerVisitor.purposeofvisit} at ${registerVisitor.timeslot}`,
         registerVisitor.company_id
       );
-
-      if (registor.hasError) {
-        toastDisplayer("error", `${registor.error}`);
-        return;
-      }
 
       setRegisterVisitor({
         vavatar: "",
@@ -115,7 +132,7 @@ export const Step4 = () => {
     if (e?.value) {
       setRegisterVisitor((prev) => ({
         ...prev,
-        timeslot: e.value,
+        timeslot: formatDateTime(e.value),
       }));
     } else {
       console.error("Invalid value provided for timeslot");
@@ -136,7 +153,6 @@ export const Step4 = () => {
         }));
       }
     } else if (field === "department_id" && e?.value) {
-      console.log("=====>", e.value);
       setRegisterVisitor((prevFormData) => ({
         ...prevFormData,
         department_id: e.value,
@@ -279,7 +295,7 @@ export const Step4 = () => {
                 <RequiredRule message="Select the department" />
               </Validator>
             </SelectBox>
-            <SelectBox
+            {/* <SelectBox
               label="Time Slot"
               dataSource={timeSlots}
               displayExpr="text"
@@ -295,7 +311,25 @@ export const Step4 = () => {
               <Validator>
                 <RequiredRule message="Time Slot is required" />
               </Validator>
-            </SelectBox>
+            </SelectBox> */}
+            <DateBox
+              labelMode="static"
+              stylingMode="outlined"
+              type="time"
+              pickerType="rollers"
+              label="Time Slot"
+              height={"56px"}
+              placeholder="Select Time Slot"
+              displayFormat="dd-MM-yyyy, HH:mm"
+              onValueChanged={(e) => handleInputTime(e)}
+              defaultValue={new Date(new Date().getTime() + 5 * 60000)} // Sets the default to current date and time
+              min={new Date()}
+              className="step-textbox required"
+            >
+              <Validator>
+                <RequiredRule message="Time Slot is required" />
+              </Validator>
+            </DateBox>
 
             <TextBox
               label="Any Hardware"

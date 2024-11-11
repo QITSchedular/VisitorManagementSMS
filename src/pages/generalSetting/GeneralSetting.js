@@ -99,10 +99,10 @@ const GeneralSetting = () => {
       try {
         gridInstance.addRow();
       } catch (error) {
-        console.error("Error adding row:", error);
+        // console.error("Error adding row:", error);
       }
     } else {
-      console.error("Grid instance not available.");
+      // console.error("Grid instance not available.");
     }
   };
 

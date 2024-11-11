@@ -43,7 +43,7 @@ const QRCodeForm = () => {
           link.click();
         })
         .catch((err) => {
-          console.error("Failed to download QR code", err);
+          // console.error("Failed to download QR code", err);
         });
     }
   };

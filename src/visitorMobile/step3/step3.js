@@ -15,7 +15,10 @@ export const Step3 = () => {
   const [registerVisitor, setRegisterVisitor] = useRegisterVisitor();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const cmpId = queryParams.get("cmpId");
+  // const cmpId = queryParams.get("cmpId");
+  const [cmpId, setcmpId] = useState(
+    localStorage.getItem("cmpId") || queryParams.get("cmpId")
+  );
 
   useEffect(() => {
     localStorage.setItem("previousPath", "/step3");

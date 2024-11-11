@@ -144,29 +144,75 @@ const VisitorMain = () => {
             (existingVisitor) => existingVisitor.id === data.visitor.id
           )
         ) {
+          toastDisplayer(
+            "success",
+            `.${data.visitor.vName} has been requested to meet ${
+              data.visitor.cnctperson
+            } on ${formatDate(data.visitor.timeslot)}`
+          );
           return [data.visitor, ...prevVisitors];
         }
         return prevVisitors;
       });
     };
 
+    // const onUpdateVisitor = (data) => {
+    //   setVisitors((prevVisitors) =>
+    //     prevVisitors.map((visitor) =>
+    //       visitor.id === data.visitor.transid
+    //         ? {
+    //             ...visitor,
+    //             state:
+    //               data.visitor.status === "R"
+    //                 ? "Rejected"
+    //                 : data.visitor.status === "A"
+    //                 ? "Approved"
+    //                 : "",
+    //             reason: data.visitor.reason,
+    //             status: data.visitor.checkinstatus,
+    //           }
+    //         : visitor
+    //     )
+    //   );
+    // };
+
     const onUpdateVisitor = (data) => {
       setVisitors((prevVisitors) =>
-        prevVisitors.map((visitor) =>
-          visitor.id === data.visitor.transid
-            ? {
-                ...visitor,
-                state:
-                  data.visitor.status === "R"
-                    ? "Rejected"
-                    : data.visitor.status === "A"
-                    ? "Approved"
-                    : "",
-                reason: data.visitor.reason,
-                status: data.visitor.checkinstatus,
-              }
-            : visitor
-        )
+        prevVisitors.map((visitor) => {
+          if (visitor.id === data.visitor.transid) {
+            // Display toast based on the status
+            if (data.visitor.checkinstatus === "Check in") {
+              toastDisplayer(
+                "success",
+                `${visitor.vName} has been successfully checked in to meet ${
+                  visitor.cnctperson
+                } on ${formatDate(visitor.timeslot)}`
+              );
+              // toastDisplayer(
+              //   "error",
+              //   `Visitor ${visitor.vName} has been rejected. Reason: ${data.visitor.reason}`
+              // );
+            } else if (data.visitor.checkinstatus === "Check Out") {
+              toastDisplayer(
+                "success",
+                `${visitor.vName} has been successfully checked out`
+              );
+            }
+
+            return {
+              ...visitor,
+              state:
+                data.visitor.status === "R"
+                  ? "Rejected"
+                  : data.visitor.status === "A"
+                  ? "Approved"
+                  : "",
+              reason: data.visitor.reason,
+              status: data.visitor.checkinstatus,
+            };
+          }
+          return visitor;
+        })
       );
     };
 
@@ -197,7 +243,7 @@ const VisitorMain = () => {
       {
         text: "Check Out",
         onClick: () => {
-          handleOpenPopup();
+          handleOpenPopup(cellData.data.id);
         },
       },
       {
@@ -358,7 +404,7 @@ const VisitorMain = () => {
     );
   };
 
-  const handleOpenPopup = () => {
+  const handleOpenPopup = (vid) => {
     setCheckOutRowData(selectedRowData);
     setIsPopupVisible(true);
   };
