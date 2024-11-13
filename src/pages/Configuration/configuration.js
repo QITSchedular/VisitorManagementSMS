@@ -2,13 +2,24 @@ import React, { useEffect, useState } from "react";
 import "./configuration.scss";
 import HeaderTab from "../../components/HeaderTab/HeaderTab";
 import { HeaderText } from "../../components/typographyText/TypograghyText";
-import { Button, SelectBox, Switch } from "devextreme-react";
+import {
+  Button,
+  SelectBox,
+  Switch,
+  TextBox,
+  Validator,
+} from "devextreme-react";
 import { toastDisplayer } from "../../components/toastDisplayer/toastdisplayer";
 import { useAuth } from "../../contexts/auth";
 import CustomLoader from "../../components/customerloader/CustomLoader";
 import { configAtom } from "../../contexts/atom";
 import { useRecoilState } from "recoil";
 import { SaveConfigData } from "../../api/auth";
+import {
+  CustomRule,
+  EmailRule,
+  RequiredRule,
+} from "devextreme-react/cjs/data-grid";
 
 function Configuration() {
   const [activePage, setActivePage] = useState();
@@ -72,6 +83,10 @@ function Configuration() {
   };
 
   const saveConfig = async () => {
+    console.log("email  :", tempStagedChanges);
+    if (tempStagedChanges.hostname && !tempStagedChanges.hostpasscode) {
+      return toastDisplayer("error", "Host passcode is required..!!");
+    }
     setLoading(true);
     var result = await SaveConfigData(tempStagedChanges);
     setLoading(false);
@@ -91,12 +106,6 @@ function Configuration() {
     { id: false, value: "No" },
   ];
   const handleInputChange = (fieldname, e) => {
-    // if(fieldname){
-    //     setTempStagedChanges((prevValues) => {
-    //         const updatedValues = { ...prevValues, fieldname: e };
-    //         return updatedValues;
-    //       });
-    //   }
     if (fieldname == "ApprovalTime") {
       setTempStagedChanges((prevValues) => {
         const updatedValues = { ...prevValues, ApprovalTime: e };
@@ -108,6 +117,17 @@ function Configuration() {
         return updatedValues;
       });
     }
+    if (fieldname) {
+      setTempStagedChanges((prevValues) => {
+        const updatedValues = { ...prevValues, [fieldname]: e };
+        return updatedValues;
+      });
+    }
+  };
+
+  const validatePasscode = (e) => {
+    const passcodePattern = /^[A-Za-z0-9]{16}$/; // 16-character alphanumeric passcode
+    return passcodePattern.test(e.value); // Returns true if the passcode is valid
   };
 
   return (
@@ -127,7 +147,7 @@ function Configuration() {
         <div className="content-block dx-card">
           <div className="navigation-header-main">
             <div className="title-section">
-              <HeaderText text="Configuration (Visitor Manual Entry)" />
+              <HeaderText text="Configuration" />
             </div>
             <div className="title-section-btn">
               <Button
@@ -140,7 +160,9 @@ function Configuration() {
             </div>
           </div>
           <div>
-            <div className="SubHeaderTxt">Auto Approval</div>
+            <div className="SubHeaderTxt">
+              Auto Approval (Visitor Manual Entry)
+            </div>
             <div className="chkBoxGroup">
               <SelectBox
                 labelMode="outside"
@@ -159,7 +181,9 @@ function Configuration() {
             </div>
           </div>
           <div style={{ paddingTop: "8px" }}>
-            <div className="SubHeaderTxt">OTP Verification</div>
+            <div className="SubHeaderTxt">
+              OTP Verification (Visitor Manual Entry)
+            </div>
             <div className="chkBoxGroup">
               <SelectBox
                 labelMode="outside"
@@ -174,12 +198,50 @@ function Configuration() {
                 valueExpr={"id"}
                 displayExpr={"value"}
               ></SelectBox>
-              {/* <Switch
-              value={stagedChanges?.OtpVerification === true}
-              onValueChanged={(e) => {
-                toggleCheckbox("OtpVerification", e.value);
-              }}
-            /> */}
+            </div>
+          </div>
+          <div style={{ paddingTop: "8px", paddingBottom: "20px" }}>
+            <div className="SubHeaderTxt">Email Configuration</div>
+            <div className="" style={{ display: "flex", gap: "16px" }}>
+              <TextBox
+                label="Email Address"
+                placeholder="Enter email address"
+                labelMode="static"
+                stylingMode="outlined"
+                onValueChanged={(e) => handleInputChange("hostname", e.value)}
+                // readOnly={isOTPVerified}
+                // value={formData && formData?.e_mail}
+                value={tempStagedChanges ? tempStagedChanges["hostname"] : ""}
+                style={{ cursor: "pointer" }}
+                valueChangeEvent="keyup"
+                width={300}
+              >
+                <Validator>
+                  <EmailRule message="Email is invalid" />
+                </Validator>
+              </TextBox>
+              <TextBox
+                label="Passcode"
+                placeholder="Enter passcode"
+                labelMode="static"
+                stylingMode="outlined"
+                onValueChanged={(e) =>
+                  handleInputChange("hostpasscode", e.value)
+                }
+                style={{ cursor: "pointer" }}
+                valueChangeEvent="keyup"
+                width={300}
+                value={
+                  tempStagedChanges ? tempStagedChanges["hostpasscode"] : ""
+                }
+              >
+                <Validator>
+                  <CustomRule
+                    validationCallback={validatePasscode}
+                    message="Passcode must be a 16-character alphanumeric code."
+                  />
+                </Validator>
+              </TextBox>
             </div>
           </div>
         </div>

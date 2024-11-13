@@ -379,119 +379,125 @@ export default function Profile() {
     const printWindow = window.open("", "", "width=800,height=500");
     printWindow.document.open();
 
-    printWindow.document.write(`
-   <html>
+    printWindow.document.write(
+      `<html>
 
-  <head>
-      <style>
-          body,
-          html {
-              margin: 0;
-              width: 100%;
-              height: 100%;
-              display: flex;
-              align-items: center;
-              /* justify-content: center; */
-              flex-direction: column;
-          }
-
-          .qr {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              flex-direction: column;
-              height: 90vh;
-              gap: 54px;
-              /* border: 1px solid red; */
-
-              .headder {
+      <head>
+          <style>
+              /* Ensure the entire viewport is covered */
+              * {
+                  margin: 0;
+                  padding: 0;
+                  box-sizing: border-box;
+              }
+      
+              html,
+              body {
+                  width: 100%;
+                  height: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-family: 'Inter', sans-serif;
+                  color: white;
+                  text-align: center;
+              }
+      
+              .container {
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: space-between; /* Spreads content vertically */
+                  align-items: center;
+                  gap: 20px;
+                  max-width: 800px;
+                  width: 90%;
+                  padding: 20px;
+                  background-color: rgba(255, 255, 255, 0.1);
+                  border-radius: 12px;
+                  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                  height: 90%; /* Set container height to 90% of viewport */
+                  background: linear-gradient(to top, #7f56d9, #a684f0); /* Background gradient for entire page */
+              }
+      
+              .header,
+              .footer {
+                  text-align: center;
+                  color: #ffffff;
+              }
+      
+              .header .welcome-text {
+                  font-size: 38px;
+                  font-weight: 500;
+                  margin: 0;
+              }
+      
+              .header .cmpName {
+                  font-size: 48px;
+                  font-weight: 700;
+                  margin: 0;
+                  color: #f1e1ff;
+              }
+      
+              .qr-section {
                   display: flex;
                   flex-direction: column;
                   align-items: center;
-
-                  .welcome-text {
-                      font-size: 42px;
-                      font-weight: 500;
-                      font-family: 'Inter', sans-serif;
-                      color: #344450;
-                      line-height: 150%;
-                  }
-
-                  .cmpName {
-                      font-size: 54px;
-                      font-weight: 500;
-                      font-family: 'Inter', sans-serif;
-                      color: #344450;
-                      line-height: 150%;
-                  }
+                  gap: 16px;
               }
-
-              .qrBody {
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                  gap: 12px;
-                  margin-top: 8px;
-
-                  span {
-                      font-size: 38px;
-                      font-weight: 500;
-                      font-family: 'Inter', sans-serif;
-                      color: #344450;
-                      line-height: 150%;
-                  }
-
-                  img {
-                      height: 380px;
-                      /* padding: 5rem 0px 16px 0px; */
-                  }
-
-                  /* .cmpName {
-                      font-size: 30px;
-                      font-weight: 500;
-                  } */
+      
+              .qr-section span {
+                  font-size: 32px;
+                  font-weight: 500;
               }
-
-
-              .footter {
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-
-                  .footer-text {
-                      font-size: 34px;
-                      font-weight: 500;
-                      font-family: 'Inter', sans-serif;
-                      color: #344450;
-                      line-height: 150%;
-                  }
-
-                  .cmp-text {
-                      font-size: 36px;
-                  }
+      
+              .qr-section img {
+                  height: 300px;
+                  width: 300px;
+                  border: 4px solid white;
+                  border-radius: 12px;
               }
-          }
-      </style>
-  </head>
-
-  <body>
-      <div class="qr">
-          <div class="headder">
-              <div class="welcome-text">Welcome to the</div>
-              <div class="cmpName">${companyData.bname}</div>
+      
+              .footer .footer-text {
+                  font-size: 28px;
+                  font-weight: 500;
+                  margin: 5px 0;
+              }
+      
+              .footer .cmp-text {
+                  font-size: 24px;
+                  color: #d3c4ff;
+              }
+      
+              .header{
+                  padding-top: 60px;
+              }
+      
+              .footer{
+                  padding-bottom: 60px;
+              }
+              
+          </style>
+      </head>
+      
+      <body>
+          <div class="container">
+              <div class="header">
+                  <p class="welcome-text">Welcome to</p>
+                  <p class="cmpName">Shish Industries Limited</p>
+              </div>
+              <div class="qr-section">
+                  <span>Scan the QR Code for entry</span>
+                  <img src="${imageUrl}" alt="QR Code" />
+              </div>
+              <div class="footer">
+                  <p class="footer-text">Visitor Management System</p>
+                  <p class="footer-text cmp-text">Powered by Quantum IT Solution</p>
+              </div>
           </div>
-          <div class="qrBody">
-              <span>Scan the QR Code for entry</span>
-              <img src="${imageUrl}" />
-          </div>
-          <div class="footter">
-              <div class="footer-text">Visitor Management System</div>
-              <div class="footer-text cmp-text">Powered by Quantum IT Solution</div>
-          </div>
-      </div>
-  </body>
-
-  </html>
+      </body>
+      
+      </html>
+      
   `);
     printWindow.document.close();
 

@@ -55,49 +55,38 @@ const AddVisitor = () => {
 
   useEffect(() => {
     if (state) {
-      const providedDate = new Date(state?.timeslot);
-      const adjustedDate = new Date(
-        providedDate.getTime() - 5 * 60 * 60 * 1000 - 30 * 60 * 1000
-      );
-      state.timeslot = adjustedDate;
-
-      // cloneData?.vName : formData?.username
-      // cloneData?.vEmail : formData?.e_mail
-      // cloneData?.vPhone1 : formData?.phone1
-      // cloneData?.vCmpname : formData?.company
-      // cloneData?.vLocation : formData?.location
-      // cloneData?.cnctperson : formData?.meetPerson
-      // cloneData?.deptId : formData?.cmpdeptid
-      // cloneData?.timeslot : formData.timeslot
-      // cloneData?.anyhardware : formData?.hardware
-      // cloneData?.purposeofvisit : formData?.purpose
-
-      // formData.username = cloneData?.vName;
-      // formData.e_mail = cloneData?.vEmail;
-      // formData.phone1 = cloneData?.vPhone1;
-      // formData.company = cloneData?.vCmpname;
-      // formData.location = cloneData?.vLocation;
-      // formData.meetPerson = cloneData?.cnctperson;
-      // formData.cmpdeptid = cloneData?.deptId;
-      // formData.timeslot = adjustedDate;
-      // formData.hardware = cloneData?.anyhardware;
-      // formData.purpose = cloneData?.purposeofvisit;
-
-      setFormData((prev) => ({
-        ...prev,
-        username: state?.vName,
-        e_mail: state?.vEmail,
-        phone1: state?.vPhone1,
-        company: state?.vCmpname,
-        location: state?.vLocation,
-        meetPerson: state?.cnctperson,
-        cmpdeptid: state?.deptId,
-        timeslot: adjustedDate,
-        hardware: state?.anyhardware,
-        purpose: state?.purposeofvisit,
-      }));
-
-      setCloneData(state);
+      if(state.fromURL == "generalSetting"){
+        // formData = data;
+        setFormData(state.data);
+        // formData.cmpdeptid = 
+        // setFormData((prev)=>({
+        //   ...prev,
+        //   state.data,
+        //   cmpdeptid : state.deptId
+        // }))
+      }else{
+        const providedDate = new Date(state?.timeslot);
+        const adjustedDate = new Date(
+          providedDate.getTime() - 5 * 60 * 60 * 1000 - 30 * 60 * 1000
+        );
+        state.timeslot = adjustedDate;
+  
+        setFormData((prev) => ({
+          ...prev,
+          username: state?.vName,
+          e_mail: state?.vEmail,
+          phone1: state?.vPhone1,
+          company: state?.vCmpname,
+          location: state?.vLocation,
+          meetPerson: state?.cnctperson,
+          cmpdeptid: state?.deptId,
+          timeslot: adjustedDate,
+          hardware: state?.anyhardware,
+          purpose: state?.purposeofvisit,
+        }));
+  
+        setCloneData(state);
+      }
     }
   }, []);
 
@@ -135,7 +124,7 @@ const AddVisitor = () => {
   const handleOpenPopup = (e) => {
     e.preventDefault();
 
-    if (stagedChanges.OtpVerification === true) {
+    if (stagedChanges?.OtpVerification === true) {
       if (isOTPVerified) {
         if (!validateFields()) {
           return toastDisplayer(
@@ -204,7 +193,7 @@ const AddVisitor = () => {
     }
     if (field == "cmpdeptid") {
       if (e.value == "specialAction") {
-        navigate("/generalsettings");
+        navigate("/generalsettings", { state: { from: "/Visitors/Add-Visitors", data : formData } });
       }
     }
     if (field == "meetPerson") {

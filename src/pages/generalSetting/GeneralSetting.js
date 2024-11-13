@@ -27,6 +27,8 @@ import CustomCheckBox from "../../components/CustomCheckBox/CustomCheckBox";
 import { configAtom } from "../../contexts/atom";
 import { useRecoilState } from "recoil";
 import { SaveConfigData } from "../../api/auth";
+import { useLocation, useNavigate } from "react-router-dom";
+import LocationGrid from "../../components/locationGrid/LocationGrid";
 
 const GeneralSetting = () => {
   const [activePage, setActivePage] = useState();
@@ -34,6 +36,18 @@ const GeneralSetting = () => {
   const gridRef = useRef(null);
   const [departmentData, setDepartmentData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [fromURL, setFromURL] = useState(null);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { state } = location;
+
+  useEffect(() => {
+    if (state) {
+      const comeFrom = state.from;
+      setFromURL(comeFrom);
+    }
+  }, []);
 
   const { authRuleContext, user } = useAuth();
   const [HeaderTabText, setHeaderTabtext] = useState([
@@ -106,6 +120,7 @@ const GeneralSetting = () => {
     }
   };
 
+
   const handleAddDepartment = async (e) => {
     var newName = e.data.deptname;
     if (newName) {
@@ -125,6 +140,16 @@ const GeneralSetting = () => {
           await getDeptData();
         } else {
           toastDisplayer("success", "A new department has been added.");
+          if (fromURL) {
+            state.data.cmpdeptid = apiRes.responsedata.deptId;
+            navigate(fromURL, {
+              state: {
+                deptId: apiRes.responsedata.deptId,
+                fromURL: "generalSetting",
+                data: state.data,
+              },
+            });
+          }
           await getDeptData();
         }
       }
@@ -278,101 +303,7 @@ const GeneralSetting = () => {
             </DataGrid>
           </div>
         </div>
-        {/* <div className="content-block dx-card">
-          <div className="navigation-header-main">
-            <div className="title-section">
-              <HeaderText text="Configuration" />
-            </div>
-            <div className="title-section-btn">
-              <Button
-                text="Save Configuration"
-                height={44}
-                onClick={saveConfig}
-                useSubmitBehavior={true}
-                stylingMode="text"
-                style={{ color: "#6941c6" }}
-              />
-            </div>
-          </div>
-          <div>
-            <div className="SubHeaderTxt">Auto Approval</div>
-            <div className="chkBoxGroup">
-              <CustomCheckBox
-                checkboxvalue={[
-                  { id: "O", value: "OFF" },
-                  { id: "1D", value: "One Day" },
-                  { id: "1W", value: "One Week" },
-                ]}
-                id={"ApprovalTime"}
-                toggleCheckbox={toggleCheckbox}
-                stagedChanges={tempStagedChanges}
-              />
-            </div>
-          </div>
-          <div style={{ paddingTop: "8px" }}>
-            <div className="SubHeaderTxt">OTP Verification</div>
-            <div className="chkBoxGroup">
-              <Switch
-                value={stagedChanges?.OtpVerification === true}
-                onValueChanged={(e) => {
-                  toggleCheckbox("OtpVerification", e.value);
-                }}
-              />
-            </div>
-          </div>
-        </div> */}
-        {/* <div className="content-block dx-card">
-          <div className="navigation-header-main">
-            <div className="title-section">
-              <HeaderText text="Auto Approve" />
-            </div>
-            <div className="title-section-btn">
-              <Button
-                text="Save Auto Approval"
-                height={44}
-                onClick={handleAddPopup}
-                useSubmitBehavior={true}
-                // stylingMode="text"
-              />
-            </div>
-          </div>
-          <div className="chkBoxGroup">
-            <CustomCheckBox
-              checkboxvalue={[
-                { id: "O", value: "OFF" },
-                { id: "1D", value: "One Day" },
-                { id: "1W", value: "One Week" },
-              ]}
-              id={"ApprovalTime"}
-              toggleCheckbox={toggleCheckbox}
-              stagedChanges={stagedChanges}
-            />
-          </div>
-        </div>
-        <div className="content-block dx-card">
-          <div className="navigation-header-main">
-            <div className="title-section">
-              <HeaderText text="OTP Vefication" />
-            </div>
-            <div className="title-section-btn">
-              <Button
-                text="Save Verification"
-                height={44}
-                onClick={handleAddPopup}
-                useSubmitBehavior={true}
-                // stylingMode="text"
-              />
-            </div>
-          </div>
-          <div className="chkBoxGroup">
-            <Switch
-              value={stagedChanges["OtpVerification"] === true}
-              onValueChanged={(e) => {
-                toggleCheckbox("OtpVerification", e.value);
-              }}
-            />
-          </div>
-        </div> */}
+        <LocationGrid user={user}/>
       </div>
     </>
   );

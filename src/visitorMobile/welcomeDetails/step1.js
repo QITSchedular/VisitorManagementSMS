@@ -103,7 +103,7 @@ export const Step1 = () => {
       ) {
         navigate(`/welcomevisitor?cmpId=${cmpId}`);
         return toastDisplayer("error", "Visitor already Checked In");
-      } else if (prevData.status == "P" && prevData.checkinstatus == null) {
+      } else if (prevData.status == "P" && prevData.checkinstatus == null && prevData.isToday.toUpperCase() !== "N") {
         setRegisterVisitor({
           vavatar: "",
           cnctperson: "",

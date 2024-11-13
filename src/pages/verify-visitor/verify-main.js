@@ -127,7 +127,7 @@ const VerifyVisitorMain = () => {
     }
     const data = visitorData.responseData;
     setIsLoading(false);
-    setVisitorCount(data.length);
+    setVisitorCount(data?.length || 0);
     // filterVisitorsByDate(selectedDateFilter);
     return setVisitorDataState(data);
   };
