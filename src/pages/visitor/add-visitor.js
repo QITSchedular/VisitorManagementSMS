@@ -32,6 +32,7 @@ import { saveNotification } from "../../api/notification";
 import { useRecoilState } from "recoil";
 import { configAtom } from "../../contexts/atom";
 import { getCompanyUser } from "../../api/visitorApi";
+import { GettingLocationdata } from "../../api/locationAPI";
 
 const AddVisitor = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -48,6 +49,7 @@ const AddVisitor = () => {
     timeslot: null,
     hardware: "",
     purpose: "",
+    isidentity: "",
   });
   const [cloneData, setCloneData] = useState(null);
   const location = useLocation();
@@ -55,22 +57,22 @@ const AddVisitor = () => {
 
   useEffect(() => {
     if (state) {
-      if(state.fromURL == "generalSetting"){
+      if (state.fromURL == "generalSetting") {
         // formData = data;
         setFormData(state.data);
-        // formData.cmpdeptid = 
+        // formData.cmpdeptid =
         // setFormData((prev)=>({
         //   ...prev,
         //   state.data,
         //   cmpdeptid : state.deptId
         // }))
-      }else{
+      } else {
         const providedDate = new Date(state?.timeslot);
         const adjustedDate = new Date(
           providedDate.getTime() - 5 * 60 * 60 * 1000 - 30 * 60 * 1000
         );
         state.timeslot = adjustedDate;
-  
+
         setFormData((prev) => ({
           ...prev,
           username: state?.vName,
@@ -84,14 +86,15 @@ const AddVisitor = () => {
           hardware: state?.anyhardware,
           purpose: state?.purposeofvisit,
         }));
-  
+
         setCloneData(state);
       }
     }
   }, []);
 
   const validateFields = () => {
-    const requiredFields = [
+    // Define the initial required fields
+    var requiredFields = [
       "username",
       "e_mail",
       "company",
@@ -102,10 +105,20 @@ const AddVisitor = () => {
       // "hardware",
       "purpose",
     ];
+
+    // Conditionally add 'visitoridentityid' if 'stagedChanges.isidentity' is "Y"
+    if (stagedChanges.isidentity === "Y") {
+      requiredFields.push("isidentity");
+    }
+
+    console.log(requiredFields);
+    // Check if all required fields are filled in 'formData'
     return requiredFields.every((field) => formData[field]);
   };
+
   const [isOTPVerified, setIsOTPVrified] = useState(false);
   const [deptData, setDeptData] = useState([]);
+  const [loctionData, setLocationData] = useState([]);
   const [companyUserData, setCompanyUserData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refFocused, setrefFocused] = useState(false);
@@ -193,7 +206,9 @@ const AddVisitor = () => {
     }
     if (field == "cmpdeptid") {
       if (e.value == "specialAction") {
-        navigate("/generalsettings", { state: { from: "/Visitors/Add-Visitors", data : formData } });
+        navigate("/generalsettings", {
+          state: { from: "/Visitors/Add-Visitors", data: formData },
+        });
       }
     }
     if (field == "meetPerson") {
@@ -276,6 +291,29 @@ const AddVisitor = () => {
     }
   };
 
+  const fetchLocationData = async () => {
+    setLoading(true);
+    const response = await GettingLocationdata(user.cmpid);
+    if (response.hasError === true) {
+      setLoading(false);
+      // return toastDisplayer("error", getOtpFromID.errorMessage);
+
+      return toastDisplayer("error", "Location data not found.");
+    } else {
+      // setDeptData(response.responseData.Data);
+      // const specialActionItem = {
+      //   transid: 0,
+      //   deptname: "Special Action",
+      //   transid: "specialAction",
+      // };
+      // setDeptData([...response.responseData.Data, specialActionItem]);
+      console.log(response.repsonseData.Data);
+      setLocationData(response.repsonseData.Data);
+      setLoading(false);
+      return toastDisplayer("suceess", "OTP send successfully.");
+    }
+  };
+
   const fetchCompanyUser = async () => {
     setLoading(true);
     const response = await getCompanyUser(user.cmpid);
@@ -311,6 +349,7 @@ const AddVisitor = () => {
   };
 
   useEffect(() => {
+    fetchLocationData();
     fetchDeptData();
     fetchCompanyUser();
   }, []);
@@ -346,6 +385,7 @@ const AddVisitor = () => {
 
   const handleSaveFunction = async () => {
     // if (isOTPVerified) {
+    console.log(validateFields());
     if (!validateFields()) {
       return toastDisplayer("error", "Please complete all required fields.");
     }
@@ -370,7 +410,11 @@ const AddVisitor = () => {
       reason: "",
       sender_email: user.e_mail,
       sender_role: user.userrole,
+      visitoridentityid: formData.isidentity,
+      locationtransid: formData.locationtransid,
     };
+
+    console.log(reqPayload);
 
     setLoading(true);
     const response = await registerVisitorApi(reqPayload);
@@ -609,6 +653,33 @@ const AddVisitor = () => {
                 </Validator>
               </TextBox>
             </div>
+            <div className="form-input">
+              <TextBox
+                placeholder="Enter PAN/Aadhar"
+                label="PAN / Aadhar"
+                labelMode="static"
+                stylingMode="outlined"
+                onValueChanged={(e) => handleInputChange("isidentity", e)}
+                value={formData && formData?.isidentity}
+                className={
+                  stagedChanges && stagedChanges.isidentity == "Y" && "required"
+                }
+              >
+                <Validator>
+                  {stagedChanges && stagedChanges.isidentity == "Y" && (
+                    <RequiredRule message="PAN or Aadhar is required" />
+                  )}
+                  <CustomRule
+                    validationCallback={({ value }) => {
+                      const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/; // PAN format: AAAAA9999A
+                      const aadharRegex = /^\d{12}$/; // Aadhar format: 12 digits
+                      return panRegex.test(value) || aadharRegex.test(value);
+                    }}
+                    message="Please enter a valid PAN or Aadhar number"
+                  />
+                </Validator>
+              </TextBox>
+            </div>
           </div>
         </div>
 
@@ -699,7 +770,7 @@ const AddVisitor = () => {
             </div>
           </div>
           <div className="personal-detail-form">
-            <div className="form-input full-width">
+            <div className="form-input">
               <TextBox
                 label="Purpose of Visit"
                 placeholder="Why they want to visit?"
@@ -713,6 +784,26 @@ const AddVisitor = () => {
                   <RequiredRule message="Purpose of Visit is required" />
                 </Validator>
               </TextBox>
+            </div>
+            <div className="form-input">
+              <SelectBox
+                label="Visiting Location"
+                placeholder="Select Location"
+                labelMode="static"
+                stylingMode="outlined"
+                onValueChanged={(e) => handleInputChange("locationtransid", e)}
+                dataSource={loctionData}
+                displayExpr={"locationname"}
+                valueExpr={"transid"}
+                value={formData && formData?.locationtransid}
+                // itemTemplate={itemTemplate}
+                className="required"
+                searchEnabled={true}
+              >
+                <Validator>
+                  <RequiredRule message="Location is required" />
+                </Validator>
+              </SelectBox>
             </div>
           </div>
         </div>
