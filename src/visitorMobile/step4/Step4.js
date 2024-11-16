@@ -14,10 +14,12 @@ import { GettingDepratmentdata } from "../../api/departmentAPi";
 import { registerVisitorApi } from "../../api/mobileVisitorApi";
 import { CustomRule, RequiredRule } from "devextreme-react/cjs/data-grid";
 import { toastDisplayer } from "../../components/toastDisplayer/toastdisplayer";
-import { useResetRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import { saveNotification } from "../../api/notification";
 import { getAllUserData, getUserData } from "../../api/common";
 import CustomLoader from "../../components/customerloader/CustomLoader";
+import { GettingLocationdata } from "../../api/locationAPI";
+import { configAtom } from "../../contexts/atom";
 
 export const Step4 = () => {
   const navigate = useNavigate();
@@ -32,6 +34,7 @@ export const Step4 = () => {
     localStorage.getItem("cmpId") || queryParams.get("cmpId")
   );
   const [loading, setLoading] = useState(false);
+  const [loctionData, setLocationData] = useState([]);
 
   useEffect(() => {
     setRegisterVisitor((prev) => ({
@@ -43,14 +46,25 @@ export const Step4 = () => {
   const handlePreviousBtn = () => {
     navigate(`/welcomestep3?cmpId=${cmpId}`);
   };
+
+  const company_id = registerVisitor.company_id;
+  const isIdentityVal = registerVisitor.isIdentityVal;
   const handleAproval = async () => {
+    console.log("first", registerVisitor);
+    if (isIdentityVal == "Y") {
+      if (!registerVisitor?.isidentity) {
+        return toastDisplayer("error", "PAN or Aadhar nuber is required.");
+      }
+    }
     if (
       !registerVisitor.cnctperson ||
       !registerVisitor.department_id ||
       !registerVisitor.timeslot ||
       !registerVisitor.purposeofvisit
     ) {
+      console.log("here");
       return;
+    } else {
     }
 
     // return console.log(
@@ -104,7 +118,6 @@ export const Step4 = () => {
     }
   };
 
-  const company_id = registerVisitor.company_id;
   const getDepartmentdata = async () => {
     const departmentData = await GettingDepratmentdata(company_id);
     if (departmentData.hasError === true) {
@@ -118,6 +131,29 @@ export const Step4 = () => {
       ...departmentData.repsonseData.Data,
       // specialActionItem,
     ]);
+  };
+
+  const fetchLocationData = async () => {
+    setLoading(true);
+    const response = await GettingLocationdata(company_id);
+    if (response.hasError === true) {
+      setLoading(false);
+      // return toastDisplayer("error", getOtpFromID.errorMessage);
+
+      return toastDisplayer("error", "Location data not found.");
+    } else {
+      // setDeptData(response.responseData.Data);
+      // const specialActionItem = {
+      //   transid: 0,
+      //   deptname: "Special Action",
+      //   transid: "specialAction",
+      // };
+      // setDeptData([...response.responseData.Data, specialActionItem]);
+      console.log(response.repsonseData.Data);
+      setLocationData(response.repsonseData.Data);
+      setLoading(false);
+      return toastDisplayer("suceess", "OTP send successfully.");
+    }
   };
 
   const hanldeInputChange = (e) => {
@@ -215,6 +251,7 @@ export const Step4 = () => {
       company_id: registerVisitor.company_id,
     }));
     getDepartmentdata();
+    fetchLocationData();
   }, []);
 
   useEffect(() => {
@@ -336,7 +373,7 @@ export const Step4 = () => {
               labelMode="static"
               stylingMode="outlined"
               height={"56px"}
-              className="last-textbox"
+              className="step-textbox"
               placeholder="Eg. Phone ,Laptop ,etc. "
               onValueChanged={(e) =>
                 hanldeInputChange({
@@ -350,7 +387,7 @@ export const Step4 = () => {
               labelMode="static"
               stylingMode="outlined"
               height={"56px"}
-              className="last-textbox required"
+              className="required step-textbox"
               onValueChanged={(e) =>
                 hanldeInputChange({
                   target: { name: "purposeofvisit", value: e.value },
@@ -359,6 +396,56 @@ export const Step4 = () => {
             >
               <Validator>
                 <RequiredRule message="Mention the Purpose of visit" />
+              </Validator>
+            </TextBox>
+            <SelectBox
+              label="Visiting Location"
+              placeholder="Select Location"
+              labelMode="static"
+              stylingMode="outlined"
+              // onValueChanged={(e) => handleInputChange("cmplocid", e)}
+              dataSource={loctionData}
+              displayExpr={"locationname"}
+              valueExpr={"transid"}
+              // value={formData && formData?.cmpdeptid}
+              // itemTemplate={itemTemplate}
+              className="required last-textbox "
+              searchEnabled={true}
+              height={"56px"}
+            >
+              <Validator>
+                <RequiredRule message="Location is required" />
+              </Validator>
+            </SelectBox>
+
+            <TextBox
+              placeholder="Enter PAN/Aadhar"
+              label="PAN / Aadhar"
+              labelMode="static"
+              stylingMode="outlined"
+              onValueChanged={(e) =>
+                hanldeInputChange({
+                  target: { name: "isidentity", value: e.value },
+                })
+              }
+              height={"56px"}
+              className="last-textbox"
+              // className={
+              //   stagedChanges && stagedChanges.isidentity == "Y" && "required"
+              // }
+            >
+              <Validator>
+                {/* {stagedChanges && stagedChanges.isidentity == "Y" && (
+                  <RequiredRule message="PAN or Aadhar is required" />
+                )} */}
+                <CustomRule
+                  validationCallback={({ value }) => {
+                    const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/; // PAN format: AAAAA9999A
+                    const aadharRegex = /^\d{12}$/; // Aadhar format: 12 digits
+                    return panRegex.test(value) || aadharRegex.test(value);
+                  }}
+                  message="Please enter a valid PAN or Aadhar number"
+                />
               </Validator>
             </TextBox>
           </div>

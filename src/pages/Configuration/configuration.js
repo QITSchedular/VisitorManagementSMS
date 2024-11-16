@@ -105,6 +105,10 @@ function Configuration() {
     { id: true, value: "Yes" },
     { id: false, value: "No" },
   ];
+  const isidentity = [
+    { id: "Y", value: "Yes" },
+    { id: "N", value: "No" },
+  ];
   const handleInputChange = (fieldname, e) => {
     if (fieldname == "ApprovalTime") {
       setTempStagedChanges((prevValues) => {
@@ -159,48 +163,74 @@ function Configuration() {
               />
             </div>
           </div>
-          <div>
-            <div className="SubHeaderTxt">
-              Auto Approval (Visitor Manual Entry)
+          <div style={{ paddingTop: "16px" }}>
+            <div className="title-section">
+              <span className="title-header-text">Visitor Manual Entry</span>
             </div>
-            <div className="chkBoxGroup">
-              <SelectBox
-                labelMode="outside"
-                width={150}
-                onValueChanged={(e) =>
-                  handleInputChange("ApprovalTime", e.value)
-                }
-                value={
-                  // "ON"
-                  tempStagedChanges ? tempStagedChanges["ApprovalTime"] : "OFF"
-                }
-                items={Source}
-                valueExpr={"id"}
-                displayExpr={"value"}
-              ></SelectBox>
+            <div style={{ display: "flex", gap: "16px" }}>
+              <div>
+                <div className="SubHeaderTxt">Auto Approval</div>
+                <div className="chkBoxGroup">
+                  <SelectBox
+                    labelMode="outside"
+                    width={300}
+                    onValueChanged={(e) =>
+                      handleInputChange("ApprovalTime", e.value)
+                    }
+                    value={
+                      // "ON"
+                      tempStagedChanges
+                        ? tempStagedChanges["ApprovalTime"]
+                        : "OFF"
+                    }
+                    items={Source}
+                    valueExpr={"id"}
+                    displayExpr={"value"}
+                  ></SelectBox>
+                </div>
+              </div>
+              <div>
+                <div className="SubHeaderTxt">OTP Verification</div>
+                <div className="chkBoxGroup">
+                  <SelectBox
+                    labelMode="outside"
+                    width={300}
+                    onValueChanged={(e) =>
+                      handleInputChange("OtpVerification", e.value)
+                    }
+                    value={
+                      tempStagedChanges
+                        ? tempStagedChanges["OtpVerification"]
+                        : "O"
+                    }
+                    items={VerificationOTP}
+                    valueExpr={"id"}
+                    displayExpr={"value"}
+                  ></SelectBox>
+                </div>
+              </div>
+              <div>
+                <div className="SubHeaderTxt">PAN/Aadhar Required</div>
+                <div className="chkBoxGroup">
+                  <SelectBox
+                    labelMode="outside"
+                    width={300}
+                    onValueChanged={(e) =>
+                      handleInputChange("isidentity", e.value)
+                    }
+                    value={
+                      tempStagedChanges ? tempStagedChanges["isidentity"] : "O"
+                    }
+                    items={isidentity}
+                    valueExpr={"id"}
+                    displayExpr={"value"}
+                  ></SelectBox>
+                </div>
+              </div>
             </div>
           </div>
-          <div style={{ paddingTop: "8px" }}>
-            <div className="SubHeaderTxt">
-              OTP Verification (Visitor Manual Entry)
-            </div>
-            <div className="chkBoxGroup">
-              <SelectBox
-                labelMode="outside"
-                width={150}
-                onValueChanged={(e) =>
-                  handleInputChange("OtpVerification", e.value)
-                }
-                value={
-                  tempStagedChanges ? tempStagedChanges["OtpVerification"] : "O"
-                }
-                items={VerificationOTP}
-                valueExpr={"id"}
-                displayExpr={"value"}
-              ></SelectBox>
-            </div>
-          </div>
-          <div style={{ paddingTop: "8px", paddingBottom: "20px" }}>
+
+          <div style={{ paddingTop: "16px", paddingBottom: "20px" }}>
             <div className="SubHeaderTxt">Email Configuration</div>
             <div className="" style={{ display: "flex", gap: "16px" }}>
               <TextBox

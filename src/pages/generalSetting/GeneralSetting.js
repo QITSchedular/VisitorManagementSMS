@@ -23,12 +23,8 @@ import {
   updateDepartment,
 } from "../../api/departmentAPi";
 import CustomLoader from "../../components/customerloader/CustomLoader";
-import CustomCheckBox from "../../components/CustomCheckBox/CustomCheckBox";
-import { configAtom } from "../../contexts/atom";
-import { useRecoilState } from "recoil";
-import { SaveConfigData } from "../../api/auth";
 import { useLocation, useNavigate } from "react-router-dom";
-import LocationGrid from "../../components/locationGrid/LocationGrid";
+import LocationGrid from "./locationGrid/LocationGrid";
 
 const GeneralSetting = () => {
   const [activePage, setActivePage] = useState();
@@ -119,7 +115,6 @@ const GeneralSetting = () => {
       // console.error("Grid instance not available.");
     }
   };
-
 
   const handleAddDepartment = async (e) => {
     var newName = e.data.deptname;
@@ -303,7 +298,7 @@ const GeneralSetting = () => {
             </DataGrid>
           </div>
         </div>
-        <LocationGrid user={user}/>
+        <LocationGrid user={user} />
       </div>
     </>
   );

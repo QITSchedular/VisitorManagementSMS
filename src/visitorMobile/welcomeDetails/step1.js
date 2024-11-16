@@ -13,6 +13,7 @@ import {
 import { getIfVisitorEixist } from "../../api/visitorApi";
 import { checkCompanyByQr } from "../../api/common";
 import { checkInVisitorApi } from "../../api/mobileVisitorApi";
+import CustomLoader from "../../components/customerloader/CustomLoader";
 
 export const Step1 = () => {
   const [registerVisitor, setRegisterVisitor] = useRegisterVisitor();
@@ -24,6 +25,8 @@ export const Step1 = () => {
 
   const [prevData, setPrevData] = useState([]);
   const [companyId, setCompanyId] = useState();
+  const [isidentityVal, setIsIdentity] = useState();
+  const [loading, setLoading] = useState();
 
   useEffect(() => {
     localStorage.setItem("previousPath", "/step1");
@@ -51,7 +54,13 @@ export const Step1 = () => {
       const getCmpData = async () => {
         const data = await checkCompanyByQr(cmpId);
         const response = data.responseData;
-        if (!data.hasError) setCompanyId(response.Data[0].transid);
+        if (!data.hasError) {
+          setCompanyId(response.Data[0].transid);
+          setIsIdentity(response.Data[0].isidentity);
+        } else {
+          setcmpId("null");
+          return toastDisplayer("error", `Please scan QR again.`);
+        }
       };
       getCmpData();
     } else {
@@ -64,10 +73,11 @@ export const Step1 = () => {
       setRegisterVisitor((prev) => ({
         ...prev,
         ["company_id"]: companyId,
+        ["isIdentityVal"]: isidentityVal,
       }));
     } else {
     }
-  }, [companyId]);
+  }, [companyId, isidentityVal]);
 
   // Handle Input Change
   const handleInputChange = (e) => {
@@ -103,7 +113,11 @@ export const Step1 = () => {
       ) {
         navigate(`/welcomevisitor?cmpId=${cmpId}`);
         return toastDisplayer("error", "Visitor already Checked In");
-      } else if (prevData.status == "P" && prevData.checkinstatus == null && prevData.isToday.toUpperCase() !== "N") {
+      } else if (
+        prevData.status == "P" &&
+        prevData.checkinstatus == null &&
+        prevData.isToday.toUpperCase() !== "N"
+      ) {
         setRegisterVisitor({
           vavatar: "",
           cnctperson: "",
@@ -120,6 +134,7 @@ export const Step1 = () => {
           vcmpname: "",
           vlocation: "",
           e_mail: "",
+          isIdentityVal: "N",
         });
         sessionStorage.removeItem("registerVisitor");
 
@@ -179,7 +194,7 @@ export const Step1 = () => {
       company_id: registerVisitor.company_id,
       e_mail: registerVisitor.e_mail,
     };
-
+    setLoading(true);
     const userData = await getIfVisitorEixist(payload);
 
     if (userData.hasError === true) {
@@ -192,6 +207,7 @@ export const Step1 = () => {
       vlocation: userData.responseData.vlocation,
       vcmpname: userData.responseData.vcmpname,
     }));
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -201,127 +217,141 @@ export const Step1 = () => {
   }, [registerVisitor.e_mail]);
 
   return (
-    <div className="Step1">
-      <form>
-        <div className="backbtn">
-          <i
-            className="ri-arrow-left-line"
-            style={{ fontSize: "20px" }}
-            onClick={handlePreviousBtn}
-          ></i>
+    <>
+      {loading && (
+        <div className="Myloader">
+          <CustomLoader />
         </div>
-        <div className="header-step">
-          <div className="step-number">
-            <span>Step 1/4</span>
+      )}
+      <div className="Step1">
+        <form>
+          <div className="backbtn">
+            <i
+              className="ri-arrow-left-line"
+              style={{ fontSize: "20px" }}
+              onClick={handlePreviousBtn}
+            ></i>
           </div>
-          <div className="welcome-text">
-            <span>Welcome!</span> <span>Fill in the details</span>
+          <div className="header-step">
+            <div className="step-number">
+              <span>Step 1/4</span>
+            </div>
+            <div className="welcome-text">
+              <span>Welcome!</span> <span>Fill in the details</span>
+            </div>
           </div>
-        </div>
 
-        <div className="input-text">
-          <TextBox
-            label="Name"
-            value={registerVisitor.vname}
-            placeholder="What's your name "
-            labelMode="static"
-            stylingMode="outlined"
-            height={"56px"}
-            className="step-textbox required"
-            onValueChanged={(e) =>
-              handleInputChange({ target: { name: "vname", value: e.value } })
-            }
-          >
-            <Validator>
-              <RequiredRule message="Name is required" />
-            </Validator>
-          </TextBox>
-          <TextBox
-            label="Email Address"
-            value={registerVisitor.e_mail}
-            labelMode="static"
-            stylingMode="outlined"
-            height={"56px"}
-            className="step-textbox required"
-            placeholder="Enter your email address"
-            Validator={true}
-            onValueChanged={(e) =>
-              handleInputChange({ target: { name: "e_mail", value: e.value } })
-            }
-          >
-            <Validator className="custom-validator">
-              <EmailRule message="Email is invalid" />
-              <RequiredRule message="Email address is required." />
-            </Validator>
-          </TextBox>
-          <TextBox
-            label="Mobile Number"
-            placeholder="Enter your mobile number"
-            value={registerVisitor.phone1}
-            labelMode="static"
-            stylingMode="outlined"
-            height={"56px"}
-            className="step-textbox required"
-            onValueChanged={(e) =>
-              handleInputChange({ target: { name: "phone1", value: e.value } })
-            }
-          >
-            <Validator className="custom-validator">
-              <RequiredRule message="mobile Number is required" />
-              <PatternRule message="Invalid mobile number" pattern="^\d{10}$" />
-            </Validator>
-          </TextBox>
-          <TextBox
-            label="Name of the company"
-            value={registerVisitor.vcmpname}
-            placeholder="In which company you work in"
-            labelMode="static"
-            stylingMode="outlined"
-            height={"56px"}
-            className="step-textbox required"
-            onValueChanged={(e) =>
-              handleInputChange({
-                target: { name: "vcmpname", value: e.value },
-              })
-            }
-          >
-            <Validator className="custom-validator">
-              <RequiredRule message="Company is required" />
-            </Validator>
-          </TextBox>
-          <TextBox
-            label="Company's Addess"
-            placeholder="Enter company address"
-            value={registerVisitor.vlocation}
-            labelMode="static"
-            stylingMode="outlined"
-            height={"56px"}
-            className="last-textbox required"
-            onValueChanged={(e) =>
-              handleInputChange({
-                target: { name: "vlocation", value: e.value },
-              })
-            }
-          >
-            <Validator className="custom-validator">
-              <RequiredRule message="Location is required" />
-            </Validator>
-          </TextBox>
-        </div>
-        <div className="btn-section">
-          <Button
-            text="Continue"
-            width={"100%"}
-            height={"44px"}
-            onClick={hanldeOnContinue}
-          />
-        </div>
+          <div className="input-text">
+            <TextBox
+              label="Name"
+              value={registerVisitor.vname}
+              placeholder="What's your name "
+              labelMode="static"
+              stylingMode="outlined"
+              height={"56px"}
+              className="step-textbox required"
+              onValueChanged={(e) =>
+                handleInputChange({ target: { name: "vname", value: e.value } })
+              }
+            >
+              <Validator>
+                <RequiredRule message="Name is required" />
+              </Validator>
+            </TextBox>
+            <TextBox
+              label="Email Address"
+              value={registerVisitor.e_mail}
+              labelMode="static"
+              stylingMode="outlined"
+              height={"56px"}
+              className="step-textbox required"
+              placeholder="Enter your email address"
+              Validator={true}
+              onValueChanged={(e) =>
+                handleInputChange({
+                  target: { name: "e_mail", value: e.value },
+                })
+              }
+            >
+              <Validator className="custom-validator">
+                <EmailRule message="Email is invalid" />
+                <RequiredRule message="Email address is required." />
+              </Validator>
+            </TextBox>
+            <TextBox
+              label="Mobile Number"
+              placeholder="Enter your mobile number"
+              value={registerVisitor.phone1}
+              labelMode="static"
+              stylingMode="outlined"
+              height={"56px"}
+              className="step-textbox required"
+              onValueChanged={(e) =>
+                handleInputChange({
+                  target: { name: "phone1", value: e.value },
+                })
+              }
+            >
+              <Validator className="custom-validator">
+                <RequiredRule message="mobile Number is required" />
+                <PatternRule
+                  message="Invalid mobile number"
+                  pattern="^\d{10}$"
+                />
+              </Validator>
+            </TextBox>
+            <TextBox
+              label="Name of the company"
+              value={registerVisitor.vcmpname}
+              placeholder="In which company you work in"
+              labelMode="static"
+              stylingMode="outlined"
+              height={"56px"}
+              className="step-textbox required"
+              onValueChanged={(e) =>
+                handleInputChange({
+                  target: { name: "vcmpname", value: e.value },
+                })
+              }
+            >
+              <Validator className="custom-validator">
+                <RequiredRule message="Company is required" />
+              </Validator>
+            </TextBox>
+            <TextBox
+              label="Company's Addess"
+              placeholder="Enter company address"
+              value={registerVisitor.vlocation}
+              labelMode="static"
+              stylingMode="outlined"
+              height={"56px"}
+              className="last-textbox required"
+              onValueChanged={(e) =>
+                handleInputChange({
+                  target: { name: "vlocation", value: e.value },
+                })
+              }
+            >
+              <Validator className="custom-validator">
+                <RequiredRule message="Location is required" />
+              </Validator>
+            </TextBox>
+          </div>
+          <div className="btn-section">
+            <Button
+              text="Continue"
+              width={"100%"}
+              height={"44px"}
+              onClick={hanldeOnContinue}
+            />
+          </div>
 
-        <div className="already-text">
-          <span> Already a visitor?</span>
-          <span onClick={hanldeNavigateCheckOut}> Check Out</span>
-        </div>
-      </form>
-    </div>
+          <div className="already-text">
+            <span> Already a visitor?</span>
+            <span onClick={hanldeNavigateCheckOut}> Check Out</span>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };

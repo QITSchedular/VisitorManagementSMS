@@ -67,6 +67,7 @@ const registerVisitor = atom({
     vcmpname: "",
     vlocation: "",
     e_mail: "",
+    isidentity: "",
   },
   effects: [syncWithSessionStorageEffect("registerVisitor")],
 });

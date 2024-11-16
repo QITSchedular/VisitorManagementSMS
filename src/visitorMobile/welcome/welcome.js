@@ -11,15 +11,22 @@ export const Welcome = () => {
   const [QrCode, setQrCode] = useState(null);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const cmpId = queryParams.get("cmpId");
+  const [cmpId, setcmpId] = useState(queryParams.get("cmpId"));
 
   const getCmpData = async () => {
     const data = await checkCompanyByQr(cmpId);
     const response = data.responseData;
-    if (!data.hasError) setQrCode(response.Data);
+    if (!data.hasError) {
+      setQrCode(response.Data);
+    } else {
+      setcmpId("null");
+      return toastDisplayer("error", `Please scan QR again.`);
+    }
   };
 
   useEffect(() => {
+    sessionStorage.removeItem("registerVisitor");
+
     if (cmpId && cmpId != "null") {
       localStorage.setItem("cmpId", cmpId);
       getCmpData();
@@ -33,6 +40,7 @@ export const Welcome = () => {
       }
     }
   }, [cmpId]);
+
   const hanldeCheckIn = () => {
     if (cmpId && cmpId != "null") navigate(`/welcomestep1?cmpId=${cmpId}`);
     else return toastDisplayer("error", `Please scan QR again.`);
