@@ -5,6 +5,7 @@ import { useRegisterVisitor } from "../../Atoms/customHook";
 import { VerifyOtp, requestOtp } from "../../api/registorApi";
 import { toast } from "react-toastify";
 import { toastDisplayer } from "../../components/toastDisplayer/toastdisplayer";
+import { checkCompanyByQr } from "../../api/common";
 
 export const CheckInOtp = () => {
   const [otp, setOtp] = useState(Array(6).fill(""));
@@ -22,7 +23,20 @@ export const CheckInOtp = () => {
 
   const email = registerVisitor.e_mail;
   const mobile = registerVisitor.phone1;
-
+  const [companyId, setCompanyId] = useState();
+  useEffect(() => {
+    if (cmpId && cmpId != "null") {
+      localStorage.setItem("cmpId", cmpId);
+      const getCmpData = async () => {
+        const data = await checkCompanyByQr(cmpId);
+        const response = data.responseData;
+        if (!data.hasError) setCompanyId(response.Data[0].transid);
+      };
+      getCmpData();
+    } else {
+      navigate("/welcomevisitor?cmpId=");
+    }
+  }, [cmpId]);
   useEffect(() => {
     const path = localStorage.getItem("previousPath");
     if (path == "/step3") {
@@ -79,7 +93,7 @@ export const CheckInOtp = () => {
 
   const handleRetryClick = async () => {
     const userType = "visitor";
-    const otpRequest = await requestOtp(email, userType, mobile);
+    const otpRequest = await requestOtp(email, userType, mobile,companyId);
     if (otpRequest.hasError === true) {
       return toastDisplayer("error", `${otpRequest.error}`);
     }

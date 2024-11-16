@@ -17,6 +17,8 @@ const OtpPopup = ({
   header,
   subHeader,
   email,
+  phone,
+  cmpid,
   role,
   isBtnVisible,
   setIsOTPVrified,
@@ -215,7 +217,7 @@ const OtpPopup = ({
               </span>
               {timer === 0 && (
                 <span className="resend-link">
-                  <Link onClick={() => GenerateOTP(email, role)}>
+                  <Link onClick={() => GenerateOTP(email, role,phone,cmpid)}>
                     Click here to resend{" "}
                   </Link>
                 </span>

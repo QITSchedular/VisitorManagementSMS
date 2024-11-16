@@ -71,7 +71,7 @@ export default function CreateAccountForm() {
     }
 
     const userEmail = registerUser.e_mail;
-    const role = "company";
+    const role = "COMPANY";
 
     setLoading(true);
 
@@ -79,7 +79,7 @@ export default function CreateAccountForm() {
 
     setLoading(false);
     if (getOtp.hasError) {
-      return toastDisplayer("error", `${getOtp.error}`);
+      return toastDisplayer("error", `${getOtp.errorMessage}`);
     } else {
       toastDisplayer("success", `${getOtp.response?.StatusMsg}`);
       navigate("/otp-verification");

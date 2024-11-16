@@ -225,7 +225,7 @@ const AddVisitor = () => {
   const GenerateOTP = async (officialMail, type, mobile) => {
     setLoading(true);
     setrefFocused(true);
-    const getOtpFromID = await requestOtp(officialMail, type, mobile);
+    const getOtpFromID = await requestOtp(officialMail, type, mobile,user.cmpid);
     if (getOtpFromID.hasError === true) {
       setLoading(false);
       return toastDisplayer("error", getOtpFromID.errorMessage);
@@ -735,6 +735,8 @@ const AddVisitor = () => {
         isVisible={isOtpPopupVisible}
         onHide={handleCloseOtpPopup}
         email={`${formData?.e_mail}`}
+        phone={`${formData?.phone1}`}
+        cmpid={user.cmpid}
         role={"visitor"}
         isBtnVisible={true}
         setIsOTPVrified={setIsOTPVrified}
