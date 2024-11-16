@@ -57,7 +57,7 @@ const AddUser = ({ setLoading, setActiveTabIndex, loading }) => {
 
     setLoading(true);
     setrefFocused(true);
-    const getOtpFromID = await requestOtp(officialMail, type, phone);
+    const getOtpFromID = await requestOtp(officialMail, type, phone,user.cmpid);
 
     if (getOtpFromID.hasError === true) {
       setLoading(false);
@@ -374,6 +374,8 @@ const AddUser = ({ setLoading, setActiveTabIndex, loading }) => {
         isVisible={isOtpPopupVisible}
         onHide={handleCloseOtpPopup}
         email={`${formData?.e_mail}`}
+        phone={`${formData?.phone}`}
+        cmpid={user.cmpid}
         role={"user"}
         isBtnVisible={true}
         setIsOTPVrified={setIsOTPVrified}

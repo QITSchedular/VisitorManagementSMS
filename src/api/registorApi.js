@@ -45,7 +45,7 @@ export const registerUserApi = async (payload) => {
   }
 };
 
-export const requestOtp = async (email, role,mobile) => {
+export const requestOtp = async (email, role,mobile,cmpid) => {
   var payload = {
       e_mail: email,
       role: role
@@ -54,7 +54,8 @@ export const requestOtp = async (email, role,mobile) => {
       payload = {
       e_mail: email,
       role: role,
-      mobile:mobile
+      mobile:mobile,
+      cmpid:cmpid
     }
   }
   // const payload = {
@@ -86,7 +87,7 @@ export const requestOtp = async (email, role,mobile) => {
     );
     return responseBody;
   } catch (error) {
-    responseBody.error =
+    responseBody.errorMessage =
       error.response?.data?.StatusMsg ||
       error.message ||
       error.response?.data?.errors;

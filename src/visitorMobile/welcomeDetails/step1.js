@@ -174,7 +174,7 @@ export const Step1 = () => {
     const email = registerVisitor.e_mail;
     const mobile = registerVisitor.phone1;
     const role = "visitor";
-    const handleOtp = requestOtp(email, role, mobile);
+    const handleOtp = requestOtp(email, role, mobile,companyId);
 
     if (handleOtp === true) {
     }
